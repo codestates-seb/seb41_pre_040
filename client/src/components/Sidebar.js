@@ -3,11 +3,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const LeftSidebar = styled.section`
-  min-width: 164px;
+  width: 164px;
   border: 1px solid black;
   border-width: 0px 1px 0px 0px;
   text-align: right;
-  flex: 1;
 `;
 
 const Menus = styled.ul`
