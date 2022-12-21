@@ -1,10 +1,14 @@
-import logo from "./logo.svg";
 import "./App.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ExamplePage from "./pages/example";
 
 function App() {
   return (
-    <div className="App">
-      <body>안녕하세요.</body>
+    <div>
+      <Header />
+      <ExamplePage />
+      <Footer />
     </div>
   );
 }
