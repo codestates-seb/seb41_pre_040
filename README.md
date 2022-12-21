@@ -9,7 +9,7 @@ Buid Tools
     
     FrontEnd: ReactNative
     
-    BackEnd:Spring, JD17, 
+    BackEnd:Spring, JDK17, 
 
 
 Collaborative: Discord, Github, zoom
