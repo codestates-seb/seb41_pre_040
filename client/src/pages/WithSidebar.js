@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
 import { Outlet } from "react-router-dom";
 
 const DivContainer = styled.div`
@@ -18,12 +19,15 @@ const PageContent = styled.div`
 
 const WithSidebar = () => {
   return (
-    <DivContainer>
-      <Sidebar />
-      <PageContent>
-        <Outlet />
-      </PageContent>
-    </DivContainer>
+    <>
+      <DivContainer>
+        <Sidebar />
+        <PageContent>
+          <Outlet />
+        </PageContent>
+      </DivContainer>
+      <Footer />
+    </>
   );
 };
 
