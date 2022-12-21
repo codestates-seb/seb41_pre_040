@@ -1,29 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import Sidebar from "../components/Sidebar";
+import { Outlet } from "react-router-dom";
 
 const DivContainer = styled.div`
   display: flex;
 `;
 
 const PageContent = styled.div`
-  flex: 5;
+  flex: 3;
   min-height: calc(100vh - 200px - 48px);
 `;
 
-const PageText = styled.div`
-  margin: 0px 0px;
-`;
-
-const ExamplePage = () => {
+const WithSidebar = () => {
   return (
     <DivContainer>
       <Sidebar />
       <PageContent>
-        <PageText>페이지 내용</PageText>
+        <Outlet />
       </PageContent>
     </DivContainer>
   );
 };
 
-export default ExamplePage;
+export default WithSidebar;
