@@ -65,4 +65,6 @@ public record QuestionDto(
                 userAccount
         );
     }
+
+//    답변이 포함된 게시글 객체 만들어야함.
 }

@@ -2,6 +2,7 @@ package com.codestates.preproject040.controller;
 
 import com.codestates.preproject040.domain.Answer;
 import com.codestates.preproject040.dto.AnswerDto;
+import com.codestates.preproject040.repository.AnswerRepository;
 import com.codestates.preproject040.service.AnswerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,29 +16,43 @@ import javax.validation.constraints.Positive;
 @RequestMapping("/questions/{questionId}/anwsers")
 public class AnswerController {
     private final AnswerService answerService;
+    private final AnswerRepository answerRepository;
 
-    public AnswerController(AnswerService answerService) {
+    public AnswerController(AnswerService answerService,
+                            AnswerRepository answerRepository) {
         this.answerService = answerService;
+        this.answerRepository = answerRepository;
     }
 
-    @PostMapping
+    @PostMapping("/{questionId}/answers")
     public ResponseEntity postAnswer(@RequestBody AnswerDto requestBody) {
-        Answer postAnswer = requestBody.toEntity(); // 받은 Dto클래스를 Enttity로 변환
+        Answer answer = requestBody.toEntity();
 
-        Answer createdAnswer = answerService.createAnswer(postAnswer);  // Entity로 변환 된 답변을 서비스를 이용해서,
+        Answer createdAnswer = answerService.createAnswer(answer);
 
-        return new ResponseEntity<>(AnswerDto.from(createdAnswer), HttpStatus.CREATED);
+        return new ResponseEntity(AnswerDto.from(createdAnswer), HttpStatus.CREATED);
     }
 
 
-    @PatchMapping("/{answer-id}")
-    public ResponseEntity patchAnswer(@PathVariable("answer-id") @Positive long answerId,
+    @PatchMapping("/{questionId}/answers/{answerId}")
+    public ResponseEntity patchAnswer(@PathVariable("answerId") @Positive long id,
                                       @RequestBody AnswerDto requestBody) {
-        Answer patchAnswer = AnswerDto.of(answerId, requestBody.content()).toEntity();
 
-        Answer updatedAnswer = answerService.updateAnswer(patchAnswer);
+        Answer answer = AnswerDto.of(id, requestBody.content()).toEntity();
+        Answer updatedAnswer = answerService.updateAnswer(answer);
 
+        return new ResponseEntity(AnswerDto.from(updatedAnswer), HttpStatus.OK);
     }
+
+
+    @DeleteMapping("/{quetionId}/answers/{answerId}")
+    public ResponseEntity deleteAnswer(@PathVariable("answerId") @Positive long id) {
+
+        answerRepository.deleteById(id);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
 
 
 }

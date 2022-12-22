@@ -1,8 +1,11 @@
 package com.codestates.preproject040.controller;
 
+import com.codestates.preproject040.domain.Answer;
 import com.codestates.preproject040.domain.Question;
+import com.codestates.preproject040.dto.AnswerDto;
 import com.codestates.preproject040.dto.QuestionDto;
 import com.codestates.preproject040.response.MultiResponseDto;
+import com.codestates.preproject040.service.AnswerService;
 import com.codestates.preproject040.service.QuestionService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -18,9 +21,11 @@ public class QuestionController {
     //todo: 검색기능
 
     private final QuestionService questionService;
+    private final AnswerService answerService;
 
-    public QuestionController(QuestionService questionService) {
+    public QuestionController(QuestionService questionService, AnswerService answerService) {
         this.questionService = questionService;
+        this.answerService = answerService;
     }
 
     //질문 작성
@@ -31,26 +36,6 @@ public class QuestionController {
         return new ResponseEntity<>(QuestionDto.from(createdQuestion), HttpStatus.CREATED);
     }
 
-//    일단 Get 넘기고 다른것부터 진행 중
-//    @GetMapping
-//    public ResponseEntity getQuestions(@RequestParam int page,
-//                                       @RequestParam int size) {
-//        Page<Question> pageQuestions = questionService.findQuestions(page-1, size);
-//        List<Question> questions = pageQuestions.getContent();
-//
-//        return new ResponseEntity<>(
-//                new MultiResponseDto<>(QuestionDto.from(questions), pageQuestions), HttpStatus.OK));
-//    }
-
-    @GetMapping("/{questionId}")
-    public ResponseEntity getQuestion(@PathVariable("questionId") @Positive long id){
-        Question question =
-
-
-
-
-        return null;
-    }
 
     //질문 수정
     @PatchMapping("/{questionId}")
@@ -62,6 +47,7 @@ public class QuestionController {
         Question updatedQuestion = questionService.updateQuestion(question);
         return new ResponseEntity<>(QuestionDto.from(updatedQuestion), HttpStatus.OK);
     }
+
 
     @DeleteMapping("/{questionId}")
     public ResponseEntity deleteQuestion(@PathVariable("questionId") @Positive long id){

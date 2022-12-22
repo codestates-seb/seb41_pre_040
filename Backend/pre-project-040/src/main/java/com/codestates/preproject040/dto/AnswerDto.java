@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 
 public record AnswerDto(
         Long id,
-        Question question,
         UserAccount userAccount,
+        Question question,
         String content,
         LocalDateTime createdAt,
         String createdBy,
@@ -18,7 +18,7 @@ public record AnswerDto(
 )
 {   // 등록에 대한 Post 역할을 하는 of
     public static AnswerDto of(Question question, UserAccount userAccount, String content) {
-        return new AnswerDto(null, question, userAccount, content, null, null, null, null);
+        return new AnswerDto(null,  userAccount,question, content, null, null, null, null);
     }
 
     // patch를 위한 of
@@ -31,8 +31,8 @@ public record AnswerDto(
     public static AnswerDto from(Answer answer) {
         return new AnswerDto(
                 answer.getId(),
-                answer.getQuestion(),
                 answer.getUserAccount(),
+                answer.getQuestion(),
                 answer.getContent(),
                 answer.getCreatedAt(),
                 answer.getCreatedBy(),
