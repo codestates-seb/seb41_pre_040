@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
+import { TagInput } from "../components/TagInput";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import QuestionTip from "../components/QuestionTip";
@@ -63,11 +64,10 @@ const Box = styled.div`
     margin-bottom: 10px;
   }
 
-  input {
-    padding: 0.6em 0.7em;
+  .with-focus-css {
     border: 1px solid #babfc4;
+    padding: 0.6em 0.7em;
     border-radius: 3px;
-
     &:focus {
       outline: none;
       border: 1px solid #69b9f7;
@@ -129,7 +129,10 @@ const AskQuestion = () => {
                   Be specific and imagine you're asking a question to another
                   person.
                 </div>
-                <input placeholder="e.g. Is there an R function for finding the index of an element in a vector?"></input>
+                <input
+                  className="with-focus-css"
+                  placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+                ></input>
               </Box>
             </BoxContainer>
             <BoxContainer>
@@ -157,10 +160,14 @@ const AskQuestion = () => {
                   Add up to 5 tags to describe what your question is about.
                   Start typing to see suggestions.
                 </div>
-                <input placeholder="e.g. (css sql-server asp.net-mvc)" />
+                <TagInput />
+                {/* <input placeholder="e.g. (css sql-server asp.net-mvc)" /> */}
               </Box>
             </BoxContainer>
             <ManageButton>
+              {/* 글 등록, 뒤로가기 구현 필요 */}
+              {/* 글 등록 시 해당 글의 detail 페이지로 이동 */}
+              {/* 작성 취소 시 뒤로가기 구현 */}
               <button className="submit-question">Review your question</button>
               <button className="cancel-question">Cancel</button>
             </ManageButton>
