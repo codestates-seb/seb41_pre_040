@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-// import MDEditor from "@uiw/react-md-editor";
+import MDEditor from "@uiw/react-md-editor";
 import Footer from "../components/Footer";
 import QuestionTip from "../components/QuestionTip";
 
@@ -50,6 +50,7 @@ const Box = styled.div`
   background-color: white;
   border: 1px solid black;
   border-radius: 3px;
+  margin-bottom: 16px;
 
   .box-title {
     font-weight: 700;
@@ -57,6 +58,8 @@ const Box = styled.div`
 
   .box-description {
     font-size: 13px;
+    margin-top: 5px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -64,6 +67,7 @@ const ManageButton = styled.div`
   display: flex;
   gap: 24px;
   margin-top: 10px;
+  margin-bottom: 20px;
 
   button {
     border: 1px solid black;
@@ -73,6 +77,7 @@ const ManageButton = styled.div`
 `;
 
 const AskQuestion = () => {
+  const [value, setValue] = useState("");
   return (
     <>
       <FormContainer>
@@ -107,7 +112,13 @@ const AskQuestion = () => {
                   Introduce the problem and expand on what you put in the title.
                   Minimum 20 characters.
                 </div>
-                <div>마크다운 에디터 불러오기</div>
+                <div>
+                  <MDEditor value={value} onChange={setValue} />
+                  <MDEditor.Markdown
+                    source={value}
+                    style={{ whiteSpace: "pre-wrap" }}
+                  />
+                </div>
               </Box>
             </BoxContainer>
             <ManageButton>
