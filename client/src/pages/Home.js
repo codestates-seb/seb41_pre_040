@@ -35,6 +35,7 @@ const AskQuestion = styled(Link)`
 const Questions = styled.div`
   margin-left: -24px;
   border-top: 1px solid #e3e6e8;
+  margin-bottom: 50px;
 `;
 
 const ButtonContainer = styled.div`
@@ -48,8 +49,8 @@ const FilterButtons = styled.div`
 
   button {
     margin-right: 0;
-    padding: 9.6px;
-    font-size: 12px;
+    padding: 10.4px;
+    font-size: 13px;
     border-radius: 3px;
     border: 1px solid #838c95;
     color: #6a737c;
@@ -82,6 +83,11 @@ const FilterButtons = styled.div`
   }
 `;
 
+const BottomNotice = styled.h2`
+  font-weight: 450;
+  font-size: 1.1rem;
+`;
+
 const Home = () => {
   return (
     <MainContent>
@@ -109,6 +115,10 @@ const Home = () => {
         <Question />
         <Question />
       </Questions>
+      <BottomNotice>
+        Looking for more? Browse the complete list of questions, or popular
+        tags. Help us answer unanswered questions.
+      </BottomNotice>
     </MainContent>
   );
 };

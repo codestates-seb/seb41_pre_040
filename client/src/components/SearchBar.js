@@ -38,9 +38,6 @@ const SearchIcon = styled.svg`
   height: 18px;
   path {
     fill: #838c95;
-    d: path(
-      "m18 16.5 l -5.14 -5.18 h -0.35 a 7 7 0 1 0 -1.19 1.19 v 0.35 L 16.5 18 l 1.5 -1.5 Z M 12 7 A 5 5 0 1 1 2 7 a 5 5 0 0 1 10 0 Z"
-    );
   }
 `;
 
@@ -52,7 +49,7 @@ const SearchBar = () => {
       <InputContainer>
         <Input placeholder="Search..."></Input>
         <SearchIcon>
-          <path />
+          <path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z" />
         </SearchIcon>
       </InputContainer>
     </SearchContainer>
