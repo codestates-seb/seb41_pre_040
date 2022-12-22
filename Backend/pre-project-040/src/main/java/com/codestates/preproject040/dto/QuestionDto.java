@@ -1,8 +1,10 @@
 package com.codestates.preproject040.dto;
 
+import com.codestates.preproject040.controller.QuestionController;
 import com.codestates.preproject040.domain.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record QuestionDto(
             Long id,
@@ -17,20 +19,19 @@ public record QuestionDto(
             String modifiedBy
 )
 {
-    // Post 역할 of
+    // Post 역할
     public static QuestionDto of(
             UserAccount userAccount,
             String title,
             QuestionHashtag questionHashtag,
-            String content,
-            Answer answer) {
+            String content) {
 
         return new QuestionDto(
                 null, userAccount, title, questionHashtag, content,
-                answer, null, null, null, null);
+                null, null, null, null, null);
     }
 
-    // patch 역할 of
+    // Patch 역할
     public static QuestionDto of(
             Long id,
             String title,
@@ -57,6 +58,16 @@ public record QuestionDto(
                 question.getModifiedBy()
         );
     }
+
+//    //todo: 삭제해도 되나..?
+//    //((임시))post 테스트용
+//    public Question toEntity(UserAccount userAccount) {
+//        return Question.of(
+//                title,
+//                content,
+//                userAccount
+//        );
+//    }
 
     public Question toEntity() {
         return Question.of(
