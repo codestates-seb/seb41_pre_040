@@ -55,7 +55,7 @@ const Button = styled.button`
   }
 `;
 
-export const TagInput = () => {
+const TagInput = () => {
   const [tags, setTags] = useState([]);
   const removeTags = (indexToRemove) => {
     setTags(tags.filter((_, index) => index !== indexToRemove));
@@ -92,3 +92,5 @@ export const TagInput = () => {
     </>
   );
 };
+
+export default TagInput;
