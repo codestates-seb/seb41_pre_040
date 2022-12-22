@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
+import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import QuestionTip from "../components/QuestionTip";
 
@@ -82,9 +83,25 @@ const ManageButton = styled.div`
   margin-bottom: 20px;
 
   button {
-    border: 1px solid black;
     border-radius: 3px;
-    padding: 10.4px;
+    font-weight: 550;
+    padding: 11px 11px;
+    font-size: 0.8rem;
+  }
+
+  .submit-question {
+    background-color: #0a95ff;
+    color: white;
+    &:hover {
+      background-color: #126fd4;
+    }
+  }
+
+  .cancel-question {
+    color: #c22e32;
+    &:hover {
+      background-color: #fdf2f2;
+    }
   }
 `;
 
