@@ -37,8 +37,49 @@ const Questions = styled.div`
   border-top: 1px solid #e3e6e8;
 `;
 
+const ButtonContainer = styled.div`
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: flex-end;
+`;
+
 const FilterButtons = styled.div`
-  border-top: 1px solid blue;
+  display: inline-flex;
+
+  button {
+    margin-right: 0;
+    padding: 9.6px;
+    font-size: 12px;
+    border-radius: 3px;
+    border: 1px solid #838c95;
+    color: #6a737c;
+
+    &:hover {
+      background-color: #f8f9f9;
+      color: #3b4045;
+    }
+
+    &:active {
+      background-color: #e3e6e8;
+      color: #3b4045;
+    }
+  }
+
+  .left {
+    border-right: 0px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .middle {
+    border-right: 0px;
+    border-radius: 0px;
+  }
+
+  .right {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
 `;
 
 const Home = () => {
@@ -48,9 +89,15 @@ const Home = () => {
         <h1>Top Questions</h1>
         <AskQuestion to="/ask">Ask Question</AskQuestion>
       </TitleAndButton>
-      <FilterButtons>
-        <div>필터링 버튼 들어갈 자리</div>
-      </FilterButtons>
+      <ButtonContainer>
+        <FilterButtons>
+          <button className="left">Interesting</button>
+          <button className="middle">Bountied</button>
+          <button className="middle">Hot</button>
+          <button className="middle">Week</button>
+          <button className="right">Month</button>
+        </FilterButtons>
+      </ButtonContainer>
       {/* 일단은 하드코딩해놓기 */}
       <Questions>
         <Question />

@@ -116,7 +116,7 @@ const Question = () => {
           </div>
           <div className="user-info">
             <div className="username">작성자</div>
-            <div>asked 8 min ago</div>
+            <div>asked 8 mins ago</div>
           </div>
         </AdditionalInfo>
       </QuestionInfo>
