@@ -48,7 +48,7 @@ const Box = styled.div`
   width: 70%;
   padding: 24px;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid #e3e6e8;
   border-radius: 3px;
   margin-bottom: 16px;
 
@@ -60,6 +60,18 @@ const Box = styled.div`
     font-size: 13px;
     margin-top: 5px;
     margin-bottom: 10px;
+  }
+
+  input {
+    padding: 0.6em 0.7em;
+    border: 1px solid #babfc4;
+    border-radius: 3px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid #69b9f7;
+      box-shadow: 0 0 4px #78bef5;
+    }
   }
 `;
 
@@ -119,6 +131,16 @@ const AskQuestion = () => {
                     style={{ whiteSpace: "pre-wrap" }}
                   />
                 </div>
+              </Box>
+            </BoxContainer>
+            <BoxContainer>
+              <Box>
+                <div className="box-title">Tags</div>
+                <div className="box-description">
+                  Add up to 5 tags to describe what your question is about.
+                  Start typing to see suggestions.
+                </div>
+                <input placeholder="e.g. (css sql-server asp.net-mvc)" />
               </Box>
             </BoxContainer>
             <ManageButton>

@@ -7,27 +7,37 @@ const BoxContainer = styled.div`
 
 const TipBox = styled.div`
   width: 70%;
-  border: 1px solid blue;
+  border: 1px solid #a1c7e7;
   border-radius: 3px;
   padding: 24px;
   margin: 16px 0px;
+  background-color: #e8f2fa;
 
   h2 {
-    font-weight: 500;
+    font-weight: 400;
     margin: 0px 0px 8px 0px;
   }
 
   p {
     margin: 0px;
+    font-size: 1rem;
   }
 
   .p-bottom {
     margin-bottom: 16px;
   }
 
+  h5 {
+    margin: 0px 0px 8px 0px;
+  }
+
+  ul {
+    margin-left: 30px;
+  }
+
   li {
     list-style-type: disc;
-    list-style-position: inside;
+    font-size: 13px;
   }
 `;
 
