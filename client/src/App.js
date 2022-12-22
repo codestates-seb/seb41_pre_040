@@ -6,6 +6,7 @@ import Questions from "./pages/Questions";
 import WithSidebar from "./pages/WithSidebar";
 import Signup from "./pages/Signup";
 import Users from "./pages/Users";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           </Route>
           {/* 로그인 페이지와 회원가입, 질문 작성 페이지 등 사이드바가 없는 페이지 라우팅은 이 아래에 */}
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/login" element={<Login />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
