@@ -14,7 +14,7 @@ const DivContainer = styled.div`
 const PageContent = styled.div`
   max-width: 1100px;
   width: calc(100% - 164px);
-  min-height: calc(100vh - 200px - 48px);
+  min-height: calc(100vh - 200px - 50px);
 `;
 
 const WithSidebar = () => {
