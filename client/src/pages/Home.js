@@ -49,8 +49,8 @@ const FilterButtons = styled.div`
 
   button {
     margin-right: 0;
-    padding: 9.6px;
-    font-size: 12px;
+    padding: 10.4px;
+    font-size: 13px;
     border-radius: 3px;
     border: 1px solid #838c95;
     color: #6a737c;
