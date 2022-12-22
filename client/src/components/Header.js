@@ -81,7 +81,7 @@ const LoginButton = styled(Link)`
 `;
 
 const SignupButton = styled(Link)`
-  background-color: #278bf7;
+  background-color: #0a95ff;
   color: white;
   padding: 8px 12px;
   border-radius: 3px;
