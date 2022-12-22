@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
 import { TagInput } from "../components/TagInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import QuestionTip from "../components/QuestionTip";
 
@@ -107,6 +107,12 @@ const ManageButton = styled.div`
 
 const AskQuestion = () => {
   const [value, setValue] = useState("");
+  const navigate = useNavigate();
+
+  const handleHistory = () => {
+    navigate(-1);
+  };
+
   return (
     <>
       <FormContainer>
@@ -169,7 +175,9 @@ const AskQuestion = () => {
               {/* 글 등록 시 해당 글의 detail 페이지로 이동 */}
               {/* 작성 취소 시 뒤로가기 구현 */}
               <button className="submit-question">Review your question</button>
-              <button className="cancel-question">Cancel</button>
+              <button className="cancel-question" onClick={handleHistory}>
+                Cancel
+              </button>
             </ManageButton>
           </main>
         </BodyContent>
