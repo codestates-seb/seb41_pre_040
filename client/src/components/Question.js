@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Tag from "./Tag";
+import TagList from "./TagsList";
 
 const QuestionContainer = styled.div`
   display: flex;
@@ -81,12 +81,6 @@ const AdditionalInfo = styled.div`
       color: #0074cc;
     }
   }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
 `;
 
 const Question = () => {
@@ -110,10 +104,7 @@ const Question = () => {
           support, but can't creating DAO beans. full stackTrace
         </div>
         <AdditionalInfo>
-          <div className="tags">
-            <Tag />
-            <Tag />
-          </div>
+          <TagList />
           <div className="user-info">
             <div className="username">작성자</div>
             <div>asked 8 mins ago</div>
