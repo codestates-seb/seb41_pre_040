@@ -37,41 +37,22 @@ const ManageButton = styled.div`
   }
 `;
 
-const BottomNotice = styled.div`
-  margin: 15px 0px 17px 0px;
-  h2 {
-    font-weight: 400;
-    font-size: 1.2rem;
-  }
-`;
-
 const AnswerQuestion = () => {
   const [value, setValue] = useState("");
 
   return (
-    <>
-      <AnswerForm>
-        <h2>Your Answer</h2>
-        <div className="editor">
-          <MDEditor value={value} onChange={setValue} />
-          <MDEditor.Markdown
-            source={value}
-            style={{ whiteSpace: "pre-wrap" }}
-          />
-        </div>
-        <ManageButton>
-          {/* 글 등록 구현 필요 */}
-          {/* 글 등록 시 해당 글의 detail 페이지로 이동 */}
-          <button className="submit-question">Post Your Answer</button>
-        </ManageButton>
-      </AnswerForm>
-      <BottomNotice>
-        <h2>
-          Not the answer you're looking for? Browse other questions or ask your
-          own question.
-        </h2>
-      </BottomNotice>
-    </>
+    <AnswerForm>
+      <h2>Your Answer</h2>
+      <div className="editor">
+        <MDEditor value={value} onChange={setValue} />
+        <MDEditor.Markdown source={value} style={{ whiteSpace: "pre-wrap" }} />
+      </div>
+      <ManageButton>
+        {/* 글 등록 구현 필요 */}
+        {/* 글 등록 시 해당 글의 detail 페이지로 이동 */}
+        <button className="submit-question">Post Your Answer</button>
+      </ManageButton>
+    </AnswerForm>
   );
 };
 

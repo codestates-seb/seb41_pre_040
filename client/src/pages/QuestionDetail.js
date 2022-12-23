@@ -5,6 +5,7 @@ import Aside from "../components/Aside";
 import AnswersList from "../components/AnswersList";
 import AnswerQuestion from "../components/AnswerQuestion";
 import PostLayout from "../components/PostLayout";
+import { Link } from "react-router-dom";
 
 const TitleContainer = styled.div`
   display: flex;
@@ -51,7 +52,6 @@ const MainContent = styled.div`
 const Main = styled.div`
   float: left;
   width: calc(100% - 300px - 24px);
-  padding-bottom: 24px;
 
   #answers {
     padding-top: 10px;
@@ -66,6 +66,17 @@ const Main = styled.div`
     font-weight: 500;
     line-height: 1.3;
     margin: 0px 0px 8px 0px;
+  }
+`;
+
+const BottomNotice = styled.div`
+  margin: 15px 0px 17px 0px;
+  h2 {
+    font-weight: 400;
+    font-size: 1.2rem;
+    .ask-question {
+      color: #0074cc;
+    }
   }
 `;
 
@@ -100,6 +111,14 @@ const QuestionDetail = () => {
           {/* 로그인 상태가 아니라면 답변 영역이 보이면 안 됨 */}
           <AnswerQuestion />
         </div>
+        <BottomNotice>
+          <h2>
+            Not the answer you're looking for? Browse other questions or{" "}
+            <Link className="ask-question" to="/ask">
+              ask your own question.
+            </Link>
+          </h2>
+        </BottomNotice>
       </Main>
       <RightAside>
         <Aside />
