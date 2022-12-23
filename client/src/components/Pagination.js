@@ -49,7 +49,7 @@ const Paging = ({ page, count, setPage}) => {
         <Container>
             <Pagination
             activePage={page}
-            itemsCountPerPage={10}
+            itemsCountPerPage={36}
             totalItemsCount={count}
             pageRangeDisplayed={5}
             onChange={setPage}

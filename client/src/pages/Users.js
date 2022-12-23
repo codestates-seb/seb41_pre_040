@@ -141,10 +141,9 @@ const Users = () => {
         <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
         <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
       </Userinfos>
-      {/* <PageContainer>
-        <Paging page={10} count={5} setPage={10} />
-
-      </PageContainer> */}
+      <PageContainer>
+        <Paging page={1} count={200} setPage={10} />
+      </PageContainer>
     </Userlist>
   )
 };
