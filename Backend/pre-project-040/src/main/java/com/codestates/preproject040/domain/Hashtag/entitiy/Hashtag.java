@@ -1,8 +1,10 @@
-package com.codestates.preproject040.domain;
+package com.codestates.preproject040.domain.Hashtag.entitiy;
 
+import com.codestates.preproject040.domain.AuditingFields;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.Objects;
 
 @Getter
@@ -17,7 +19,7 @@ import java.util.Objects;
 public class Hashtag extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private BigInteger id;
 
     @Setter
     @Column(nullable = false, unique = true, length = 50)
