@@ -79,7 +79,7 @@ const Footer = () => {
     <StyledFooter>
       <div className="footer--container">
         <div className="footer-logo">
-          <Link to="/question/qrevise">
+          <Link to="/question/id/qrevise">
             <FooterBigSvg />
           </Link>
         </div>

@@ -16,8 +16,8 @@ const TagContainer = styled.a`
   }
 `;
 
-const Tag = () => {
-  return <TagContainer>태그 내용</TagContainer>;
+const Tag = ({ content }) => {
+  return <TagContainer>{content}</TagContainer>;
 };
 
 export default Tag;
