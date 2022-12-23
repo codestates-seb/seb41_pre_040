@@ -36,13 +36,7 @@ public class AnswerService {
 
     public Answer createAnswer(Answer answer) {
         // 게시글 있는지 확인
-        Optional<Question> optionalQuestion =
-                questionRepository.findById(answer.getQuestion().getId());
-
-        Question findQuestion =
-                optionalQuestion.orElseThrow(() ->
-                        new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
-
+        questionService.findVerifiedQuestion(answer.getQuestion().getId());
         return answerRepository.save(answer);
     }
 
@@ -50,20 +44,10 @@ public class AnswerService {
     // 답변 존재 확인
     public Answer updateAnswer(Answer answer) {
         // 게시글 확인
-       Optional<Question> optionalQuestion =
-               questionRepository.findById(answer.getQuestion().getId());
-
-       Question findQuestion =
-               optionalQuestion.orElseThrow(() ->
-                       new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
+       questionService.findVerifiedQuestion(answer.getQuestion().getId());
 
         // 답글 존재 확인.
-        Optional<Answer> optionalAnswer =
-                answerRepository.findById(answer.getId());
-
-        Answer findAnswer =
-                optionalAnswer.orElseThrow(() ->
-                        new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND));
+        findVerifiedAnswer(answer.getId());
 
         // 유저확인(답글을 수정하려는 사람이 해당 답글을 달은 사람이 맞는지 확인)
         // 확인한 답글에서 유저의 아이디가 있는지..
@@ -71,6 +55,13 @@ public class AnswerService {
 
         // 예외가 발생하지 않았다면, answer를 리턴
         return answer;
+    }
+
+    public void deleteAnswer(Answer answer) {
+        // 답글 확인 해준다.
+        findVerifiedAnswer(answer.getId());
+        // 있으면 삭제 // 이 아래 코드가 실행되는 건 존재한다는 의미.
+        answerRepository.deleteById(answer.getId());
     }
 
     public Answer findVerifiedAnswer(long id) {
