@@ -65,7 +65,7 @@ const AsideBar = styled.div`
   }
 `;
 
-const aside = () => {
+const Aside = () => {
   return (
     <AsideBar>
       <ul>
@@ -131,4 +131,4 @@ const aside = () => {
   );
 };
 
-export default aside;
+export default Aside;
