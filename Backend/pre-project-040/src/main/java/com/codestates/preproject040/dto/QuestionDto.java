@@ -1,10 +1,8 @@
 package com.codestates.preproject040.dto;
 
-import com.codestates.preproject040.controller.QuestionController;
 import com.codestates.preproject040.domain.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public record QuestionDto(
             Long id,
@@ -76,4 +74,6 @@ public record QuestionDto(
                 userAccount
         );
     }
+
+//    답변이 포함된 게시글 객체 만들어야함.
 }

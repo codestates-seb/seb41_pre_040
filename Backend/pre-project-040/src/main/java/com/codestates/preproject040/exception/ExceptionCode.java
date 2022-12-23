@@ -3,7 +3,9 @@ package com.codestates.preproject040.exception;
 import lombok.Getter;
 
 public enum ExceptionCode {
-    QUESTION_NOT_FOUND(404, "Question not found");
+    QUESTION_NOT_FOUND(404, "Question not found"),
+    USER_NOT_FOUND(404, "User not found"),
+    ANSWER_NOT_FOUND(404,"Answer not founde");
 
     @Getter
     private int status;
