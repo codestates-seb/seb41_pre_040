@@ -1,6 +1,7 @@
 package com.codestates.preproject040.service;
 
 import com.codestates.preproject040.domain.Question;
+import com.codestates.preproject040.domain.UserAccount;
 import com.codestates.preproject040.exception.BusinessLogicException;
 import com.codestates.preproject040.exception.ExceptionCode;
 import com.codestates.preproject040.repository.QuestionRepository;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,10 +29,13 @@ public class QuestionService {
         return findVerifiedQuestion(id);
     }
 
-    //todo: 페이지네이션..?
+    public List<Question> findQuestions() {
+        return questionRepository.findAll();
+    }
+
     public Page<Question> findQuestions(int page, int size) {
         return questionRepository.findAll(PageRequest.of(page, size,
-                Sort.by("id").descending()));
+                Sort.by("question-id").descending()));
     }
 
     public Question updateQuestion(Question question) {
@@ -58,4 +63,5 @@ public class QuestionService {
                         new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
         return findQuestion;
     }
+
 }
