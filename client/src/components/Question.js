@@ -95,13 +95,12 @@ const Question = () => {
         <h3 className="question-title">
           {/* Link to="/question/${id}" */}
           <Link to="/question/detail">
-            On OOP based language when pass map or list or etc.. what is right
-            behavior to pass as argument, use, and return them
+            How do I UPDATE from a SELECT in SQL Server?
           </Link>
         </h3>
         <div className="question-content">
-          I have a SpringMVC app with Postgres DB. I'm try to add hibernate
-          support, but can't creating DAO beans. full stackTrace
+          In SQL Server, it is possible to insert rows into a table with an
+          INSERT.. SELECT statement:
         </div>
         <AdditionalInfo>
           <TagList />

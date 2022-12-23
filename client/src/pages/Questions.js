@@ -123,6 +123,7 @@ const Questions = () => {
         </ConditionFilter>
       </ButtonContainer>
       {/* 일단은 하드코딩해놓기 */}
+      {/* 여기도 QuestionList 컴포넌트 만들기 */}
       <QuestionsContainer>
         <Question />
         <Question />
