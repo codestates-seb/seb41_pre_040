@@ -22,7 +22,10 @@ function App() {
             <Route path="/questions" element={<Questions />}></Route>
             <Route path="/users" element={<Users />}></Route>
             <Route path="/question/id" element={<QuestionDetail />}></Route>
-            <Route path="/question/qrevise" element={<EditQuestion />}></Route>
+            <Route
+              path="/question/id/qrevise"
+              element={<EditQuestion />}
+            ></Route>
           </Route>
           {/* 로그인 페이지와 회원가입, 질문 작성 페이지 등 사이드바가 없는 페이지 라우팅은 이 아래에 */}
           <Route path="/signup" element={<Signup />}></Route>
