@@ -73,7 +73,7 @@ const BottomNotice = styled.div`
   margin: 15px 0px 17px 0px;
   h2 {
     font-weight: 400;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     .ask-question {
       color: #0074cc;
       &:hover {

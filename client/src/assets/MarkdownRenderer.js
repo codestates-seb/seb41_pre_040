@@ -2,11 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const MarkdownStyle = styled.div`
   font-size: 0.95rem;
   line-height: 1.3rem;
+  pre,
+  code {
+    font-size: 13px;
+  }
 `;
 
 const dummyData = `
