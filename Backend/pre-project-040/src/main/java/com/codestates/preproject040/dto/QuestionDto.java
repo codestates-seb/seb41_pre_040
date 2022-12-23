@@ -2,6 +2,7 @@ package com.codestates.preproject040.dto;
 
 import com.codestates.preproject040.controller.QuestionController;
 import com.codestates.preproject040.domain.*;
+import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -59,7 +60,14 @@ public record QuestionDto(
         );
     }
 
-//    //todo: 삭제해도 되나..?
+    public Question toEntity() {
+        return Question.of(
+                title,
+                content,
+                userAccount
+        );
+    }
+//================================================================================================================
 //    //((임시))post 테스트용
 //    public Question toEntity(UserAccount userAccount) {
 //        return Question.of(
@@ -68,12 +76,4 @@ public record QuestionDto(
 //                userAccount
 //        );
 //    }
-
-    public Question toEntity() {
-        return Question.of(
-                title,
-                content,
-                userAccount
-        );
-    }
 }

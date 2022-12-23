@@ -3,12 +3,15 @@ package com.codestates.preproject040.controller;
 import com.codestates.preproject040.domain.Question;
 import com.codestates.preproject040.domain.UserAccount;
 import com.codestates.preproject040.dto.QuestionDto;
+//import com.codestates.preproject040.dto.QuestionRequestDto;
+//import com.codestates.preproject040.dto.response.QuestionResponseDto;
 import com.codestates.preproject040.dto.QuestionRequestDto;
 import com.codestates.preproject040.dto.response.QuestionResponseDto;
 import com.codestates.preproject040.repository.QuestionRepository;
 import com.codestates.preproject040.repository.UserRepository;
 import com.codestates.preproject040.response.MultiResponseDto;
 import com.codestates.preproject040.service.QuestionService;
+import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +24,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/questions")
 public class QuestionController {
-    //todo: 검색기능
+    //todo: 검색기능 아직두 못하뮤ㅠㅠ
 
     private final QuestionService questionService;
     private final UserRepository userRepository;
@@ -35,31 +38,12 @@ public class QuestionController {
         this.questionRepository = questionRepository;
     }
 
-    //질문 작성
-//    @PostMapping
-//    public ResponseEntity postQuestion(@RequestBody QuestionDto requestBody){
-//        UserAccount userAccount = createUser();
-//        Question question = requestBody.toEntity(userAccount);
-//        Question createdQuestion = questionService.createQuestion(question);
-//        return new ResponseEntity<>(QuestionDto.from(createdQuestion), HttpStatus.CREATED);
-//    }
-
-//  //질문 올리기
-//    @PostMapping
-//    public ResponseEntity postQuestion(@RequestBody QuestionDto requestBody){
-//        Question question = requestBody.toEntity();
-//        Question createdQuestion = questionService.createQuestion(question);
-//        return new ResponseEntity<>(QuestionDto.from(createdQuestion), HttpStatus.CREATED);
-//    }
-
-    //((임시))임시 유저 정보 만들어서 작성
+    //질문 작성 - requestDto(유저정보 넣음), responseDto 사용
     @PostMapping
     public ResponseEntity postQuestion(@RequestBody QuestionRequestDto requestBody){
-        UserAccount userAccount = createUser();
-        userRepository.save(userAccount);
-        Question question = requestBody.toEntity(userAccount);
+        Question question = requestBody.toEntity();
         Question createdQuestion = questionService.createQuestion(question);
-        return new ResponseEntity<>(QuestionResponseDto.from(userAccount, createdQuestion), HttpStatus.CREATED);
+        return new ResponseEntity<>(QuestionResponseDto.from(createdQuestion), HttpStatus.CREATED);
     }
 
     //질문 보기(Question 페이지)
@@ -83,7 +67,6 @@ public class QuestionController {
         return new ResponseEntity<>(QuestionDto.from(foundQuestion), HttpStatus.OK);
     }
 
-    //todo: post 임시용 수정 필요> 일단 post 확인할라고 막아둠
     //질문 수정
     @PatchMapping("/{questionId}")
     public ResponseEntity patchQuestion(@PathVariable("questionId") @Positive long id,
@@ -101,8 +84,19 @@ public class QuestionController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    //((임시))유저 정보 생성
-    private UserAccount createUser() {
-        return UserAccount.of("임시 유저", "1234", "abc@gmail.com", "임시 닉네임");
-    }
+//================================================================================================================
+//    //((임시))질문 작성 - 임시 유저 정보 만들어서 작성
+//    @PostMapping
+//    public ResponseEntity postQuestion(@RequestBody QuestionRequestDto requestBody){
+//        UserAccount userAccount = createUser();
+//        userRepository.save(userAccount);
+//        Question question = requestBody.toEntity(userAccount);
+//        Question createdQuestion = questionService.createQuestion(question);
+//        return new ResponseEntity<>(QuestionResponseDto.from(userAccount, createdQuestion), HttpStatus.CREATED);
+//    }
+
+//    //((임시))유저 정보 생성
+//    private UserAccount createUser() {
+//        return UserAccount.of("임시 유저", "1234", "abc@gmail.com", "임시 닉네임");
+//    }
 }
