@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import AskButton from "../components/AskButton";
 import Aside from "../components/Aside";
+import AnswersList from "../components/AnswersList";
+import AnswerQuestion from "../components/AnswerQuestion";
 import PostLayout from "../components/PostLayout";
 
 const TitleContainer = styled.div`
@@ -49,7 +51,22 @@ const MainContent = styled.div`
 const Main = styled.div`
   float: left;
   width: calc(100% - 300px - 24px);
-  /* border: 1px solid black; */
+  padding-bottom: 24px;
+
+  #answers {
+    padding-top: 10px;
+  }
+
+  #answer-header {
+    margin-top: 10px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 0px 0px 8px 0px;
+  }
 `;
 
 const RightAside = styled.div`
@@ -74,7 +91,15 @@ const QuestionDetail = () => {
       </TitleContainer>
       <Main>
         {/* 질문 하나, 답변 여러 개 */}
-        <PostLayout />
+        <PostLayout editlink={"qrevise"} />
+        <div id="answers">
+          <div id="answer-header">
+            <h2>answers.length Answers</h2>
+          </div>
+          <AnswersList />
+          {/* 로그인 상태가 아니라면 답변 영역이 보이면 안 됨 */}
+          <AnswerQuestion />
+        </div>
       </Main>
       <RightAside>
         <Aside />

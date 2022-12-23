@@ -94,7 +94,7 @@ const Question = () => {
       <QuestionInfo>
         <h3 className="question-title">
           {/* Link to="/question/${id}" */}
-          <Link to="/question/detail">
+          <Link to="/question/id">
             How do I UPDATE from a SELECT in SQL Server?
           </Link>
         </h3>
