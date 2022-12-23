@@ -100,7 +100,7 @@ const Question = () => {
       <QuestionInfo>
         <h3 className="question-title">
           {/* Link to="/question/${id}" */}
-          <Link to>
+          <Link to="/question/detail">
             On OOP based language when pass map or list or etc.. what is right
             behavior to pass as argument, use, and return them
           </Link>
