@@ -135,11 +135,7 @@ const Users = () => {
         <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
         <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
         <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
-        <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
-        <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
-        <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
-        <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
-        <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
+        <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />  
       </Userinfos>
       <PageContainer>
         <Paging page={1} count={200} setPage={10} />
