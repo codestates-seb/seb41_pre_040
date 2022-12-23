@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import Users from "./pages/Users";
 import AskQuestion from "./pages/AskQuestion";
 import Login from "./pages/Login";
+import EditQuestion from "./pages/EditQusetion";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/ask" element={<AskQuestion />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/question/qrevise" element={<EditQuestion />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
