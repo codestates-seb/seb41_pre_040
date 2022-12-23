@@ -29,9 +29,9 @@ public class QuestionService {
         return findVerifiedQuestion(id);
     }
 
-    public List<Question> findQuestions() {
-        return questionRepository.findAll();
-    }
+//    public List<Question> findQuestions() {
+//        return questionRepository.findAll();
+//    }
 
     public Page<Question> findQuestions(int page, int size) {
         return questionRepository.findAll(PageRequest.of(page, size,
@@ -63,5 +63,4 @@ public class QuestionService {
                         new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
         return findQuestion;
     }
-
 }

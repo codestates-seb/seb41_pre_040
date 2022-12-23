@@ -17,7 +17,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Positive;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,22 +31,24 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final UserRepository userRepository;
-    private final QuestionRepository questionRepository;
 
     public QuestionController(QuestionService questionService,
                               UserRepository userRepository,
                               QuestionRepository questionRepository) {
         this.questionService = questionService;
         this.userRepository = userRepository;
-        this.questionRepository = questionRepository;
     }
 
-    //질문 작성 - requestDto(유저정보 넣음), responseDto 사용
+    //((임시))질문 작성 - 임시 유저 정보 만들어서 작성
     @PostMapping
-    public ResponseEntity postQuestion(@RequestBody QuestionRequestDto requestBody){
-        Question question = requestBody.toEntity();
+    public ResponseEntity postQuestion(@RequestBody QuestionRequestDto requestBody,
+                                       HttpServletResponse httpServletResponse) throws IOException {
+        UserAccount userAccount = createUser();
+        userRepository.save(userAccount);
+        Question question = requestBody.toEntity(userAccount);
         Question createdQuestion = questionService.createQuestion(question);
-        return new ResponseEntity<>(QuestionResponseDto.from(createdQuestion), HttpStatus.CREATED);
+        httpServletResponse.sendRedirect("/questions");
+        return new ResponseEntity<>(QuestionResponseDto.from(userAccount, createdQuestion), HttpStatus.CREATED);
     }
 
     //질문 보기(Question 페이지)
@@ -67,36 +72,40 @@ public class QuestionController {
         return new ResponseEntity<>(QuestionDto.from(foundQuestion), HttpStatus.OK);
     }
 
+//    //질문 수정
+//    @PatchMapping("/{questionId}")
+//    public ResponseEntity patchQuestion(@PathVariable("questionId") @Positive long id,
+//                                        @RequestBody QuestionDto requestBody){
+//        Question question =
+//                QuestionDto.of(id, requestBody.title(), requestBody.questionHashtag(), requestBody.content())
+//                        .toEntity();
+//        Question updatedQuestion = questionService.updateQuestion(question);
+//        return new ResponseEntity<>(QuestionDto.from(updatedQuestion), HttpStatus.OK);
+//    }
+
     //질문 수정
     @PatchMapping("/{questionId}")
     public ResponseEntity patchQuestion(@PathVariable("questionId") @Positive long id,
-                                        @RequestBody QuestionDto requestBody){
+                                        @RequestBody QuestionRequestDto requestBody){
+        UserAccount userAccount = createUser();
+        userRepository.save(createUser());
+
         Question question =
-                QuestionDto.of(id, requestBody.title(), requestBody.questionHashtag(), requestBody.content())
-                        .toEntity();
+                QuestionRequestDto.of(id, requestBody.title(), requestBody.content()).toEntity(userAccount);
         Question updatedQuestion = questionService.updateQuestion(question);
-        return new ResponseEntity<>(QuestionDto.from(updatedQuestion), HttpStatus.OK);
+
+        return new ResponseEntity<>(QuestionResponseDto.from(userAccount, updatedQuestion), HttpStatus.OK);
     }
 
     //질문 삭제
     @DeleteMapping("/{questionId}")
     public ResponseEntity deleteQuestion(@PathVariable("questionId") long id){
+        questionService.deleteQuestion(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-//================================================================================================================
-//    //((임시))질문 작성 - 임시 유저 정보 만들어서 작성
-//    @PostMapping
-//    public ResponseEntity postQuestion(@RequestBody QuestionRequestDto requestBody){
-//        UserAccount userAccount = createUser();
-//        userRepository.save(userAccount);
-//        Question question = requestBody.toEntity(userAccount);
-//        Question createdQuestion = questionService.createQuestion(question);
-//        return new ResponseEntity<>(QuestionResponseDto.from(userAccount, createdQuestion), HttpStatus.CREATED);
-//    }
-
-//    //((임시))유저 정보 생성
-//    private UserAccount createUser() {
-//        return UserAccount.of("임시 유저", "1234", "abc@gmail.com", "임시 닉네임");
-//    }
+    //((임시))유저 정보 생성
+    private UserAccount createUser() {
+        return UserAccount.of("임시 유저", "1234", "abc@gmail.com", "임시 닉네임");
+    }
 }

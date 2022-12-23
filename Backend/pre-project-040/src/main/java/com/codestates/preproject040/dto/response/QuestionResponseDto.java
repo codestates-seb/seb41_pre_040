@@ -24,27 +24,14 @@ public record QuestionResponseDto(
         );
     }
 
-    //((임시-Post 확인))test코드, hashtag null
-    public static QuestionResponseDto from(Question question){
+    //((임시-Post 확인))controller에 임시사용자정보 생성, hashtag null
+    public static QuestionResponseDto from(UserAccount userAccount, Question question){
         return new QuestionResponseDto(
                 question.getId(),
                 question.getTitle(),
                 question.getContent(),
                 null,
-                question.getUserAccount().getUserId()
+                userAccount.getUserId()
         );
     }
-
-//================================================================================================================
-//    //((임시-Post 확인))controller에 임시사용자정보 생성, hashtag null
-//    //매개변수로 UserAccount, Question
-//    public static QuestionResponseDto from(UserAccount userAccount, Question question){
-//        return new QuestionResponseDto(
-//                question.getId(),
-//                question.getTitle(),
-//                question.getContent(),
-//                null,
-//                userAccount.getUserId()
-//        );
-//    }
 }

@@ -47,17 +47,4 @@ public class HomeController {
                         .collect(Collectors.toList());
         return new ResponseEntity<>(questionDtos, HttpStatus.OK);
     }
-
-//================================================================================================================
-//    //질문 보기(루트페이지)
-//    @GetMapping
-//    public ResponseEntity getQuestionsHome(){
-//        List<Question> questions = questionService.findQuestions();
-//
-//        List<QuestionDto> questionDtos =
-//                questions.stream()
-//                        .map(QuestionDto::from)
-//                        .collect(Collectors.toList());
-//        return new ResponseEntity<>(questionDtos, HttpStatus.OK);
-//    }
 }
