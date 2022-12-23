@@ -13,7 +13,6 @@ const StyledHeader = styled.header`
   height: 50px;
   position: sticky;
   top: 0;
-  z-index: 1;
 `;
 
 const HeaderContainer = styled.div`
@@ -81,7 +80,7 @@ const LoginButton = styled(Link)`
 `;
 
 const SignupButton = styled(Link)`
-  background-color: #0a95ff;
+  background-color: #278bf7;
   color: white;
   padding: 8px 12px;
   border-radius: 3px;
@@ -98,7 +97,6 @@ const Header = () => {
         <LogoContainer to="/">
           <HeaderLogo>로고</HeaderLogo>
         </LogoContainer>
-
         <HeaderContents>
           <li>About</li>
           <li>Products</li>
