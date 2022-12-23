@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { FooterBigSvg } from "../images/HomeSvg";
+import { Link } from "react-router-dom";
 
 const StyledFooter = styled.footer`
   background-color: #232629;
   color: hsl(210, 8%, 60%);
   height: 380px;
-  width: 100%; 
+  width: 100%;
   bottom: 0;
   display: flex;
 
@@ -78,7 +79,9 @@ const Footer = () => {
     <StyledFooter>
       <div className="footer--container">
         <div className="footer-logo">
-          <FooterBigSvg />
+          <Link to="/question/qrevise">
+            <FooterBigSvg />
+          </Link>
         </div>
         <nav className="footer-nav">
           <div className="footer-col">
