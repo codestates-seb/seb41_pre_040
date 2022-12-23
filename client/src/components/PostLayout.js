@@ -73,6 +73,10 @@ const UserAndOptions = styled.div`
   justify-content: space-between;
   margin: 16px 0px;
 
+  .author {
+    font-size: 13px;
+  }
+
   .options {
     display: flex;
     gap: 5px;
@@ -123,8 +127,8 @@ const PostLayout = ({ editlink }) => {
             <Link to={editlink}>Edit</Link>
             <div id="delete">Delete</div>
           </div>
-          <div className="writer">
-            <div>유저 정보</div>
+          <div className="author">
+            <div>author: name</div>
           </div>
         </UserAndOptions>
       </div>

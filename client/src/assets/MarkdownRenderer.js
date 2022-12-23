@@ -29,8 +29,17 @@ Is it also possible to _update_ a table with \`SELECT\`? I have a temporary tabl
     WHERE Table.id = other_table.id
 
 \`\`\`js
+// 자바스크립트 코드 렌더링 테스트
 function add(x, y) {
   return x + y;
+}
+\`\`\`
+\`\`\`java
+// 자바 코드 렌더링 테스트
+public class Main {
+  public static void main(String[] args) {
+      System. out.println("Hello World" );
+  }
 }
 \`\`\`
 `;

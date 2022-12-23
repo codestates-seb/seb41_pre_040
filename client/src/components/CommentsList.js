@@ -8,7 +8,7 @@ const Comments = styled.ul`
   border-top: 1px solid #e3e6e8;
 `;
 
-const AddComment = styled.div`
+const AddComment = styled.span`
   font-size: 13px;
   color: #838c95;
 

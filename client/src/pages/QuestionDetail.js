@@ -111,7 +111,6 @@ const QuestionDetail = () => {
             <h2>answers.length Answers</h2>
           </div>
           <AnswersList />
-          {/* 로그인 상태가 아니라면 답변 영역이 보이면 안 됨 */}
           <AnswerQuestion />
         </div>
         <BottomNotice>
