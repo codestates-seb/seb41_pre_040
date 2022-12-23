@@ -56,28 +56,30 @@ const WrapLogin = styled.div`
   }
 `;
 
-// const LoginFunc = (e) => {
-//   e.preventDefault();
-//   if (!Email) {
-//     return alert("Email을 입력하세요.");
-//   } else if (!Pssword) {
-//     return alert("Password를 입력하세요.");
-//   }
-// };
-
 const LoginForm = () => {
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <WrapLogin>
       <form onSubmit>
         <div className="form-col">
           <label>Email</label>
-          <input type="text"></input>
+          <input
+            type="text"
+            id="email-input"
+            defaultValue={email}
+            onChagne={(e) => setEmail(e.target.value)}
+          ></input>
         </div>
         <div className="form-col">
           <label>Password</label>
-          <input type="text"></input>
+          <input
+            type="password"
+            id="password-input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
         </div>
         <button className="Blue-button">Log in</button>
       </form>
