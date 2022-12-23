@@ -6,7 +6,7 @@ const StyledFooter = styled.footer`
   background-color: #232629;
   color: hsl(210, 8%, 60%);
   height: 380px;
-  width: 100%;
+  width: 100%; 
   bottom: 0;
   display: flex;
 
