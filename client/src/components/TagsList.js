@@ -9,7 +9,7 @@ const Tags = styled.div`
 `;
 
 const TagList = () => {
-  const dummyTags = ["JavaScript", "MySQL", "Java", "CSS", "React"];
+  const dummyTags = ["JavaScript", "sql", "Java", "CSS", "React"];
 
   return (
     <Tags>

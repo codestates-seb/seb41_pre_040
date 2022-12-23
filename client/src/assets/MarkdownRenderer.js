@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
-// import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const MarkdownStyle = styled.div`
   font-size: 0.95rem;
@@ -25,26 +26,15 @@ Is it also possible to _update_ a table with \`SELECT\`? I have a temporary tabl
     WHERE Table.id = other_table.id
 
 \`\`\`js
-    function add(x, y) {
-      return x + y;
-    }
+function add(x, y) {
+  return x + y;
+}
 \`\`\`
-
-> 인용문
 `;
 
 // 코드블럭 배경 색상: #f6f6f6;
 // 인라인 코드 배경 색상: #e3e6e8;
 // 코드 하이라이팅 적용하기
-
-// const InlineCode = styled.span`
-//   background-color: #f6f6f6;
-//   border: 1px solid green;
-// `;
-
-// const InlineCodeBlock = ({ node, ...props }) => {
-//   <InlineCode {...props}></InlineCode>;
-// };
 
 const MarkdownRenderer = () => {
   return (
@@ -52,7 +42,48 @@ const MarkdownRenderer = () => {
       <ReactMarkdown
         children={dummyData}
         components={{
-          inline: true,
+          blockquote({ node, children, ...props }) {
+            return (
+              <div
+                style={{
+                  background: "#f6f6f6",
+                  padding: "1px 15px",
+                  borderLeft: "5px solid orange",
+                }}
+                {...props}
+              >
+                {children}
+              </div>
+            );
+          },
+          code({ node, inline, className, children, ...props }) {
+            const match = /language-(\w+)/.exec(className || "");
+            return inline ? (
+              <code
+                style={{
+                  backgroundColor: "#e3e6e8",
+                  padding: "2px",
+                  borderRadius: "3px",
+                }}
+              >
+                {children}
+              </code>
+            ) : match ? (
+              <SyntaxHighlighter
+                children={String(children).replace(/\n$/, "")}
+                language={match[1]}
+                PreTag="div"
+                {...props}
+              />
+            ) : (
+              <SyntaxHighlighter
+                children={String(children).replace(/\n$/, "")}
+                language="textile"
+                PreTag="div"
+                {...props}
+              />
+            );
+          },
         }}
       />
     </MarkdownStyle>

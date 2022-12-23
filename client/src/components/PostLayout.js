@@ -78,6 +78,13 @@ const UserAndOptions = styled.div`
     gap: 5px;
     font-size: 13px;
     color: #6a737c;
+    #delete {
+      color: #c22e32;
+      &:hover {
+        cursor: pointer;
+        font-weight: bold;
+      }
+    }
   }
 `;
 
@@ -114,7 +121,7 @@ const PostLayout = ({ editlink }) => {
           <div className="options">
             <div>Share</div>
             <Link to={editlink}>Edit</Link>
-            <div>Delete</div>
+            <div id="delete">Delete</div>
           </div>
           <div className="writer">
             <div>유저 정보</div>

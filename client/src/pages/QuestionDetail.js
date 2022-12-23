@@ -76,6 +76,9 @@ const BottomNotice = styled.div`
     font-size: 1.2rem;
     .ask-question {
       color: #0074cc;
+      &:hover {
+        color: #0a95ff;
+      }
     }
   }
 `;
