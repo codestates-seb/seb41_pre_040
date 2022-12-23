@@ -1,7 +1,7 @@
 import React from "react";
 import Question from "../components/Question";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import AskButton from "../components/AskButton";
 
 const MainContent = styled.div`
   width: calc(100% - 300px - 24px);
@@ -17,18 +17,6 @@ const TitleAndButton = styled.div`
     margin: 0;
     font-weight: 500;
     flex: 1 auto;
-  }
-`;
-
-const AskQuestion = styled(Link)`
-  background-color: #0a95ff;
-  color: white;
-  font-weight: 555;
-  padding: 11px 11px;
-  border-radius: 3px;
-  font-size: 0.8rem;
-  &:hover {
-    background-color: #126fd4;
   }
 `;
 
@@ -117,7 +105,7 @@ const Questions = () => {
     <MainContent>
       <TitleAndButton>
         <h1>All Questions</h1>
-        <AskQuestion to="/ask">Ask Question</AskQuestion>
+        <AskButton />
       </TitleAndButton>
       <ButtonContainer>
         <div className="questions-length">questions.length</div>
