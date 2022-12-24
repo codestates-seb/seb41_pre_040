@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import AskButton from "../components/AskButton";
 import Aside from "../components/Aside";
 import AnswersList from "../components/AnswersList";
 import AnswerQuestion from "../components/AnswerQuestion";
-import PostLayout from "../components/PostLayout";
-import { Link } from "react-router-dom";
+import QuestionPostLayout from "../components/QuestionPostLayout";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const TitleContainer = styled.div`
   display: flex;
@@ -89,11 +90,23 @@ const RightAside = styled.div`
 `;
 
 const QuestionDetail = () => {
+  const questionId = useParams().id;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // 상태에서 아이디에 해당하는 질문 가져오기
+  const question = useSelector((state) => {
+    let questions = state.questions.value;
+    return questions.filter((el) => el.id === Number(questionId))[0];
+  });
+
   return (
     <MainContent>
       <TitleContainer>
         <TitleAndButton>
-          <h1>How do I UPDATE from a SELECT in SQL Server?</h1>
+          <h1>{question.title}</h1>
           <div className="ask-button">
             <AskButton />
           </div>
@@ -105,7 +118,11 @@ const QuestionDetail = () => {
       </TitleContainer>
       <Main>
         {/* 질문 하나, 답변 여러 개 */}
-        <PostLayout editlink={"qrevise"} />
+        <QuestionPostLayout
+          id={question.id}
+          content={question.content}
+          tags={question.tags}
+        />
         <div id="answers">
           <div id="answer-header">
             <h2>answers.length Answers</h2>

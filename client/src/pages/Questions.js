@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Question from "../components/Question";
 import styled from "styled-components";
 import AskButton from "../components/AskButton";
+import { useSelector } from "react-redux";
 
 const MainContent = styled.div`
   width: calc(100% - 300px - 24px);
@@ -101,6 +102,12 @@ const FilterIcon = styled.svg`
 `;
 
 const Questions = () => {
+  const questions = useSelector((state) => state.questions.value);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <MainContent>
       <TitleAndButton>
@@ -108,7 +115,7 @@ const Questions = () => {
         <AskButton />
       </TitleAndButton>
       <ButtonContainer>
-        <div className="questions-length">questions.length</div>
+        <div className="questions-length">{questions.length} questions</div>
         <FilterButtons>
           <button className="left">Newest</button>
           <button className="middle">Active</button>
@@ -125,14 +132,17 @@ const Questions = () => {
       {/* 일단은 하드코딩해놓기 */}
       {/* 여기도 QuestionList 컴포넌트 만들기 */}
       <QuestionsContainer>
-        <Question />
-        <Question />
-        <Question />
-        <Question />
-        <Question />
-        <Question />
-        <Question />
-        <Question />
+        {questions.map((el) => {
+          return (
+            <Question
+              key={el.id}
+              id={el.id}
+              title={el.title}
+              content={el.content}
+              tags={el.tags}
+            />
+          );
+        })}
       </QuestionsContainer>
     </MainContent>
   );

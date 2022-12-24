@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PostLayout from "./PostLayout";
+import AnswerPostLayout from "./AnswerPostLayout";
 
 const AnswerContainer = styled.li`
   padding: 16px 0px;
@@ -10,7 +10,7 @@ const AnswerContainer = styled.li`
 const Answer = () => {
   return (
     <AnswerContainer>
-      <PostLayout />
+      <AnswerPostLayout />
     </AnswerContainer>
   );
 };

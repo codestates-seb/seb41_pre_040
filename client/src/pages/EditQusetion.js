@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
 import TagInput from "../components/TagInput";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { editQuestion } from "../redux/questionsSlice";
 
 const Container = styled.div`
   display: flex;
@@ -149,7 +152,21 @@ const Container = styled.div`
 `;
 
 const EditQuestion = () => {
-  const [value, setValue] = useState("");
+  const questionId = useParams().id;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // useSelector로 아이디에 해당하는 질문 객체 불러오기
+  const question = useSelector((state) => {
+    let questions = state.questions.value;
+    return questions.filter((el) => el.id === Number(questionId))[0];
+  });
+
+  // input의 value 속성을 이용해 거기에 해당하는 내용들로 필드 채워놓기
+  const [titleInput, setTitleInput] = useState(question.title);
+  const [contentInput, setContentInput] = useState(question.content);
+  const [tags, setTags] = useState(question.tags);
+
   return (
     <div>
       <Container>
@@ -170,27 +187,47 @@ const EditQuestion = () => {
             <div className="FormContainer">
               <div className="FormBox">
                 <label>Title</label>
-                <input type="text"></input>
+                <input
+                  type="text"
+                  value={titleInput}
+                  onChange={(e) => setTitleInput(e.target.value)}
+                ></input>
               </div>
               <div className="FormBox">
                 <label>Body</label>
                 <div>
-                  <MDEditor value={value} onChange={setValue} />
+                  <MDEditor value={contentInput} onChange={setContentInput} />
                   <MDEditor.Markdown
-                    source={value}
+                    source={contentInput}
                     style={{ whiteSpace: "pre-wrap" }}
                   />
                 </div>
                 <div>
                   <label>Tags</label>
-                  <TagInput></TagInput>
+                  <TagInput tags={tags} setTags={setTags} />
                 </div>
                 <div>
                   <label>Edit Summary</label>
                   <input placeholder="briefly explain your changes (corrected spelling, fixed grammar, improved formatting)"></input>
                 </div>
                 <div>
-                  <button className="BlueButton">Save edits</button>
+                  <button
+                    className="BlueButton"
+                    onClick={() => {
+                      dispatch(
+                        editQuestion({
+                          id: question.id,
+                          title: titleInput,
+                          content: contentInput,
+                          tags: tags,
+                        })
+                      );
+                      alert("질문이 수정되었습니다.");
+                      navigate("/");
+                    }}
+                  >
+                    Save edits
+                  </button>
                 </div>
                 <div className="AddComment">Add a comment</div>
               </div>
