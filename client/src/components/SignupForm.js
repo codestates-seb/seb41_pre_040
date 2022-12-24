@@ -84,7 +84,8 @@ const SignupForm = () => {
     const [passwordErr, setPasswordErr] = useState(false);
 
     const EMAIL_REGEX = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
-    const signupLists = useSelector((state) => state.signup.value);
+    const signupLists = useSelector((state) => state.signupList.value);
+    
     
     const navigte = useNavigate();
     const dispatch = useDispatch();
@@ -134,7 +135,7 @@ const SignupForm = () => {
                 console.log(signupLists)
                 navigte("/login");
         }
-        
+        console.log(signupLists)
     }
 
     return (
