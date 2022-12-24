@@ -41,14 +41,15 @@ font-size: 12px;
 font-weight: bold;
 `;
 
-const UserSlot = () => {
+const UserSlot = ( { id, location, vote }) => {
+
     return (
         <Slot>
             <img src="https://user-images.githubusercontent.com/104320234/188269297-ff59ed55-4627-49f3-a001-9e480ff2bc7d.png" alt="img"/>
             <UserInfo>
-                <Name>변수 이름</Name>
-                <Location>지역</Location>
-                <Reputation>추천수</Reputation>
+                <Name>{id}</Name>
+                <Location>{location}</Location>
+                <Reputation>{vote}</Reputation>
             </UserInfo>
 
 

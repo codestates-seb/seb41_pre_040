@@ -1,7 +1,9 @@
-import React, { useState, useEffect, createContext} from "react";
+// import React, { useState, useEffect, createContext} from "react";
+import React from "react";
 import styled from 'styled-components';
 import UserSlot from "../components/UserSlot";
 import Paging from "../components/Pagination";
+import { useSelector } from "react-redux";
 
 
 
@@ -104,9 +106,15 @@ const PageContainer = styled.div`
 
 
 const Users = () => {
-  // const [count, setCount] = useState(0);
-  // const [currnetpage, setCurrentPage] = useState(1);
-  // const  
+
+  const users = useSelector((state) => state.users.value)
+  console.log(users)
+  // const [pagesPerPage] = useState(5);
+  // const [currentPage, setCurrentPage] = useState(1);
+
+  // const indexOfLastPost = currentPage * pagesPerPage;
+  // const indexOfFirstPost = indexOfLastPost - pagesPerPage;
+
 
 
   return (
@@ -131,14 +139,15 @@ const Users = () => {
         <button >year</button>
       </DateButtons>
       <Userinfos>
-        <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
-        <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
-        <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
-        <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />
-        <UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot /><UserSlot />  
+
+      {users.map((el) => {
+          return <UserSlot id={el.id} location={el.location} vote={el.vote} />;
+        })}
+
+
       </Userinfos>
       <PageContainer>
-        <Paging page={1} count={200} setPage={10} />
+        <Paging currentPage={1} count={10} onChange={10} />
       </PageContainer>
     </Userlist>
   )

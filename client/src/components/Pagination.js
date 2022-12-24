@@ -28,7 +28,7 @@ const Container = styled.div`
     width: 30px;
     height: 30px;
     padding-top: 3px;
-    border: 1px solid var(--black-100);
+    border: 1px solid #F1F2F3;
     border-radius: 3px;
     display: flex;
     justify-content: center;
@@ -44,15 +44,19 @@ const Container = styled.div`
 `;
 
 
-const Paging = ({ page, count, setPage}) => {
+const Paging = ({ currentPage, 
+  // itemsCountPerPage, 
+  count, onChange, pageRangeDisplayed = 5,   }) => {
+
+
     return (
         <Container>
             <Pagination
-            activePage={page}
+            activePage={currentPage}
             itemsCountPerPage={36}
             totalItemsCount={count}
-            pageRangeDisplayed={5}
-            onChange={setPage}
+            pageRangeDisplayed={pageRangeDisplayed}
+            onChange={onChange}
             prevPageText="Prev"
             nextPageText="Next"
             />

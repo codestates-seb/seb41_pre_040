@@ -8,7 +8,7 @@ import Signup from "./pages/Signup";
 import Users from "./pages/Users";
 import AskQuestion from "./pages/AskQuestion";
 import Login from "./pages/Login";
-import EditQuestion from "./pages/EditQusetion";
+import EditQuestion from "./pages/EditQuestion";
 import QuestionDetail from "./pages/QuestionDetail";
 
 function App() {
