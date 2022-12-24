@@ -13,7 +13,6 @@ import com.codestates.preproject040.repository.UserRepository;
 import com.codestates.preproject040.response.MultiResponseDto;
 import com.codestates.preproject040.service.QuestionService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,7 +21,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Positive;
 import java.io.IOException;
@@ -61,8 +59,7 @@ public class QuestionController {
     ){
 //        Page<QuestionResponseDto> questions =
 //                questionService.searchQuestions(searchType, searchKeyword, pageable).map(QuestionResponseDto::from);
-        Page<Question> questions = questionService.searchQuestions(searchType, searchKeyword, pageable)
-                .map();
+        Page<QuestionDto> questions = questionService.searchQuestions(searchType, searchKeyword, pageable);
 
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
