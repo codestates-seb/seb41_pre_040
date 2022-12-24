@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import Question from "../components/Question";
 import AskButton from "../components/AskButton";
-// import AskButton from "../components/FilterButton";
 import { useSelector } from "react-redux";
 
 const MainContent = styled.div`
@@ -80,7 +79,6 @@ const BottomNotice = styled.h2`
 
 const Home = () => {
   const questions = useSelector((state) => state.questions.value);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -100,6 +98,7 @@ const Home = () => {
           <button className="right">Month</button>
         </FilterButtons>
       </ButtonContainer>
+      {/* 일단은 하드코딩해놓기 */}
       <Questions>
         {questions.map((el) => {
           return (
