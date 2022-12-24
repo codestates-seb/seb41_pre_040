@@ -4,75 +4,75 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   value: [  {
     "userId": 1,
-    "id": 1,
+    "display_name": 1,
     "location": "서울",
-    "vote": "3"
+    "reputation": "3"
   },
   {
     "userId": 1,
-    "id": 2,
+    "display_name": 2,
     "location": "대전",
-    "vote": "4"
+    "reputation": "4"
   },
   {
     "userId": 1,
-    "id": 3,
+    "display_name": 3,
     "location": "대구",
-    "vote": "8"
+    "reputation": "8"
   },
   {
     "userId": 1,
-    "id": 1,
+    "display_name": 1,
     "location": "서울",
-    "vote": "3"
+    "reputation": "3"
   },
   {
     "userId": 1,
-    "id": 2,
+    "display_name": 2,
     "location": "대전",
-    "vote": "4"
+    "reputation": "4"
   },
   {
     "userId": 1,
-    "id": 3,
+    "display_name": 3,
     "location": "대구",
-    "vote": "8"
+    "reputation": "8"
   },
   {
     "userId": 1,
-    "id": 1,
+    "display_name": 1,
     "location": "서울",
-    "vote": "3"
+    "reputation": "3"
   },
   {
     "userId": 1,
-    "id": 2,
+    "display_name": 2,
     "location": "대전",
-    "vote": "4"
+    "reputation": "4"
   },
   {
     "userId": 1,
-    "id": 3,
+    "display_name": 3,
     "location": "대구",
-    "vote": "8"
+    "reputation": "8"
   },
   {
     "userId": 1,
-    "id": 1,
+    "display_name": 1,
     "location": "서울",
-    "vote": "3"
+    "reputation": "3"
   },
   {
     "userId": 1,
-    "id": 2,
+    "display_name": 2,
     "location": "대전",
-    "vote": "4"
+    "reputation": "4"
   },
   {
     "userId": 1,
-    "id": 3,
+    "display_name": 3,
     "location": "대구",
-    "vote": "8"
+    "reputation": "8"
   },
   ],
 };
@@ -84,9 +84,9 @@ export const usersSlice = createSlice({
     usersList: (state, action) => {
       state.value = [
         {
-          id: action.payload.id,
+          display_name: action.payload.display_name,
           location: action.payload.location,
-          vote: action.payload.vote,
+          reputation: action.payload.reputation,
         },
         ...state.value,
       ];
