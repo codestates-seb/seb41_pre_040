@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const AskQuestion = styled(Link)`
   background-color: #0a95ff;
@@ -15,7 +16,11 @@ const AskQuestion = styled(Link)`
 `;
 
 const AskButton = () => {
-  return <AskQuestion to="/ask">Ask Question</AskQuestion>;
+  const isLogged = useSelector((state) => state.user.isLogin);
+
+  return (
+    <AskQuestion to={isLogged ? "/ask" : "/login"}>Ask Question</AskQuestion>
+  );
 };
 
 export default AskButton;
