@@ -92,7 +92,7 @@ const UserAndOptions = styled.div`
   }
 `;
 
-const PostLayout = ({ editlink }) => {
+const QuestionPostLayout = ({ content, tags }) => {
   return (
     <Layout>
       <div className="votecell">
@@ -116,15 +116,15 @@ const PostLayout = ({ editlink }) => {
       </div>
       <div className="postcell">
         <div>
-          <MarkdownRenderer />
+          <MarkdownRenderer content={content} />
         </div>
         <div className="tags">
-          <TagList />
+          <TagList tags={tags} />
         </div>
         <UserAndOptions>
           <div className="options">
             <div>Share</div>
-            <Link to={editlink}>Edit</Link>
+            <Link to="qrevise">Edit</Link>
             <div id="delete">Delete</div>
           </div>
           <div className="author">
@@ -139,4 +139,4 @@ const PostLayout = ({ editlink }) => {
   );
 };
 
-export default PostLayout;
+export default QuestionPostLayout;

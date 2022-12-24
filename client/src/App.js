@@ -21,9 +21,9 @@ function App() {
             <Route index element={<Home />}></Route>
             <Route path="/questions" element={<Questions />}></Route>
             <Route path="/users" element={<Users />}></Route>
-            <Route path="/question/id" element={<QuestionDetail />}></Route>
+            <Route path="/question/:id" element={<QuestionDetail />}></Route>
             <Route
-              path="/question/id/qrevise"
+              path="/question/:id/qrevise"
               element={<EditQuestion />}
             ></Route>
           </Route>

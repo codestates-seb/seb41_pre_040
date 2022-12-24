@@ -83,7 +83,7 @@ const AdditionalInfo = styled.div`
   }
 `;
 
-const Question = ({ title, content }) => {
+const Question = ({ id, title, content, tags }) => {
   return (
     <QuestionContainer>
       <QuestionStat>
@@ -93,12 +93,11 @@ const Question = ({ title, content }) => {
       </QuestionStat>
       <QuestionInfo>
         <h3 className="question-title">
-          {/* Link to="/question/${id}" */}
-          <Link to="/question/id">{title}</Link>
+          <Link to={`/question/${id}`}>{title}</Link>
         </h3>
         <div className="question-content">{content}</div>
         <AdditionalInfo>
-          <TagList />
+          <TagList tags={tags} />
           <div className="user-info">
             <div className="username">작성자</div>
             <div>asked 8 mins ago</div>

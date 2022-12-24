@@ -8,12 +8,12 @@ const Tags = styled.div`
   gap: 4px;
 `;
 
-const TagList = () => {
-  const dummyTags = ["JavaScript", "sql", "Java", "CSS", "React"];
+const TagList = ({ tags }) => {
+  // const dummyTags = ["JavaScript", "sql", "Java", "CSS", "React"];
 
   return (
     <Tags>
-      {dummyTags.map((el, idx) => {
+      {tags.map((el, idx) => {
         return <Tag content={el} key={idx} />;
       })}
     </Tags>
