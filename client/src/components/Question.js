@@ -83,7 +83,7 @@ const AdditionalInfo = styled.div`
   }
 `;
 
-const Question = () => {
+const Question = ({ title, content }) => {
   return (
     <QuestionContainer>
       <QuestionStat>
@@ -94,14 +94,9 @@ const Question = () => {
       <QuestionInfo>
         <h3 className="question-title">
           {/* Link to="/question/${id}" */}
-          <Link to="/question/id">
-            How do I UPDATE from a SELECT in SQL Server?
-          </Link>
+          <Link to="/question/id">{title}</Link>
         </h3>
-        <div className="question-content">
-          In SQL Server, it is possible to insert rows into a table with an
-          INSERT.. SELECT statement:
-        </div>
+        <div className="question-content">{content}</div>
         <AdditionalInfo>
           <TagList />
           <div className="user-info">

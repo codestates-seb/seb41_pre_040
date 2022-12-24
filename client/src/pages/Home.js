@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Question from "../components/Question";
 import AskButton from "../components/AskButton";
 // import AskButton from "../components/FilterButton";
+import { useSelector } from "react-redux";
 
 const MainContent = styled.div`
   width: calc(100% - 300px - 24px);
@@ -78,6 +79,9 @@ const BottomNotice = styled.h2`
 `;
 
 const Home = () => {
+  const questions = useSelector((state) => state.questions.value);
+  // props로 전달해야 할 내용: key, title, content
+
   return (
     <MainContent>
       <TitleAndButton>
@@ -93,16 +97,10 @@ const Home = () => {
           <button className="right">Month</button>
         </FilterButtons>
       </ButtonContainer>
-      {/* 일단은 하드코딩해놓기 */}
       <Questions>
-        <Question />
-        <Question />
-        <Question />
-        <Question />
-        <Question />
-        <Question />
-        <Question />
-        <Question />
+        {questions.map((el) => {
+          return <Question key={el.id} title={el.title} content={el.content} />;
+        })}
       </Questions>
       <BottomNotice>
         Looking for more? Browse the complete list of questions, or popular

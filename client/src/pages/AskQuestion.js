@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
 import TagInput from "../components/TagInput";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import QuestionTip from "../components/QuestionTip";
+import { useDispatch, useSelector } from "react-redux";
+import { postQuestion } from "../redux/questionsSlice";
 
 const FormContainer = styled.div`
   display: flex;
@@ -106,8 +108,12 @@ const ManageButton = styled.div`
 `;
 
 const AskQuestion = () => {
-  const [value, setValue] = useState("");
+  const [titleInput, setTitleInput] = useState("");
+  const [contentInput, setContentInput] = useState("");
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const questions = useSelector((state) => state.questions.value);
 
   const handleHistory = () => {
     navigate(-1);
@@ -138,6 +144,7 @@ const AskQuestion = () => {
                 <input
                   className="with-focus-css"
                   placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+                  onChange={(e) => setTitleInput(e.target.value)}
                 ></input>
               </Box>
             </BoxContainer>
@@ -151,9 +158,9 @@ const AskQuestion = () => {
                   Minimum 20 characters.
                 </div>
                 <div>
-                  <MDEditor value={value} onChange={setValue} />
+                  <MDEditor value={contentInput} onChange={setContentInput} />
                   <MDEditor.Markdown
-                    source={value}
+                    source={contentInput}
                     style={{ whiteSpace: "pre-wrap" }}
                   />
                 </div>
@@ -167,13 +174,28 @@ const AskQuestion = () => {
                   Start typing to see suggestions.
                 </div>
                 <TagInput />
-                {/* <input placeholder="e.g. (css sql-server asp.net-mvc)" /> */}
               </Box>
             </BoxContainer>
             <ManageButton>
               {/* 글 등록 구현 필요 */}
               {/* 글 등록 시 해당 글의 detail 페이지로 이동 */}
-              <button className="submit-question">Review your question</button>
+              <button
+                className="submit-question"
+                onClick={() => {
+                  dispatch(
+                    postQuestion({
+                      id: questions.length + 1,
+                      title: titleInput,
+                      content: contentInput,
+                    })
+                  );
+                  alert("질문이 등록되었습니다.");
+                  // 일단은 home으로 이동하게 해놓기
+                  navigate("/");
+                }}
+              >
+                Review your question
+              </button>
               <button className="cancel-question" onClick={handleHistory}>
                 Cancel
               </button>
