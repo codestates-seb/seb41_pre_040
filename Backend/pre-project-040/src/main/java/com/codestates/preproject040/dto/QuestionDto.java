@@ -67,13 +67,4 @@ public record QuestionDto(
                 userAccount
         );
     }
-//================================================================================================================
-//    //((임시))post 테스트용
-//    public Question toEntity(UserAccount userAccount) {
-//        return Question.of(
-//                title,
-//                content,
-//                userAccount
-//        );
-//    }
 }

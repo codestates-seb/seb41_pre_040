@@ -11,16 +11,19 @@ public record QuestionResponseDto(
         String title,
         String content,
         List<Hashtag> hashtags,
-        String userId) {
+        String userId,
+        String nickname
+) {
     public static QuestionResponseDto of(
             Long id,
             String title,
             String content,
             List<Hashtag> hashtags,
-            String userId
+            String userId,
+            String nickname
     ){
         return new QuestionResponseDto(
-                id, title, content, hashtags, userId
+                id, title, content, hashtags, userId, nickname
         );
     }
 
@@ -31,7 +34,8 @@ public record QuestionResponseDto(
                 question.getTitle(),
                 question.getContent(),
                 null,
-                userAccount.getUserId()
+                userAccount.getUserId(),
+                userAccount.getNickname()
         );
     }
 }
