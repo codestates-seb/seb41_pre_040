@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { LogoutStatus } from "../redux/user";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -106,7 +111,27 @@ const UserIcon = styled.button`
 `;
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const isLogged = useSelector((state) => state.user.isLogin);
+
+  const navigte = useNavigate();
+  const dispatch = useDispatch();
+
+  // 서버 연결 전 테스트용 코드
+  const onClickLogout = () => {
+    console.log("로그아웃");
+    dispatch(LogoutStatus({ isLogin: false }));
+    navigte("/");
+    window.location.reload();
+  };
+  // 서버와 연결시
+  // const onClickLogout = () => {
+  //   axios.get("url").then((res) => {
+  //     if (res.data.success) {
+  //       dispatch(LoginStatus({ isLogin: false }));
+  //       navigte("/");
+  //     }
+  //   });
+  // };
 
   return (
     <StyledHeader>
@@ -116,7 +141,7 @@ const Header = () => {
         </LogoContainer>
 
         {/* 여기부터 로그인 상태에 따라 달라짐 */}
-        {isLogin ? (
+        {isLogged ? (
           <>
             <HeaderContents>
               <li>Products</li>
@@ -124,7 +149,7 @@ const Header = () => {
             <SearchBar />
             <Buttons>
               <UserIcon>유저</UserIcon>
-              <LogoutButton>LogOut</LogoutButton>
+              <LogoutButton onClick={onClickLogout}>LogOut</LogoutButton>
             </Buttons>
           </>
         ) : (

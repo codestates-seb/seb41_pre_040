@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { LoginStatus } from "../redux/user";
 
 const WrapLogin = styled.div`
   border: none;
@@ -60,28 +64,80 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const onEmailHandler = (e) => {
+    setEmail(e.target.value);
+  };
+  const onPasswordHandler = (e) => {
+    setPassword(e.target.value);
+  };
+  const navigte = useNavigate();
+  const dispatch = useDispatch();
+
+  const onClickLogin = () => {
+    // 테스트를 위한 임의의 id, password
+    const userId = "40fighting@naver.com";
+    const userPassword = "1234";
+    if (userId !== email) {
+      alert("입력하신 id가 일치하지 않습니다.");
+    } else if (userPassword !== password) {
+      alert("입력하신 비밀번호가 일치하지 않습니다.");
+    } else {
+      dispatch(LoginStatus({ isLogin: true }));
+      console.log("로그인 성공");
+      navigte("/");
+    }
+  };
+
+  // 서버와 연동시켰을 때 코드
+  // const onClickLogin = async () => {
+  //   console.log("click login");
+  //   console.log("Email : ", email);
+  //   console.log("password : ", password);
+
+  //   try {
+  //     const res = await axios.get("url", {
+  //       params: { userId: email, userPassword: password },
+  //     });
+  //     const userId = res.data.userId;
+  //     const userPassword = res.data.UserPassword;
+
+  //     if (userId !== email) {
+  //       alert("입력하신 id가 일치하지 않습니다.");
+  //     } else if (userPassword !== password) {
+  //       alert("입력하신 비밀번호가 일치하지 않습니다.");
+  //     } else {
+  //       dispatch(LoginStatus({ isLogin: true }));
+  //       console.log("로그인 성공");
+  //       navigte("/");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  //};
+
   return (
     <WrapLogin>
-      <form onSubmit>
+      <form>
         <div className="form-col">
           <label>Email</label>
           <input
-            type="text"
-            id="email-input"
+            id="email"
             defaultValue={email}
-            onChagne={(e) => setEmail(e.target.value)}
+            onChange={onEmailHandler}
           ></input>
         </div>
         <div className="form-col">
           <label>Password</label>
           <input
             type="password"
-            id="password-input"
+            id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={onPasswordHandler}
           ></input>
         </div>
-        <button className="Blue-button">Log in</button>
+        <button className="Blue-button" onClick={onClickLogin}>
+          Log in
+        </button>
       </form>
     </WrapLogin>
   );
