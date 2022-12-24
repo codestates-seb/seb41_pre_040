@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, useActionData, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MarkdownRenderer from "../assets/MarkdownRenderer";
 import TagList from "./TagsList";
 import CommentsList from "./CommentsList";
