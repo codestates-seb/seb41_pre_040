@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
@@ -80,6 +80,15 @@ const LoginButton = styled(Link)`
   }
 `;
 
+const LogoutButton = styled(LoginButton)`
+  background-color: #fdf2f2;
+  color: #c22e32;
+  border-color: #c22e32;
+  &:hover {
+    background-color: #fadcdc;
+  }
+`;
+
 const SignupButton = styled(Link)`
   background-color: #278bf7;
   color: white;
@@ -91,26 +100,47 @@ const SignupButton = styled(Link)`
   }
 `;
 
+const UserIcon = styled.button`
+  border: 1px solid black;
+  padding: 6px;
+`;
+
 const Header = () => {
+  const [isLogin, setIsLogin] = useState(false);
+
   return (
     <StyledHeader>
       <HeaderContainer>
         <LogoContainer to="/">
           <HeaderLogo>로고</HeaderLogo>
         </LogoContainer>
-        <HeaderContents>
-          <li>About</li>
-          <li>Products</li>
-          <li>For Teams</li>
-        </HeaderContents>
 
-        <SearchBar />
-
-        {/* 아래 버튼들은 로그인 상태에 따라 조건부렌더링 필요 */}
-        <Buttons>
-          <LoginButton to="/login">Log in</LoginButton>
-          <SignupButton to="/signup">Sign up</SignupButton>
-        </Buttons>
+        {/* 여기부터 로그인 상태에 따라 달라짐 */}
+        {isLogin ? (
+          <>
+            <HeaderContents>
+              <li>Products</li>
+            </HeaderContents>
+            <SearchBar />
+            <Buttons>
+              <UserIcon>유저</UserIcon>
+              <LogoutButton>LogOut</LogoutButton>
+            </Buttons>
+          </>
+        ) : (
+          <>
+            <HeaderContents>
+              <li>About</li>
+              <li>Products</li>
+              <li>For Teams</li>
+            </HeaderContents>
+            <SearchBar />
+            <Buttons>
+              <LoginButton to="/login">Log in</LoginButton>
+              <SignupButton to="/signup">Sign up</SignupButton>
+            </Buttons>
+          </>
+        )}
       </HeaderContainer>
     </StyledHeader>
   );
