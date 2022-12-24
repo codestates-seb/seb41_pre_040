@@ -110,6 +110,7 @@ const ManageButton = styled.div`
 const AskQuestion = () => {
   const [titleInput, setTitleInput] = useState("");
   const [contentInput, setContentInput] = useState("");
+  const [tags, setTags] = useState([]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -173,7 +174,7 @@ const AskQuestion = () => {
                   Add up to 5 tags to describe what your question is about.
                   Start typing to see suggestions.
                 </div>
-                <TagInput />
+                <TagInput tags={tags} setTags={setTags} />
               </Box>
             </BoxContainer>
             <ManageButton>
@@ -187,11 +188,13 @@ const AskQuestion = () => {
                       id: questions.length + 1,
                       title: titleInput,
                       content: contentInput,
+                      tags: tags,
                     })
                   );
                   alert("질문이 등록되었습니다.");
                   // 일단은 home으로 이동하게 해놓기
-                  navigate("/");
+                  // 서버 연동 후에는 새로고침까지 여기서 처리하기
+                  navigate(`/question/${questions.length + 1}`);
                 }}
               >
                 Review your question

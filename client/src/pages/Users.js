@@ -1,5 +1,5 @@
-// import React, { useState, useEffect, createContext} from "react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styled from 'styled-components';
 import UserSlot from "../components/UserSlot";
 import Paging from "../components/Pagination";
@@ -107,19 +107,42 @@ const PageContainer = styled.div`
 
 const Users = () => {
 
-  const users = useSelector((state) => state.users.value)
-  console.log(users)
-  // const [pagesPerPage] = useState(5);
-  // const [currentPage, setCurrentPage] = useState(1);
+  // const [data, setData] = useState(null);
+  // const [isPending, setIsPending] = useState(true);
 
-  // const indexOfLastPost = currentPage * pagesPerPage;
-  // const indexOfFirstPost = indexOfLastPost - pagesPerPage;
+  // useEffect( ()=>{
+  //   axios
+  //   .get("https://api.stackexchange.com/2.3/users?page=1&pagesize=22&order=desc&sort=reputation&site=stackoverflow")
+  //   .then((res)=> {
+  //     setData([res.data.items]);
+  //   })
+  //   .then(()=> {
+  //     setIsPending(false);
+  //     console.log(data);
+  //   })
+  //   .catch((err)=>console.error(err));
+
+  // })
+
+  // const getClick = () => {
+  //   axios
+  //   .get("https://api.stackexchange.com/2.3/users?page=5&pagesize=80&order=desc&sort=reputation&site=stackoverflow")
+  //   .then((res)=> {
+  //     setData([res.data.items]);
+  //   })
+  // } 
 
 
+
+  const users = useSelector((state) => state.users.value);
+
+  const [page, setPage] = useState(1);
+  const handlePageChange = (page) => {setPage(page);};
 
   return (
     <Userlist>
       <h1>Users</h1>
+      {/* <button onClick={getClick}>버튼버튼</button> */}
       <FilterUser>
         <SearchUser>
           <SearchBar placeholder="Filter by user"/>
@@ -140,14 +163,13 @@ const Users = () => {
       </DateButtons>
       <Userinfos>
 
-      {users.map((el) => {
-          return <UserSlot id={el.id} location={el.location} vote={el.vote} />;
+      {users.slice(4*(page-1), 4*(page-1)+4).map((el) => {
+          return <UserSlot display_name={el.display_name} location={el.location} reputation={el.reputation} />;
         })}
-
-
       </Userinfos>
+
       <PageContainer>
-        <Paging currentPage={1} count={10} onChange={10} />
+        <Paging activePage={page} itemsCountPerPage={4} totalItemsCount={users.length} onChange={handlePageChange} />
       </PageContainer>
     </Userlist>
   )

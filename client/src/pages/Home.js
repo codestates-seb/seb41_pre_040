@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Question from "../components/Question";
 import AskButton from "../components/AskButton";
@@ -79,6 +79,9 @@ const BottomNotice = styled.h2`
 
 const Home = () => {
   const questions = useSelector((state) => state.questions.value);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <MainContent>
@@ -98,7 +101,15 @@ const Home = () => {
       {/* 일단은 하드코딩해놓기 */}
       <Questions>
         {questions.map((el) => {
-          return <Question key={el.id} title={el.title} content={el.content} />;
+          return (
+            <Question
+              key={el.id}
+              id={el.id}
+              title={el.title}
+              content={el.content}
+              tags={el.tags}
+            />
+          );
         })}
       </Questions>
       <BottomNotice>

@@ -81,7 +81,7 @@ export const usersSlice = createSlice({
   name: "users",
   initialState: initialState,
   reducers: {
-    usersPagination: (state, action) => {
+    usersList: (state, action) => {
       state.value = [
         {
           id: action.payload.id,
@@ -94,5 +94,5 @@ export const usersSlice = createSlice({
   },
 });
 
-export const { usersPagination } = usersSlice.actions;
+export const { usersList, paginate } = usersSlice.actions;
 export default usersSlice.reducer;

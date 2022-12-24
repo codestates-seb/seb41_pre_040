@@ -41,15 +41,15 @@ font-size: 12px;
 font-weight: bold;
 `;
 
-const UserSlot = ( { id, location, vote }) => {
+const UserSlot = ( { display_name, location, reputation }) => {
 
     return (
         <Slot>
             <img src="https://user-images.githubusercontent.com/104320234/188269297-ff59ed55-4627-49f3-a001-9e480ff2bc7d.png" alt="img"/>
             <UserInfo>
-                <Name>{id}</Name>
+                <Name>{display_name}</Name>
                 <Location>{location}</Location>
-                <Reputation>{vote}</Reputation>
+                <Reputation>{reputation}</Reputation>
             </UserInfo>
 
 

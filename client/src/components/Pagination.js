@@ -44,21 +44,23 @@ const Container = styled.div`
 `;
 
 
-const Paging = ({ currentPage, 
-  // itemsCountPerPage, 
-  count, onChange, pageRangeDisplayed = 5,   }) => {
+const Paging = ({ activePage,
+  itemsCountPerPage,
+  totalItemsCount,
+  onChange,
+  pageRangeDisplayed = 5 }) => {
 
 
     return (
         <Container>
             <Pagination
-            activePage={currentPage}
-            itemsCountPerPage={36}
-            totalItemsCount={count}
-            pageRangeDisplayed={pageRangeDisplayed}
-            onChange={onChange}
-            prevPageText="Prev"
-            nextPageText="Next"
+                    activePage={activePage}
+                    itemsCountPerPage={itemsCountPerPage}
+                    totalItemsCount={totalItemsCount}
+                    pageRangeDisplayed={pageRangeDisplayed}
+                    onChange={onChange}
+                    prevPageText="Prev"
+                    nextPageText="Next"
             />
         </Container>
         

@@ -12,47 +12,11 @@ const MarkdownStyle = styled.div`
   }
 `;
 
-const dummyData = `
-In **SQL Server**, it is possible to insert rows into a table with an \`INSERT.. SELECT\` statement:
-
-    INSERT INTO Table (col1, col2, col3)
-    SELECT col1, col2, col3 
-    FROM other_table 
-    WHERE sql = 'cool'
-
-Is it also possible to _update_ a table with \`SELECT\`? I have a temporary table containing the values and would like to update another table using those values. Perhaps something like this:
-
-    UPDATE Table SET col1, col2
-    SELECT col1, col2 
-    FROM other_table 
-    WHERE sql = 'cool'
-    WHERE Table.id = other_table.id
-
-\`\`\`js
-// 자바스크립트 코드 렌더링 테스트
-function add(x, y) {
-  return x + y;
-}
-\`\`\`
-\`\`\`java
-// 자바 코드 렌더링 테스트
-public class Main {
-  public static void main(String[] args) {
-      System. out.println("Hello World" );
-  }
-}
-\`\`\`
-`;
-
-// 코드블럭 배경 색상: #f6f6f6;
-// 인라인 코드 배경 색상: #e3e6e8;
-// 코드 하이라이팅 적용하기
-
-const MarkdownRenderer = () => {
+const MarkdownRenderer = ({ content }) => {
   return (
     <MarkdownStyle>
       <ReactMarkdown
-        children={dummyData}
+        children={content}
         components={{
           blockquote({ node, children, ...props }) {
             return (
