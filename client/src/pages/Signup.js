@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import SignupForm from "../components/SignupForm";
 
 const Container = styled.div`
   display: flex;
@@ -19,6 +20,9 @@ const SideContainer = styled.span`
   h1 {
     font-size: 27px;
     margin: 0px 0px 32px;
+  }
+  .collabo {
+    color: #9199a1;
   }
 `;
 
@@ -67,51 +71,6 @@ const SocialSign = styled.button`
   }
 `;
 
-const SignInfo = styled.div`
-  background-color: white;
-  width: 292px;
-  padding: 24px;
-  margin-top: 20px;
-  margin-bottom: 24px;
-  border-radius: 10px;
-  box-shadow: 3px 3px 3px 3px gray;
-  .text {
-    margin-bottom: 15px;
-  }
-`;
-
-const Inputtext = styled.input`
-  padding: 8px 10px 8px 10px;
-  margin-bottom: 15px;
-  width: 245px;
-  height: 40px;
-  border: 1px solid rgb(186, 191, 196);
-  border-radius: 3px;
-  font-size: 17px;
-  &::placeholder {
-    color: #f1f2f3;
-  }
-  &:focus {
-    border-color: #0a95ff;
-    outline: #c1f4ff solid 4px;
-  }
-`;
-
-const SignupBtn = styled.button`
-  flex-grow: 1;
-  width: 100%;
-  height: 45px;
-  border-radius: 3px;
-  border: none;
-  background-color: hsl(206, 100%, 52%);
-  color: white;
-  margin-top: 13px;
-  cursor: pointer;
-  &:hover {
-    background-color: hsl(206, 100%, 40%);
-  }
-`;
-
 const Signup = () => {
   return (
     <Container>
@@ -151,7 +110,7 @@ const Signup = () => {
           <span>Earn reputation and badges</span>
         </SideMessge>
 
-        <div>
+        <div className="collabo">
           Collaborate and share knowledge with a private group for FREE.
         </div>
         <GetMessage
@@ -213,19 +172,7 @@ const Signup = () => {
             Sign up with GitHub
           </div>
         </SocialSign>
-        <SignInfo>
-          <div className="text">Display name</div>
-          <Inputtext></Inputtext>
-          <div className="text">Email</div>
-          <Inputtext></Inputtext>
-          <div className="text">Password</div>
-          <Inputtext></Inputtext>
-          <div>
-            <SignupBtn>
-              <Link to="/">Sign up</Link>
-            </SignupBtn>
-          </div>
-        </SignInfo>
+        <SignupForm />  
       </SignupContainer>
     </Container>
   );
