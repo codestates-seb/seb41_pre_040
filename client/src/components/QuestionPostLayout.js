@@ -6,6 +6,7 @@ import TagList from "./TagsList";
 import CommentsList from "./CommentsList";
 import { deleteQuestion } from "../redux/questionsSlice";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Layout = styled.div`
   display: grid;
@@ -97,6 +98,7 @@ const UserAndOptions = styled.div`
 const QuestionPostLayout = ({ id, content, tags }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLogged = useSelector((state) => state.user.isLogin);
 
   return (
     <Layout>
@@ -129,7 +131,7 @@ const QuestionPostLayout = ({ id, content, tags }) => {
         <UserAndOptions>
           <div className="options">
             <div>Share</div>
-            <Link to="qrevise">Edit</Link>
+            {isLogged ? <Link to="qrevise">Edit</Link> : <></>}
             <div
               id="delete"
               onClick={() => {
