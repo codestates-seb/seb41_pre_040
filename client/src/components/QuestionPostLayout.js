@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useActionData, useNavigate } from "react-router-dom";
 import MarkdownRenderer from "../assets/MarkdownRenderer";
 import TagList from "./TagsList";
 import CommentsList from "./CommentsList";
+import { deleteQuestion } from "../redux/questionsSlice";
+import { useDispatch } from "react-redux";
 
 const Layout = styled.div`
   display: grid;
@@ -92,7 +94,10 @@ const UserAndOptions = styled.div`
   }
 `;
 
-const QuestionPostLayout = ({ content, tags }) => {
+const QuestionPostLayout = ({ id, content, tags }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   return (
     <Layout>
       <div className="votecell">
@@ -125,7 +130,23 @@ const QuestionPostLayout = ({ content, tags }) => {
           <div className="options">
             <div>Share</div>
             <Link to="qrevise">Edit</Link>
-            <div id="delete">Delete</div>
+            <div
+              id="delete"
+              onClick={() => {
+                let confirm = window.confirm("질문을 삭제하시겠습니까?");
+                if (confirm === true) {
+                  dispatch(
+                    deleteQuestion({
+                      id: id,
+                    })
+                  );
+                  alert("질문이 삭제되었습니다.");
+                  navigate("/questions");
+                }
+              }}
+            >
+              Delete
+            </div>
           </div>
           <div className="author">
             <div>author: name</div>

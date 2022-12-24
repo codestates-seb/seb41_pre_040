@@ -118,7 +118,11 @@ const QuestionDetail = () => {
       </TitleContainer>
       <Main>
         {/* 질문 하나, 답변 여러 개 */}
-        <QuestionPostLayout content={question.content} tags={question.tags} />
+        <QuestionPostLayout
+          id={question.id}
+          content={question.content}
+          tags={question.tags}
+        />
         <div id="answers">
           <div id="answer-header">
             <h2>answers.length Answers</h2>

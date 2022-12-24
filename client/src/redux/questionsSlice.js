@@ -56,6 +56,7 @@ export const questionsSlice = createSlice({
     deleteQuestion: (state, action) => {
       // 아이디 일치하는 것만 제외하고
       // 그걸 state.value에 재할당하기
+      state.value = state.value.filter((el) => el.id !== action.payload.id);
     },
   },
 });
