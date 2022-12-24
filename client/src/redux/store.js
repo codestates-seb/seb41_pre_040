@@ -9,7 +9,7 @@ export default configureStore({
     questions: questionsReducer,
     users: usersReducer,
     user: useReducer,
-    signup: signupReducer,
+    signupList: signupReducer,
 
   },
 });

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import MarkdownRenderer from "../assets/MarkdownRenderer";
 import TagList from "./TagsList";
 import CommentsList from "./CommentsList";
+import { useSelector } from "react-redux";
 
 const Layout = styled.div`
   display: grid;
@@ -93,6 +94,7 @@ const UserAndOptions = styled.div`
 `;
 
 const AnswerPostLayout = () => {
+  const isLogged = useSelector((state) => state.user.isLogin);
   return (
     <Layout>
       <div className="votecell">
@@ -124,7 +126,7 @@ const AnswerPostLayout = () => {
         <UserAndOptions>
           <div className="options">
             <div>Share</div>
-            <Link>Edit</Link>
+            {isLogged ? <Link>Edit</Link> : <></>}
             <div id="delete">Delete</div>
           </div>
           <div className="author">
