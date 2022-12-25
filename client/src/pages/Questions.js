@@ -129,8 +129,6 @@ const Questions = () => {
           Filter
         </ConditionFilter>
       </ButtonContainer>
-      {/* 일단은 하드코딩해놓기 */}
-      {/* 여기도 QuestionList 컴포넌트 만들기 */}
       <QuestionsContainer>
         {questions.map((el) => {
           return (
@@ -140,6 +138,7 @@ const Questions = () => {
               title={el.title}
               content={el.content}
               tags={el.tags}
+              created_at={el.created_at}
             />
           );
         })}

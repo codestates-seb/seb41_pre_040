@@ -5,6 +5,7 @@ import Aside from "../components/Aside";
 import AnswersList from "../components/AnswersList";
 import AnswerQuestion from "../components/AnswerQuestion";
 import QuestionPostLayout from "../components/QuestionPostLayout";
+import elapsedTime_ago from "../assets/dateparse";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -113,7 +114,9 @@ const QuestionDetail = () => {
         </TitleAndButton>
         <div className="ask-date">
           Asked
-          <span className="time-elapsed"> Today</span>
+          <span className="time-elapsed">{` ${elapsedTime_ago(
+            question.created_at
+          )}`}</span>
         </div>
       </TitleContainer>
       <Main>

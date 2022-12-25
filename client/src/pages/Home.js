@@ -108,6 +108,7 @@ const Home = () => {
               title={el.title}
               content={el.content}
               tags={el.tags}
+              created_at={el.created_at}
             />
           );
         })}
