@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import styled from "styled-components";
 
 const TagsInput = styled.input`
@@ -61,13 +61,20 @@ const TagInput = ({ tags, setTags }) => {
   };
 
   const addTags = (event) => {
-    const filtered = tags.filter((el) => el === event.target.value);
-    if (event.target.value !== "" && filtered.length === 0) {
+    // 뒤에 붙는 공백 지우기
+    let tag = event.target.value;
+    tag = tag.slice(0, tag.length - 1);
+    const filtered = tags.filter((el) => el === tag);
+
+    // 태그가 이미 존재하는 경우에는 자동으로 지워짐
+    if (filtered.length > 0) event.target.value = "";
+
+    if (tag !== "" && filtered.length === 0) {
       if (tags.length === 5) {
         event.target.value = "";
         return;
       }
-      setTags([...tags, event.target.value]);
+      setTags([...tags, tag]);
       event.target.value = "";
     }
   };
