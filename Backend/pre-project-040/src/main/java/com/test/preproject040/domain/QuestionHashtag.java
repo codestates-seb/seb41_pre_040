@@ -1,4 +1,4 @@
-package com.codestates.preproject040.domain;
+package com.test.preproject040.domain;
 
 import com.codestates.preproject040.domain.Hashtag.entitiy.Hashtag;
 import lombok.*;

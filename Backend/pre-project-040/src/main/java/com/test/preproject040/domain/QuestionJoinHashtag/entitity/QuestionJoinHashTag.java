@@ -1,4 +1,4 @@
-package com.codestates.preproject040.domain.QuestionJoinHashtag.entitity;
+package com.test.preproject040.domain.QuestionJoinHashtag.entitity;
 
 
 import lombok.Getter;

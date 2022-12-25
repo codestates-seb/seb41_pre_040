@@ -1,4 +1,4 @@
-package com.codestates.preproject040.config;
+package com.test.preproject040.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
