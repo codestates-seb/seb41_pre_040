@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 const MarkdownStyle = styled.div`
@@ -17,6 +18,7 @@ const MarkdownRenderer = ({ content }) => {
     <MarkdownStyle>
       <ReactMarkdown
         children={content}
+        remarkPlugins={[remarkGfm]}
         components={{
           blockquote({ node, children, ...props }) {
             return (

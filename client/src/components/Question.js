@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import TagList from "./TagsList";
+import elapsedTime_ago from "../assets/dateparse";
 
 const QuestionContainer = styled.div`
   display: flex;
@@ -83,7 +84,7 @@ const AdditionalInfo = styled.div`
   }
 `;
 
-const Question = ({ id, title, content, tags }) => {
+const Question = ({ id, title, content, tags, created_at }) => {
   return (
     <QuestionContainer>
       <QuestionStat>
@@ -100,7 +101,7 @@ const Question = ({ id, title, content, tags }) => {
           <TagList tags={tags} />
           <div className="user-info">
             <div className="username">작성자</div>
-            <div>asked 8 mins ago</div>
+            <div>asked {elapsedTime_ago(created_at)}</div>
           </div>
         </AdditionalInfo>
       </QuestionInfo>
