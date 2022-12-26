@@ -11,5 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     //findBy(컬럼이름)Containing = 컬럼에서 키워드 포함된 것 찾기
     Page<Question> findByTitleContaining(String title, Pageable pageable);
-    Page<Question> findByContentContaining(String content, Pageable pageable);
+    Page<Question> findByContent1Containing(String content1, Pageable pageable);
+
+    Page<Question> findByContent2Containing(String content2, Pageable pageable);
 }

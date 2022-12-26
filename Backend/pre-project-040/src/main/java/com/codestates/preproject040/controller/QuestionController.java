@@ -91,7 +91,7 @@ public class QuestionController {
         userRepository.save(userAccount);
 
         Question question =
-                QuestionDto.of(requestBody.title(), requestBody.content())
+                QuestionDto.of(requestBody.title(), requestBody.content1(), requestBody.content2())
                         .toEntity(userAccount);
         Question updatedQuestion = questionService.updateQuestion(id, question);
 

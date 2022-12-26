@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 @Service
 public class QuestionService {
     private final QuestionRepository questionRepository;
@@ -24,15 +25,23 @@ public class QuestionService {
     // 질문 검색(title, content 검색 결과를 합쳐서 createdAt 역순으로 정렬)
     public List<QuestionDto> searchQuestions(String searchKeyword, Pageable pageable) {
         Page<Question> byTitleContaining = questionRepository.findByTitleContaining(searchKeyword, pageable);
-        Page<Question> byContentContaining = questionRepository.findByContentContaining(searchKeyword, pageable);
+        Page<Question> byContent1Containing = questionRepository.findByContent1Containing(searchKeyword, pageable);
+        Page<Question> byContent2Containing = questionRepository.findByContent2Containing(searchKeyword, pageable);
 
         List<Question> titleList = new ArrayList<>(byTitleContaining.stream().toList());
-        List<Question> contentList = new ArrayList<>(byContentContaining.stream().toList());
+        List<Question> content1List = new ArrayList<>(byContent1Containing.stream().toList());
+        List<Question> content2List = new ArrayList<>(byContent2Containing.stream().toList());
 
         // 중복 아닌 결과 합치기
-        for(int i = 0; i < contentList.size(); i++) {
-            if (!titleList.contains(contentList.get(i))) {
-                titleList.add(contentList.get(i));
+        for(int i = 0; i < content1List.size(); i++) {
+            if (!titleList.contains(content1List.get(i))) {
+                titleList.add(content1List.get(i));
+            }
+        }
+
+        for(int i = 0; i < content2List.size(); i++) {
+            if (!titleList.contains(content2List.get(i))) {
+                titleList.add(content2List.get(i));
             }
         }
 
@@ -73,8 +82,10 @@ public class QuestionService {
 
         Optional.ofNullable(question.getTitle())
                 .ifPresent(findQuestion::setTitle);
-        Optional.ofNullable(question.getContent())
-                .ifPresent(findQuestion::setContent);
+        Optional.ofNullable(question.getContent1())
+                .ifPresent(findQuestion::setContent1);
+        Optional.ofNullable(question.getContent2())
+                .ifPresent(findQuestion::setContent2);
 
         return questionRepository.save(findQuestion);
     }
