@@ -30,7 +30,7 @@ public class QuestionController {
         this.userRepository = userRepository;
     }
 
-    // 검색 ex. question/search?searchKeyword=내용&page=0
+    // 검색 ex. questions/search?searchKeyword=내용&page=0
     // 실제 size=30, 일단 size=2로 작성
     @GetMapping("/questions/search")
     public ResponseEntity getQuestions(
