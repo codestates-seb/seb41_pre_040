@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class GoogleOAuth2ResponseTest {
     private final ObjectMapper mapper = new ObjectMapper();
 
-    @DisplayName("인증 결과를 Map(deserialized json)으로 받으면, 카카오 인증 응답 객체로 변환한다.")
+    /*@DisplayName("인증 결과를 Map(deserialized json)으로 받으면, 카카오 인증 응답 객체로 변환한다.")
     @Test
     void givenMapFromJson_whenInstantiating_thenReturnsGoogleResponseObject() throws Exception {
         // Given
@@ -47,6 +47,6 @@ class GoogleOAuth2ResponseTest {
                 .hasFieldOrPropertyWithValue("email", "user@example.com")
                 .hasFieldOrPropertyWithValue("providerUserInfo.photoUrl", "http://localhost:8080/img1234567890/photo.png")
                 .hasFieldOrPropertyWithValue("providerUserInfo.email", "user@example.com");
-    }
+    }*/
 
 }
