@@ -33,10 +33,6 @@ public class UserAccountService {
     @Transactional(readOnly = true)
     public UserResponse getUser(String userId) {
         return userAccountRepository.findById(userId)
-                .filter(userAccount -> {
-                    String password = userAccount.getUserPassword();
-                    password 
-                })
                 .map(UserAccountDto::from)
                 .map(UserResponse::from)
                 .orElseThrow(() -> new UsernameNotFoundException("해당 유저를 찾을 수 없음"));
