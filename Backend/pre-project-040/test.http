@@ -1,0 +1,35 @@
+POST http://localhost:8080/signup/join
+Content-Type: application/json
+
+{
+    "userId": "juno",
+    "userPassword": "1234",
+    "email": "e@email.com",
+    "nickname": "juno"
+}
+
+###
+
+GET http://localhost:8080
+
+###
+
+GET http://localhost:8080/signup
+
+###
+
+POST http://localhost:8080/questions
+Content-Type: application/json
+
+{
+  "title": "test-title",
+  "content": "test-content"
+}
+
+###
+
+GET http://localhost:8080/questions
+
+###
+
+GET http://localhost:8080/logout
