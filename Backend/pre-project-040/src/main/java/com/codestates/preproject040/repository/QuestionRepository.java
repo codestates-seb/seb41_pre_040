@@ -1,9 +1,15 @@
 package com.codestates.preproject040.repository;
 
 import com.codestates.preproject040.domain.Question;
+import com.codestates.preproject040.domain.UserAccount;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    //todo : @query 사용법 / sql limit 구글링
-    //todo : 홈화면 ex50개
+    //findBy(컬럼이름)Containing = 컬럼에서 키워드 포함된 것 찾기
+    Page<Question> findByTitleContaining(String title, Pageable pageable);
+    Page<Question> findByContentContaining(String content, Pageable pageable);
 }

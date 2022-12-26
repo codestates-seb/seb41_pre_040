@@ -1,43 +1,44 @@
 package com.codestates.preproject040.dto;
 
-import com.codestates.preproject040.domain.*;
+import com.codestates.preproject040.domain.Answer;
+import com.codestates.preproject040.domain.Question;
+import com.codestates.preproject040.domain.QuestionHashtag;
+import com.codestates.preproject040.domain.UserAccount;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public record QuestionDto(
-            Long id,
-            UserAccount userAccount,
-            String title,
-            QuestionHashtag questionHashtag,
-            String content,
-            Answer answer,
-            LocalDateTime createdAt,
-            String createdBy,
-            LocalDateTime modifiedAt,
-            String modifiedBy
+        Long id,
+        UserAccount userAccount,
+        String title,
+        Set<QuestionHashtag> questionHashtag,
+        String content,
+        Set<Answer> answer,
+        LocalDateTime createdAt,
+        String createdBy,
+        LocalDateTime modifiedAt,
+        String modifiedBy
 )
 {
-    // Post 역할
+    // Post 역할 -userAccount, -questionHashtag
     public static QuestionDto of(
-            UserAccount userAccount,
             String title,
-            QuestionHashtag questionHashtag,
             String content) {
 
         return new QuestionDto(
-                null, userAccount, title, questionHashtag, content,
+                null, null, title, null, content,
                 null, null, null, null, null);
     }
 
-    // Patch 역할
+    // Patch 역할 -questionHashtag
     public static QuestionDto of(
             Long id,
             String title,
-            QuestionHashtag questionHashtag,
             String content) {
 
         return new QuestionDto(
-                id, null, title, questionHashtag, content,
+                id, null, title, null, content,
                 null, null, null, null, null
         );
     }
@@ -47,9 +48,9 @@ public record QuestionDto(
                 question.getId(),
                 question.getUserAccount(),
                 question.getTitle(),
-                (QuestionHashtag) question.getQuestionHashtags(),
+                question.getQuestionHashtags(),
                 question.getContent(),
-                (Answer) question.getAnswers(),
+                question.getAnswers(),
                 question.getCreatedAt(),
                 question.getCreatedBy(),
                 question.getModifiedAt(),
@@ -57,23 +58,12 @@ public record QuestionDto(
         );
     }
 
-//    //todo: 삭제해도 되나..?
-//    //((임시))post 테스트용
-//    public Question toEntity(UserAccount userAccount) {
-//        return Question.of(
-//                title,
-//                content,
-//                userAccount
-//        );
-//    }
-
-    public Question toEntity() {
+    //((임시))임시 user 정보 사용
+    public Question toEntity(UserAccount userAccount) {
         return Question.of(
                 title,
                 content,
                 userAccount
         );
     }
-
-//    답변이 포함된 게시글 객체 만들어야함.
 }
