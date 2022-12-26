@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(indexes = {
         @Index(columnList = "email", unique = true),
@@ -29,15 +29,21 @@ public class UserAccount extends AuditingFields {
     @Setter @Column(length = 100)
     private String nickname;
 
-    private UserAccount(String userId, String userPassword, String email, String nickname) {
+    private UserAccount(String userId, String userPassword, String email, String nickname, String createdBy) {
         this.userId = userId;
         this.userPassword = userPassword;
         this.email = email;
         this.nickname = nickname;
+        this.createdBy = createdBy;
+        this.modifiedBy = createdBy;
     }
 
     public static UserAccount of(String userId, String userPassword, String email, String nickname) {
-        return new UserAccount(userId, userPassword, email, nickname);
+        return new UserAccount(userId, userPassword, email, nickname, null);
+    }
+
+    public static UserAccount of(String userId, String userPassword, String email, String nickname, String createdBy) {
+        return new UserAccount(userId, userPassword, email, nickname, createdBy);
     }
 
     @Override

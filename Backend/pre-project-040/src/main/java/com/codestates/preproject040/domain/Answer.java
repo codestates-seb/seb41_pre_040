@@ -20,7 +20,7 @@ public class Answer extends AuditingFields {
     private Long id;
 
     @Setter
-    @Column(nullable = false, length = 2000)
+    @Column(nullable = false, length = 500)
     private String content;
 
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId")
