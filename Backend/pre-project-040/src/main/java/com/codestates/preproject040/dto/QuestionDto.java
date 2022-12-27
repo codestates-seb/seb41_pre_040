@@ -7,17 +7,17 @@ import com.codestates.preproject040.domain.UserAccount;
 
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Set;
+
+import java.util.List;
 
 public record QuestionDto(
         Long id,
         UserAccount userAccount,
         String title,
-        ArrayList<QuestionHashtag> questionHashtag,
+        List<QuestionHashtag> questionHashtag,
         String content1,
         String content2,
-        ArrayList<Answer> answer,
+        List<Answer> answer,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
@@ -27,7 +27,7 @@ public record QuestionDto(
     // Post 역할 -userAccount, -questionHashtag
     public static QuestionDto of(
             String title,
-            ArrayList<QuestionHashtag> questionHashtag,
+            List<QuestionHashtag> questionHashtag,
             String content1,
             String content2
     ) {
@@ -41,7 +41,7 @@ public record QuestionDto(
     public static QuestionDto of(
             Long id,
             String title,
-            ArrayList<QuestionHashtag> questionHashtag,
+            List<QuestionHashtag> questionHashtag,
             String content1,
             String content2) {
 

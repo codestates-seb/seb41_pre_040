@@ -38,14 +38,14 @@ public class Question extends AuditingFields {
     @ToString.Exclude
     @OrderBy("createdAt DESC")
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private final ArrayList<Answer> answers = new ArrayList<>();
+    private final List<Answer> answers = new ArrayList<>();
 
     @Setter
     @ToString.Exclude
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    public ArrayList<QuestionHashtag> questionHashtags = new ArrayList<QuestionHashtag>();
+    public List<QuestionHashtag> questionHashtags = new ArrayList<>();
 
-    private Question(String title, String content1, String content2, UserAccount userAccount, ArrayList<QuestionHashtag> questionHashtag) {
+    private Question(String title, String content1, String content2, UserAccount userAccount, List<QuestionHashtag> questionHashtag) {
         this.title = title;
         this.content1 = content1;
         this.content2 = content2;
@@ -53,7 +53,7 @@ public class Question extends AuditingFields {
         this.questionHashtags = questionHashtag;
     }
 
-    public static Question of(String title, String content1, String content2, UserAccount userAccount, ArrayList<QuestionHashtag> questionHashtag) {
+    public static Question of(String title, String content1, String content2, UserAccount userAccount, List<QuestionHashtag> questionHashtag) {
         return new Question(title, content1, content2, userAccount, questionHashtag);
     }
 
