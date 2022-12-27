@@ -29,11 +29,9 @@ public class Question extends AuditingFields {
 
     @Setter @Column(nullable = false)
     private String content2;
-/*
+
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId")
     private UserAccount userAccount;
-
- */
 
     @ToString.Exclude
     @OrderBy("createdAt DESC")
@@ -45,16 +43,15 @@ public class Question extends AuditingFields {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     public List<QuestionHashtag> questionHashtags = new ArrayList<>();
 
-    private Question(String title, String content1, String content2, UserAccount userAccount, List<QuestionHashtag> questionHashtag) {
+    private Question(String title, String content1, String content2, UserAccount userAccount) {
         this.title = title;
         this.content1 = content1;
         this.content2 = content2;
-       // this.userAccount = userAccount;
-        this.questionHashtags = questionHashtag;
+        this.userAccount = userAccount;
     }
 
-    public static Question of(String title, String content1, String content2, UserAccount userAccount, List<QuestionHashtag> questionHashtag) {
-        return new Question(title, content1, content2, userAccount, questionHashtag);
+    public static Question of(String title, String content1, String content2, UserAccount userAccount) {
+        return new Question(title, content1, content2, userAccount);
     }
 
     @Override

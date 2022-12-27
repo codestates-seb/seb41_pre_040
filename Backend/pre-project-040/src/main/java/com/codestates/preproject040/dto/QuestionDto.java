@@ -73,8 +73,7 @@ public record QuestionDto(
                 title,
                 content1,
                 content2,
-                userAccount,
-                questionHashtag
+                userAccount
         );
     }
 }
