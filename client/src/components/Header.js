@@ -106,12 +106,19 @@ const SignupButton = styled(Link)`
 `;
 
 const UserIcon = styled.button`
-  border: 1px solid black;
-  padding: 6px;
+width: 40px;
+height: 47px;
+&:hover{
+  background-color: #babfc4;
+}
+
+
 `;
 
 const Header = () => {
   const isLogged = useSelector((state) => state.user.isLogin);
+  const userinfos = useSelector((state) => state.users.value)
+  const loggedUser = userinfos.filter(e => e.isLogin === true)
 
   const navigte = useNavigate();
   const dispatch = useDispatch();
@@ -148,7 +155,10 @@ const Header = () => {
             </HeaderContents>
             <SearchBar />
             <Buttons>
-              <UserIcon>유저</UserIcon>
+              <Link to="/userinfo">
+              <UserIcon>
+                <img width="20" alt="" src={loggedUser[0].userImg}/></UserIcon>
+              </Link>
               <LogoutButton onClick={onClickLogout}>LogOut</LogoutButton>
             </Buttons>
           </>

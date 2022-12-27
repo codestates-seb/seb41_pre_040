@@ -10,6 +10,11 @@ import AskQuestion from "./pages/AskQuestion";
 import Login from "./pages/Login";
 import EditQuestion from "./pages/EditQuestion";
 import QuestionDetail from "./pages/QuestionDetail";
+import UserInfo from "./pages/UserInfo";
+import axios from "axios";
+
+
+axios.defaults.headers.get["ngrok-skip-browser-warning"] = "dalkfajfo";
 
 function App() {
   return (
@@ -22,6 +27,7 @@ function App() {
             <Route path="/questions" element={<Questions />}></Route>
             <Route path="/users" element={<Users />}></Route>
             <Route path="/question/:id" element={<QuestionDetail />}></Route>
+            <Route path="/userinfo" element={<UserInfo />}></Route>
             <Route
               path="/question/:id/qrevise"
               element={<EditQuestion />}

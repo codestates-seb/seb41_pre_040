@@ -114,6 +114,7 @@ const SignupForm = () => {
         // }
         setPassword(e.target.value);
     };
+
     const onClickSignup = () => {
       console.log(emailErr)
         if (!EMAIL_REGEX.test(email) || password.length < 8) {
@@ -126,10 +127,13 @@ const SignupForm = () => {
         else {
             dispatch(
                 signupList({ 
-                email: email,
+                userId: email,
                 display_name: name,
                 password: password,
-                id: (signupLists.length + 1), 
+                userImg: "https://pic.onlinewebfonts.com/svg/img_312847.png",
+                reputation: 0,
+                location: "-",
+                isLogin: false
                 }));
                 console.log(emailErr)
                 console.log(signupLists)
@@ -137,6 +141,42 @@ const SignupForm = () => {
         }
         console.log(signupLists)
     }
+
+    //서버와 해보자!
+    // const onClickSignup = async () => {
+    //     console.log("click login");
+    //     console.log("Email : ", email);
+    //     console.log("password : ", password);
+    
+
+
+
+
+
+    //     if (!EMAIL_REGEX.test(email) || password.length < 8) {
+    //         if (!EMAIL_REGEX.test(email)) setEmailErr(true);
+    //         else setEmailErr(false);
+    //         if (password.length < 8) setPasswordErr(true);
+    //         else setPasswordErr(false);
+    //         return;
+    //     }
+    //     else {
+    //         dispatch(
+    //             signupList({ 
+    //             userId: email,
+    //             display_name: name,
+    //             password: password,
+    //             userImg: "https://pic.onlinewebfonts.com/svg/img_312847.png",
+    //             reputation: 0,
+    //             location: "-",
+    //             isLogin: false
+    //             }));
+    //             console.log(signupLists)
+    //             navigte("/login");
+    //     }
+    //     console.log(signupLists)
+    // }
+
 
     return (
         <SignInfo>

@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+// import { useSelector } from "react-redux";
 import { LoginStatus } from "../redux/user";
+// import { loginSwitch } from "../redux/usersSlice";
+// import { loginSwitch } from "../redux/usersSlice";
+
 
 const WrapLogin = styled.div`
   border: none;
@@ -73,10 +77,22 @@ const LoginForm = () => {
   const navigte = useNavigate();
   const dispatch = useDispatch();
 
+  // const userinfos = useSelector((state) => state.users.value); //로그인 상태위해 추가
+  // console.log("이니셜 ",userinfos)
+  // const loggedUser = userinfos.filter(e => e.userId === "40fighting@naver.com") //필터위해 추가
+  // console.log("필터된  ", loggedUser[0].isLogin)
+  // // loggedUser[0].isLogin = true
+  // console.log("로그인바뀐  ", loggedUser[0].isLogin)
+
+
   const onClickLogin = () => {
     // 테스트를 위한 임의의 id, password
     const userId = "40fighting@naver.com";
     const userPassword = "1234";
+    
+    // const loggedUser = userinfos.filter(e => e.userId === userId) //필터위해 추가
+    // console.log(loggedUser[0])
+    
     if (userId !== email) {
       alert("입력하신 id가 일치하지 않습니다.");
     } else if (userPassword !== password) {
@@ -114,6 +130,30 @@ const LoginForm = () => {
   //     console.log(err);
   //   }
   //};
+
+  // 서버와 연동시켰을 때 코드
+  // const onClickLogin = (e) => {
+  //   console.log("click login");
+  //   console.log("Email : ", email);
+  //   console.log("password : ", password);
+  //   e.preventDefault();
+  //   console.log()
+
+  //   return axios
+  //     .get("/users", {
+  //       params: { userId: email },
+  //       headers: {
+  //         "ngrok-skip-browser-warning": "ojwodhfaofd",
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       // dispatch(LoginStatus());
+  //       // navigate("/");
+  //     })
+  //     .catch((err) => console.error(err));
+  // };
+
 
   return (
     <WrapLogin>

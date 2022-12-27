@@ -112,27 +112,16 @@ const Users = () => {
 
   // useEffect( ()=>{
   //   axios
-  //   .get("https://api.stackexchange.com/2.3/users?page=1&pagesize=22&order=desc&sort=reputation&site=stackoverflow")
+  //   .get("https://api.stackexchange.com/2.3/users?page=1&pagesize=100&order=desc&sort=reputation&site=stackoverflow")
   //   .then((res)=> {
   //     setData([res.data.items]);
   //   })
   //   .then(()=> {
   //     setIsPending(false);
-  //     console.log(data);
   //   })
   //   .catch((err)=>console.error(err));
 
-  // })
-
-  // const getClick = () => {
-  //   axios
-  //   .get("https://api.stackexchange.com/2.3/users?page=5&pagesize=80&order=desc&sort=reputation&site=stackoverflow")
-  //   .then((res)=> {
-  //     setData([res.data.items]);
-  //   })
-  // } 
-
-
+  // }, [])
 
   const users = useSelector((state) => state.users.value);
 
@@ -141,8 +130,8 @@ const Users = () => {
 
   return (
     <Userlist>
+
       <h1>Users</h1>
-      {/* <button onClick={getClick}>버튼버튼</button> */}
       <FilterUser>
         <SearchUser>
           <SearchBar placeholder="Filter by user"/>
@@ -162,17 +151,22 @@ const Users = () => {
         <button >year</button>
       </DateButtons>
       <Userinfos>
-
-      {users.slice(4*(page-1), 4*(page-1)+4).map((el) => {
-          return <UserSlot display_name={el.display_name} location={el.location} reputation={el.reputation} />;
+        {/* {data[0].slice(12*(page-1), 12*(page-1)+12).map(  (el) => {
+          return <UserSlot display_name={el.display_name} location={el.location} reputation={el.reputation} profile_image={el.profile_image } />;
+        })} */}
+          {users.slice(12*(page-1), 12*(page-1)+12).map((el) => {
+          return <UserSlot display_name={el.display_name} location={el.location} reputation={el.reputation} profile_image={el.profile_image } />;
         })}
       </Userinfos>
 
       <PageContainer>
-        <Paging activePage={page} itemsCountPerPage={4} totalItemsCount={users.length} onChange={handlePageChange} />
+        {/* <Paging activePage={page} itemsCountPerPage={12} totalItemsCount={data[0].length} onChange={handlePageChange} /> */}
+        <Paging activePage={page} itemsCountPerPage={12} totalItemsCount={users.length} onChange={handlePageChange} />
       </PageContainer>
+      
     </Userlist>
   )
+      
 };
 
 export default Users;
