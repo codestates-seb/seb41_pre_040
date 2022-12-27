@@ -29,11 +29,9 @@ public class Question extends AuditingFields {
 
     @Setter @Column(nullable = false)
     private String content2;
-/*
+
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId")
     private UserAccount userAccount;
-
- */
 
     @ToString.Exclude
     @OrderBy("createdAt DESC")
@@ -49,7 +47,7 @@ public class Question extends AuditingFields {
         this.title = title;
         this.content1 = content1;
         this.content2 = content2;
-       // this.userAccount = userAccount;
+        this.userAccount = userAccount;
         this.questionHashtags = questionHashtag;
     }
 
@@ -79,5 +77,4 @@ public class Question extends AuditingFields {
         }
         return false;
     }
-
 }
