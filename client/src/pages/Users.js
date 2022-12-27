@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from 'styled-components';
 import UserSlot from "../components/UserSlot";
 import Paging from "../components/Pagination";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 
 
@@ -107,28 +107,30 @@ const PageContainer = styled.div`
 
 const Users = () => {
 
-  // const [data, setData] = useState(null);
-  // const [isPending, setIsPending] = useState(true);
+  const [data, setData] = useState(null);
+  const [isPending, setIsPending] = useState(true);
 
-  // useEffect( ()=>{
-  //   axios
-  //   .get("https://api.stackexchange.com/2.3/users?page=1&pagesize=100&order=desc&sort=reputation&site=stackoverflow")
-  //   .then((res)=> {
-  //     setData([res.data.items]);
-  //   })
-  //   .then(()=> {
-  //     setIsPending(false);
-  //   })
-  //   .catch((err)=>console.error(err));
+  useEffect( ()=>{
+    axios
+    .get("https://api.stackexchange.com/2.3/users?page=2&pagesize=100&order=desc&sort=reputation&site=stackoverflow")
+    .then((res)=> {
+      setData([res.data.items]);
+    })
+    .then(()=> {
+      setIsPending(false);
+    })
+    .catch((err)=>console.error(err));
 
-  // }, [])
+  }, [])
 
-  const users = useSelector((state) => state.users.value);
+  console.log("data: ",data)
+  // const users = useSelector((state) => state.users.value);
 
   const [page, setPage] = useState(1);
   const handlePageChange = (page) => {setPage(page);};
 
   return (
+    
     <Userlist>
 
       <h1>Users</h1>
@@ -150,20 +152,18 @@ const Users = () => {
         <button >quater</button>
         <button >year</button>
       </DateButtons>
+    {isPending ? ( <div> Loading </div> ) : ( 
       <Userinfos>
-        {/* {data[0].slice(12*(page-1), 12*(page-1)+12).map(  (el) => {
-          return <UserSlot display_name={el.display_name} location={el.location} reputation={el.reputation} profile_image={el.profile_image } />;
-        })} */}
-          {users.slice(12*(page-1), 12*(page-1)+12).map((el) => {
+        {data[0].slice(12*(page-1), 12*(page-1)+12).map(  (el) => {
           return <UserSlot display_name={el.display_name} location={el.location} reputation={el.reputation} profile_image={el.profile_image } />;
         })}
       </Userinfos>
-
+        )}
+      {isPending ? ( <div>  </div> ) : ( 
       <PageContainer>
-        {/* <Paging activePage={page} itemsCountPerPage={12} totalItemsCount={data[0].length} onChange={handlePageChange} /> */}
-        <Paging activePage={page} itemsCountPerPage={12} totalItemsCount={users.length} onChange={handlePageChange} />
+        <Paging activePage={page} itemsCountPerPage={12} totalItemsCount={data[0].length} onChange={handlePageChange} />
       </PageContainer>
-      
+      )}
     </Userlist>
   )
       
