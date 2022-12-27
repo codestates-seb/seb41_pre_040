@@ -1,6 +1,7 @@
 package com.codestates.preproject040.controller;
 
 import com.codestates.preproject040.dto.UserAccountDto;
+import com.codestates.preproject040.dto.request.LoginRequest;
 import com.codestates.preproject040.dto.request.UserRequest;
 import com.codestates.preproject040.dto.response.UserResponse;
 import com.codestates.preproject040.service.UserAccountService;
@@ -17,6 +18,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final UserAccountService userAccountService;
+
+    @PostMapping("/login")
+    private UserResponse login(@RequestBody LoginRequest loginRequest) {
+        return userAccountService.login(loginRequest);
+    }
 
     @GetMapping
     public List<UserResponse> getUsers() {
