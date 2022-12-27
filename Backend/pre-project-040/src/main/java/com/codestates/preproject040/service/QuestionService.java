@@ -5,7 +5,9 @@ import com.codestates.preproject040.domain.Question;
 import com.codestates.preproject040.dto.QuestionDto;
 import com.codestates.preproject040.exception.BusinessLogicException;
 import com.codestates.preproject040.exception.ExceptionCode;
+import com.codestates.preproject040.repository.QuestionHashtagRepository;
 import com.codestates.preproject040.repository.QuestionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ import java.util.stream.Collectors;
 @Service
 public class QuestionService {
     private final QuestionRepository questionRepository;
+
+    @Autowired
+    private QuestionHashtagRepository hashtagVariableRepository;
 
     public QuestionService(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
@@ -54,6 +59,16 @@ public class QuestionService {
         return searchList;
     }
 
+
+    //hashtag에 따른 전체 검색 기능
+    public Iterable<Question> findAllByHashTag(String tagName) {
+        return questionRepository.findAll().stream()
+                .filter(question -> question.hasTag(tagName))
+                .collect(Collectors.toList());
+    }
+
+
+
     // 생성
     public Question createQuestion(Question question) {
         return questionRepository.save(question);
@@ -86,6 +101,8 @@ public class QuestionService {
                 .ifPresent(findQuestion::setContent1);
         Optional.ofNullable(question.getContent2())
                 .ifPresent(findQuestion::setContent2);
+        Optional.ofNullable(question.getQuestionHashtags())
+                .ifPresent(findQuestion::setQuestionHashtags);
 
         return questionRepository.save(findQuestion);
     }
@@ -105,5 +122,10 @@ public class QuestionService {
                         new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
         return findQuestion;
     }
+
+
+    // hashTag
+
+
 
 }

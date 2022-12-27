@@ -4,12 +4,13 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @Getter
 @ToString(callSuper = true)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "createdAt"),
@@ -39,15 +40,17 @@ public class Question extends AuditingFields {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private final Set<Answer> answers = new LinkedHashSet<>();
 
+    @Setter
     @ToString.Exclude
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private final Set<QuestionHashtag> questionHashtags = new LinkedHashSet<>();
+    public Set<QuestionHashtag> questionHashtags = new LinkedHashSet<>();
 
-    private Question(String title, String content1, String content2, UserAccount userAccount) {
+    private Question(String title, String content1, String content2, UserAccount userAccount, Set<QuestionHashtag> questionHashtag) {
         this.title = title;
         this.content1 = content1;
         this.content2 = content2;
         this.userAccount = userAccount;
+        this.questionHashtags = questionHashtag;
     }
 
     public static Question of(String title, String content1, String content2, UserAccount userAccount) {
@@ -64,6 +67,17 @@ public class Question extends AuditingFields {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+
+
+    public boolean hasTag(String TagName){
+        for (QuestionHashtag questionHashtag: questionHashtags){
+            if(questionHashtag.getHashtag().getTagName().equals(TagName)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -2,16 +2,18 @@ package com.codestates.preproject040.dto.response;
 
 import com.codestates.preproject040.domain.Hashtag;
 import com.codestates.preproject040.domain.Question;
+import com.codestates.preproject040.domain.QuestionHashtag;
 import com.codestates.preproject040.domain.UserAccount;
 
-import java.util.List;
+
+import java.util.Set;
 
 public record QuestionResponseDto(
         Long id,
         String title,
         String content1,
         String content2,
-        List<Hashtag> hashtags,
+        Set<QuestionHashtag> questionHashtags,
         String userId,
         String nickname
 ) {
@@ -20,7 +22,7 @@ public record QuestionResponseDto(
             String title,
             String content1,
             String content2,
-            List<Hashtag> hashtags,
+            Set<QuestionHashtag> questionHashtags,
             String userId,
             String nickname
     ){

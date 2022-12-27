@@ -5,9 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Objects;
 
+
 @Getter
 @ToString(callSuper = true)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Entity
 public class QuestionHashtag {
     @Id
@@ -41,5 +42,7 @@ public class QuestionHashtag {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 
 }

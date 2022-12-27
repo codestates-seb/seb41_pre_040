@@ -7,12 +7,14 @@ import java.util.Objects;
 
 @Getter
 @ToString
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Table(indexes = {
-        @Index(columnList = "content", unique = true),
+        @Index(columnList = "tagName", unique = true),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
+@AllArgsConstructor
+@Builder
 @Entity
 public class Hashtag extends AuditingFields {
     @Id
@@ -21,10 +23,10 @@ public class Hashtag extends AuditingFields {
 
     @Setter
     @Column(nullable = false, unique = true, length = 50)
-    private String content;
+    private String tagName;
 
     private Hashtag(String content) {
-        this.content = content;
+        this.tagName = content;
     }
 
     public static Hashtag of(String content) {
