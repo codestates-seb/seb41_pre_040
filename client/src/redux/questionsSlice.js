@@ -3,28 +3,29 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialStateValue = {
   value: [
     {
-      id: 0,
-      title: "제목",
-      content: "내용",
-      tags: ["태그1", "태그2", "태그3", "태그4"],
-    },
-    {
-      id: 1,
-      title: "프로젝트 화이팅",
-      content: "저희 되게 잘하고 있어요",
-      tags: ["화", "이", "팅"],
-    },
-    {
       id: 2,
-      title: "여러분",
-      content: "메리크리스마스입니다",
-      tags: ["1", "2", "3", "4"],
+      title: "시간 변환 함수를 만들었어요",
+      content:
+        "근데 스택오버플로우 가보니까 질문 목록 페이지에 있는거랑 상세조회 페이지랑 변환이 다르게 되더라고요?",
+      tags: ["ㅎㅎ"],
+      created_at: "2022-12-25T08:18:11.687Z",
+      modified_at: "2022-12-25T08:18:11.687Z",
     },
     {
-      id: 3,
-      title: "2023년이라니",
-      content: "말도안된다!",
-      tags: ["a", "b", "c", "d"],
+      title: "그건 시간이 남는다면 나중에 더 해보겠습니다....",
+      content: "ㅠㅠ",
+      tags: ["s", "h", "sa"],
+      created_at: "2022-12-25T08:10:58.169Z",
+      modified_at: "2022-12-25T08:10:58.169Z",
+      id: 1,
+    },
+    {
+      id: 0,
+      title: "오류를 찾게 된다면",
+      content: "슬며시 알려주세요",
+      tags: [],
+      created_at: "2022-12-22T05:38:20.025Z",
+      modified_at: "2022-12-22T05:38:20.025Z",
     },
   ],
 };
@@ -40,6 +41,8 @@ export const questionsSlice = createSlice({
           title: action.payload.title,
           content: action.payload.content,
           tags: action.payload.tags,
+          created_at: action.payload.created_at,
+          modified_at: action.payload.modified_at,
         },
         ...state.value,
       ];

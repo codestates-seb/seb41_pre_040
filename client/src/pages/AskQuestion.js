@@ -120,6 +120,28 @@ const AskQuestion = () => {
     navigate(-1);
   };
 
+  const handleSubmit = () => {
+    // id 고유값으로 수정하기 -> 만약 어떤 질문이 삭제된다면 배열의 길이가 변해 키가 겹칠 가능성이 있다.
+    // 콘솔의 serialize 오류는 현재 온전히 redux-toolkit으로 질문들을 관리하고 있기 때문에 발생하는 오류임
+    // json-server 테스트 결과 거기서는 서버에 바로 데이터를 전달하기 때문에 이런 문제가 생기지 않는다.
+    dispatch(
+      postQuestion({
+        id: questions.length + 1,
+        title: titleInput,
+        content: contentInput,
+        tags: tags,
+        created_at: new Date(),
+        modified_at: new Date(),
+      })
+    );
+    alert("질문이 등록되었습니다.");
+
+    // 일단은 질문 페이지로 이동하도록
+    // 서버 연동 후에는 새로고침까지 여기서 처리하기
+    // questions.length 말고 id로 접근해야 함.....
+    navigate(`/questions`);
+  };
+
   return (
     <>
       <FormContainer>
@@ -178,25 +200,7 @@ const AskQuestion = () => {
               </Box>
             </BoxContainer>
             <ManageButton>
-              {/* 글 등록 구현 필요 */}
-              {/* 글 등록 시 해당 글의 detail 페이지로 이동 */}
-              <button
-                className="submit-question"
-                onClick={() => {
-                  dispatch(
-                    postQuestion({
-                      id: questions.length + 1,
-                      title: titleInput,
-                      content: contentInput,
-                      tags: tags,
-                    })
-                  );
-                  alert("질문이 등록되었습니다.");
-                  // 일단은 home으로 이동하게 해놓기
-                  // 서버 연동 후에는 새로고침까지 여기서 처리하기
-                  navigate(`/question/${questions.length + 1}`);
-                }}
-              >
+              <button className="submit-question" onClick={handleSubmit}>
                 Review your question
               </button>
               <button className="cancel-question" onClick={handleHistory}>
