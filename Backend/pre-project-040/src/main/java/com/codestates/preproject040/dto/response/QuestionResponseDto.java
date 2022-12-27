@@ -27,7 +27,7 @@ public record QuestionResponseDto(
             String nickname
     ){
         return new QuestionResponseDto(
-                id, title, content1, content2, hashtags, userId, nickname
+                id, title, content1, content2, questionHashtags, userId, nickname
         );
     }
 
@@ -38,7 +38,7 @@ public record QuestionResponseDto(
                 question.getTitle(),
                 question.getContent1(),
                 question.getContent2(),
-                null,
+                question.getQuestionHashtags(),
                 userAccount.getUserId(),
                 userAccount.getNickname()
         );

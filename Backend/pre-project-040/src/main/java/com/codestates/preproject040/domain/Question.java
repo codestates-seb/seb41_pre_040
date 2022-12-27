@@ -53,8 +53,8 @@ public class Question extends AuditingFields {
         this.questionHashtags = questionHashtag;
     }
 
-    public static Question of(String title, String content1, String content2, UserAccount userAccount) {
-        return new Question(title, content1, content2, userAccount);
+    public static Question of(String title, String content1, String content2, UserAccount userAccount, Set<QuestionHashtag> questionHashtag) {
+        return new Question(title, content1, content2, userAccount, questionHashtag);
     }
 
     @Override

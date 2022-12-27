@@ -25,11 +25,13 @@ public record QuestionDto(
     // Post 역할 -userAccount, -questionHashtag
     public static QuestionDto of(
             String title,
+            Set<QuestionHashtag> questionHashtag,
             String content1,
-            String content2) {
+            String content2
+    ) {
 
         return new QuestionDto(
-                null, null, title, null, content1, content2,
+                null, null, title, questionHashtag, content1, content2,
                 null, null, null, null, null);
     }
 
@@ -37,11 +39,12 @@ public record QuestionDto(
     public static QuestionDto of(
             Long id,
             String title,
+            Set<QuestionHashtag> questionHashtag,
             String content1,
             String content2) {
 
         return new QuestionDto(
-                id, null, title, null, content1, content2,
+                id, null, title, questionHashtag, content1, content2,
                 null, null, null, null, null
         );
     }
