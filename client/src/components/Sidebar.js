@@ -83,7 +83,6 @@ const StLine = styled.div`
 `
 
 const Sidebar = () => {
-
   return (
     <LeftSidebar>
       <Menus>        
