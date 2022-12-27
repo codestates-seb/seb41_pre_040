@@ -2,22 +2,31 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: [  {
-    email: "code@gmail.com",
+    userId: "code@gmail.com",
     display_name: "김코드",
     password: "1234",
-    id: 1
+    reputation: 0,
+    userImg: "",
+    location: "서울",
+    isLogin: false
   },
   {
-    email: "state@gmail.com",
+    userId: "state@gmail.com",
     display_name: "스테이츠",
     password: "1234",
-    id: 2
+    reputation: 0,
+    userImg: "",
+    location: "대전",
+    isLogin: false
   },
   {
-    email: "preproject@gmail.com",
+    userId: "preproject@gmail.com",
     display_name: "프리프로",
     password: "1234",
-    id: 3
+    reputation: 0,
+    userImg: "",
+    location: "대구",
+    isLogin: false
   },
   ],
 };
@@ -29,10 +38,13 @@ export const signupSlice = createSlice({
     signupList: (state, action) => {
       state.value = [...state.value,
         {
-          email: action.payload.email,
+          userId: action.payload.userId,
           display_name: action.payload.display_name,
           password: action.payload.password,
-          id: action.payload.id
+          userImg: action.payload.userImg,
+          reputation: action.payload.reputation,
+          location: action.payload.location,
+          isLogin: action.payload.isLogin
         },
       ];
     },
