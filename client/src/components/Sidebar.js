@@ -13,6 +13,7 @@ const LeftSidebar = styled.section`
   position: sticky;
   display: flex;
   flex-flow: column nowrap;
+  /* position: fixed; */
 `;
 
 const Menus = styled.ul`
@@ -21,6 +22,10 @@ const Menus = styled.ul`
   color: #627680;
   margin-bottom: 15px;
   padding-top: 10px;
+  position: fixed;
+  .topmargin    {
+    margin-top: 40px;
+  }
 `;
 
 const Earth = styled(RiEarthLine)`
@@ -72,7 +77,6 @@ const AdSection = styled.div`
 `
 
 const StLine = styled.div`
-  margin-top: 40px;
   font-weight: bold;
   padding-left: 10px;
 `
@@ -97,15 +101,15 @@ const Sidebar = () => {
         </StyledLink>
           </li>
         </ul>
-      </Menus>
-      <div>
-
-      <StLine class="fc-black-750 mb6">Stack Overflow for Teams</StLine>
+      <div className="topmargin">
+      <StLine class="fc-black-750 mb6">Stack Overflow for</StLine>
+      <StLine>Teams</StLine>
       <AdSection>
         – Start collaborating and sharing organizational knowledge.
         </AdSection>
       <img class="wmx100 mx-auto my8 h-auto d-block" width="160" height="114" src="https://cdn.sstatic.net/Img/teams/teams-illo-free-sidebar-promo.svg?v=47faa659a05e" alt=""></img>
       </div>
+      </Menus>
     </LeftSidebar>
   );
 };
