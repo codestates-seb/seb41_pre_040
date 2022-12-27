@@ -1,6 +1,6 @@
 package com.codestates.preproject040.dto.response;
 
-import com.codestates.preproject040.domain.Hashtag;
+
 import com.codestates.preproject040.domain.Question;
 import com.codestates.preproject040.domain.QuestionHashtag;
 import com.codestates.preproject040.domain.UserAccount;
