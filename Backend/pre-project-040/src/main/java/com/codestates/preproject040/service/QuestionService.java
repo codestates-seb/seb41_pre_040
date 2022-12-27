@@ -59,12 +59,15 @@ public class QuestionService {
         return searchList;
     }
 
+
     //hashtag에 따른 전체 검색 기능
     public Iterable<Question> findAllByHashTag(String tagName) {
         return questionRepository.findAll().stream()
                 .filter(question -> question.hasTag(tagName))
                 .collect(Collectors.toList());
     }
+
+
 
     // 생성
     public Question createQuestion(Question question) {
@@ -121,7 +124,7 @@ public class QuestionService {
     }
 
 
-    // 해시태그 레포 주입 받아서 사용
+    // hashTag
 
 
 
