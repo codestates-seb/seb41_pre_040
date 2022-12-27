@@ -39,7 +39,7 @@ const initialState = {
     location: "대전",
     reputation: "4",
     userImg: "https://user-images.githubusercontent.com/104320234/188269297-ff59ed55-4627-49f3-a001-9e480ff2bc7d.png",
-    isLogin: false
+    isLogin: true
   },
   {
     userId: 1,
