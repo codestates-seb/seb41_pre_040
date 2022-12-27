@@ -6,6 +6,7 @@ import com.codestates.preproject040.dto.QuestionDto;
 import com.codestates.preproject040.repository.QuestionRepository;
 import com.codestates.preproject040.repository.UserRepository;
 import com.codestates.preproject040.service.QuestionService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -52,6 +53,9 @@ public class QuestionControllerTest {
         hashtag.setTagName("#개발일지");
         hashtag1.setHashtag(hashtag);
         set.add(hashtag1);
+
+        ObjectMapper mapper=new ObjectMapper();
+        String Json=mapper.writeValueAsString()
 
         QuestionDto post =
                 QuestionDto.of("title1", set,"content1", "content2");

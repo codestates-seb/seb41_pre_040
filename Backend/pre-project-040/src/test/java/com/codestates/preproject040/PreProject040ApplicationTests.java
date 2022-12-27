@@ -24,7 +24,7 @@ class PreProject040ApplicationTests {
 		QuestionHashtag questionHashtag2=new QuestionHashtag();
 		questionHashtag.setHashtag(new Hashtag(2l, "힘드러"));
 
-		question.questionHashtags= Set.of(questionHashtag,questionHashtag2);
+		//question.questionHashtags= Arr;
 
 	}
 	@Test

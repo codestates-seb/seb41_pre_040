@@ -3,10 +3,8 @@ package com.codestates.preproject040.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.sql.Array;
+import java.util.*;
 
 @Getter
 @ToString(callSuper = true)
@@ -43,9 +41,9 @@ public class Question extends AuditingFields {
     @Setter
     @ToString.Exclude
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    public Set<QuestionHashtag> questionHashtags = new LinkedHashSet<>();
+    public ArrayList<QuestionHashtag> questionHashtags = new ArrayList<QuestionHashtag>();
 
-    private Question(String title, String content1, String content2, UserAccount userAccount, Set<QuestionHashtag> questionHashtag) {
+    private Question(String title, String content1, String content2, UserAccount userAccount, ArrayList<QuestionHashtag> questionHashtag) {
         this.title = title;
         this.content1 = content1;
         this.content2 = content2;

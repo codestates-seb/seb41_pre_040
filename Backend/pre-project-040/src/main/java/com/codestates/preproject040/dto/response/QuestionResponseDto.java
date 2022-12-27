@@ -6,14 +6,16 @@ import com.codestates.preproject040.domain.QuestionHashtag;
 import com.codestates.preproject040.domain.UserAccount;
 
 
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 
 public record QuestionResponseDto(
         Long id,
         String title,
         String content1,
         String content2,
-        Set<QuestionHashtag> questionHashtags,
+        ArrayList<QuestionHashtag> questionHashtags,
         String userId,
         String nickname
 ) {
@@ -22,7 +24,7 @@ public record QuestionResponseDto(
             String title,
             String content1,
             String content2,
-            Set<QuestionHashtag> questionHashtags,
+            ArrayList<QuestionHashtag> questionHashtags,
             String userId,
             String nickname
     ){

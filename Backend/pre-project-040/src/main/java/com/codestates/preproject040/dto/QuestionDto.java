@@ -4,15 +4,17 @@ import com.codestates.preproject040.domain.Answer;
 import com.codestates.preproject040.domain.Question;
 import com.codestates.preproject040.domain.QuestionHashtag;
 import com.codestates.preproject040.domain.UserAccount;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Set;
 
 public record QuestionDto(
         Long id,
         UserAccount userAccount,
         String title,
-        Set<QuestionHashtag> questionHashtag,
+        ArrayList<QuestionHashtag> questionHashtag,
         String content1,
         String content2,
         Set<Answer> answer,
@@ -25,7 +27,7 @@ public record QuestionDto(
     // Post 역할 -userAccount, -questionHashtag
     public static QuestionDto of(
             String title,
-            Set<QuestionHashtag> questionHashtag,
+            ArrayList<QuestionHashtag> questionHashtag,
             String content1,
             String content2
     ) {
@@ -39,7 +41,7 @@ public record QuestionDto(
     public static QuestionDto of(
             Long id,
             String title,
-            Set<QuestionHashtag> questionHashtag,
+            ArrayList<QuestionHashtag> questionHashtag,
             String content1,
             String content2) {
 
