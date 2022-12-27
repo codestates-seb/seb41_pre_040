@@ -123,22 +123,23 @@ const Header = () => {
   const navigte = useNavigate();
   const dispatch = useDispatch();
 
-  // 서버 연결 전 테스트용 코드
-  const onClickLogout = () => {
-    console.log("로그아웃");
-    dispatch(LogoutStatus({ isLogin: false }));
-    navigte("/");
-    window.location.reload();
-  };
   // 서버와 연결시
   // const onClickLogout = () => {
-  //   axios.get("url").then((res) => {
+  //   axios.get("/logout").then((res) => {
   //     if (res.data.success) {
-  //       dispatch(LoginStatus({ isLogin: false }));
+  //       dispatch(LogoutStatus({ isLogin: false }));
   //       navigte("/");
+  //       window.location.reload();
   //     }
   //   });
   // };
+  const onClickLogout = () => {
+    axios.get("/logout").then((res) => {
+      dispatch(LogoutStatus());
+      navigte("/");
+      window.location.reload();
+    });
+  };
 
   return (
     <StyledHeader>

@@ -77,6 +77,7 @@ const LoginForm = () => {
   const navigte = useNavigate();
   const dispatch = useDispatch();
 
+<<<<<<< Updated upstream
   // const userinfos = useSelector((state) => state.users.value); //로그인 상태위해 추가
   // console.log("이니셜 ",userinfos)
   // const loggedUser = userinfos.filter(e => e.userId === "40fighting@naver.com") //필터위해 추가
@@ -109,27 +110,31 @@ const LoginForm = () => {
   //   console.log("click login");
   //   console.log("Email : ", email);
   //   console.log("password : ", password);
+=======
+  const onClickLogin = (e) => {
+    e.preventDefault();
+>>>>>>> Stashed changes
 
-  //   try {
-  //     const res = await axios.get("url", {
-  //       params: { userId: email, userPassword: password },
-  //     });
-  //     const userId = res.data.userId;
-  //     const userPassword = res.data.UserPassword;
-
-  //     if (userId !== email) {
-  //       alert("입력하신 id가 일치하지 않습니다.");
-  //     } else if (userPassword !== password) {
-  //       alert("입력하신 비밀번호가 일치하지 않습니다.");
-  //     } else {
-  //       dispatch(LoginStatus({ isLogin: true }));
-  //       console.log("로그인 성공");
-  //       navigte("/");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  //};
+    let body = {
+      userId: email,
+      userPassword: password,
+    };
+    return axios
+      .post("/loin", body)
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(LoginStatus({ isLogin: true }));
+          console.log("로그인 성공");
+          navigte("/");
+        } else {
+          alert("email과 password가 일치하지 않습니다.");
+        }
+      })
+      .catch(
+        (err) => console.error(err),
+        alert("email과 password가 일치하지 않습니다.")
+      );
+  };
 
   // 서버와 연동시켰을 때 코드
   // const onClickLogin = (e) => {

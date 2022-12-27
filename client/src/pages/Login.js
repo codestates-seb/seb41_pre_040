@@ -73,7 +73,7 @@ const Login = () => {
     <StyledContainer>
       <div className="login-content">
         <LoginSvg />
-        <button className="oauth-button-Google">
+        <button className="Goole-login-button">
           <GoogleSvg />
           Login in with Google
         </button>

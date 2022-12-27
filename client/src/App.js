@@ -10,11 +10,6 @@ import AskQuestion from "./pages/AskQuestion";
 import Login from "./pages/Login";
 import EditQuestion from "./pages/EditQuestion";
 import QuestionDetail from "./pages/QuestionDetail";
-import UserInfo from "./pages/UserInfo";
-import axios from "axios";
-
-
-axios.defaults.headers.get["ngrok-skip-browser-warning"] = "dalkfajfo";
 
 function App() {
   return (
