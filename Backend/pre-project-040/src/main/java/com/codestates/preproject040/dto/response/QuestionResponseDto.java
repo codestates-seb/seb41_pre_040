@@ -19,6 +19,7 @@ public record QuestionResponseDto(
         String userId,
         String nickname
 ) {
+
     public static QuestionResponseDto of(
             Long id,
             String title,

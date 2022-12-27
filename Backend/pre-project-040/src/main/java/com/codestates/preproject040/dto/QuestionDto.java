@@ -17,7 +17,7 @@ public record QuestionDto(
         ArrayList<QuestionHashtag> questionHashtag,
         String content1,
         String content2,
-        Set<Answer> answer,
+        ArrayList<Answer> answer,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
