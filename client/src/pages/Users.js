@@ -159,10 +159,11 @@ const Users = () => {
         })}
       </Userinfos>
         )}
+      {isPending ? ( <div>  </div> ) : ( 
       <PageContainer>
-        <Paging activePage={page} itemsCountPerPage={12} totalItemsCount={100} onChange={handlePageChange} />
+        <Paging activePage={page} itemsCountPerPage={12} totalItemsCount={data[0].length} onChange={handlePageChange} />
       </PageContainer>
-      
+      )}
     </Userlist>
   )
       
