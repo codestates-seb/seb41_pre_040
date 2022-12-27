@@ -36,7 +36,7 @@ public class Question extends AuditingFields {
     @ToString.Exclude
     @OrderBy("createdAt DESC")
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private final Set<Answer> answers = new LinkedHashSet<>();
+    private final ArrayList<Answer> answers = new ArrayList<>();
 
     @Setter
     @ToString.Exclude
@@ -51,7 +51,7 @@ public class Question extends AuditingFields {
         this.questionHashtags = questionHashtag;
     }
 
-    public static Question of(String title, String content1, String content2, UserAccount userAccount, Set<QuestionHashtag> questionHashtag) {
+    public static Question of(String title, String content1, String content2, UserAccount userAccount, ArrayList<QuestionHashtag> questionHashtag) {
         return new Question(title, content1, content2, userAccount, questionHashtag);
     }
 
