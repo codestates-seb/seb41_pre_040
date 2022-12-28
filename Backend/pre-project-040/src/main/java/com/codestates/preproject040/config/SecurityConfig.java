@@ -68,7 +68,7 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .and()*/
-                .logout(logout -> logout.logoutSuccessUrl("/"))
+                //.logout(logout -> logout.logoutSuccessUrl("/"))
                 .oauth2Login(oAuth -> oAuth
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oAuth2UserService)
