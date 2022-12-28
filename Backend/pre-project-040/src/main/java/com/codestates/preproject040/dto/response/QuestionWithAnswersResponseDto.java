@@ -3,6 +3,7 @@ package com.codestates.preproject040.dto.response;
 import com.codestates.preproject040.dto.QuestionDto;
 import com.codestates.preproject040.dto.answer.AnswerDto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public record QuestionWithAnswersResponseDto(
@@ -11,6 +12,8 @@ public record QuestionWithAnswersResponseDto(
         String title,
         String content1,
         String content2,
+        LocalDateTime createdAt,
+        LocalDateTime modifiedAt,
         List<AnswerDto> answerDtoList
 ) {
     public static QuestionWithAnswersResponseDto of(
@@ -19,10 +22,12 @@ public record QuestionWithAnswersResponseDto(
             String title,
             String content1,
             String content2,
+            LocalDateTime createdAt,
+            LocalDateTime modifiedAt,
             List<AnswerDto> answerDtoList
     ){
         return new QuestionWithAnswersResponseDto(
-                questionId, nickname, title, content1, content2, answerDtoList
+                questionId, nickname, title, content1, content2, createdAt, modifiedAt, answerDtoList
         );
     }
 
@@ -33,6 +38,8 @@ public record QuestionWithAnswersResponseDto(
                 questionDto.title(),
                 questionDto.content1(),
                 questionDto.content2(),
+                questionDto.createdAt(),
+                questionDto.modifiedAt(),
                 questionDto.answerDtoList()
         );
     }

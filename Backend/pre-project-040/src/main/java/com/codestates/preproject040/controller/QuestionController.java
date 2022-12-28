@@ -7,6 +7,7 @@ import com.codestates.preproject040.dto.QuestionPatch;
 import com.codestates.preproject040.dto.QuestionPost;
 import com.codestates.preproject040.dto.UserAccountDto;
 import com.codestates.preproject040.dto.response.QuestionResponseDto;
+import com.codestates.preproject040.dto.response.QuestionWithAnswersResponseDto;
 import com.codestates.preproject040.repository.QuestionRepository;
 import com.codestates.preproject040.repository.UserRepository;
 import com.codestates.preproject040.service.QuestionService;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class QuestionController {
@@ -37,11 +37,11 @@ public class QuestionController {
     // 실제 size=30, 일단 size=2로 작성
     @GetMapping("/questions/search")
     public ResponseEntity getQuestions(
-        //TODO : answer값 없는 responseDto로 리팩토링 필요
             String searchKeyword,
             @PageableDefault(size = 2, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
     ) {
         List<QuestionResponseDto> questionList = questionService.searchQuestions(searchKeyword, pageable);
+
         return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
 
@@ -51,9 +51,6 @@ public class QuestionController {
         UserAccount userAccount = createUser();
         userRepository.save(userAccount);
 
-        //변수로 userAccount를 userAccountDto.from으로 묶어서 Dto로 만들고
-        //QuestionPostDto에서 QuestionDto로 보낼 때 매개변수로 넣어줌
-        //QuestionDto 객체를 questionService의 createQuestion으로 넣어주고
         QuestionDto question = requestBody.toDto(UserAccountDto.from(userAccount));
         QuestionResponseDto createdQuestion = questionService.createQuestion(question);
 
@@ -61,10 +58,25 @@ public class QuestionController {
     }
 
     // 1개 보기
+    //TODO : 답변 있을 때, 없을 때 구분해서 적용
+    /*
     @GetMapping("/questions/{questionId}")
-    public ResponseEntity getQuestion(@PathVariable("questionId") @Positive long id){
-        QuestionResponseDto question = questionService.findQuestion(id);
+    public ResponseEntity getQuestion(@PathVariable("questionId") @Positive Long id){
+        QuestionWithAnswersResponseDto question = questionService.findQuestion(id);
+
         return new ResponseEntity<>(question, HttpStatus.OK);
+    }
+     */
+    @GetMapping("/questions/{questionId}")
+    public ResponseEntity getQuestion(@PathVariable("questionId") @Positive Long id){
+        if(questionService.answerIsEmpty(id)) {
+            QuestionResponseDto question = questionService.findQuestion(id);
+            return new ResponseEntity<>(question, HttpStatus.OK);
+        }
+        else {
+            QuestionWithAnswersResponseDto question = questionService.findQuestionWithAnswers(id);
+            return new ResponseEntity<>(question, HttpStatus.OK);
+        }
     }
 
     // (Home 화면) 목록 보기
@@ -73,7 +85,6 @@ public class QuestionController {
     public ResponseEntity getQuestionsHome(
             @PageableDefault(size = 2, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
     ){
-        //TODO : answer값 없는 responseDto로 리팩토링 필요
         List<QuestionResponseDto> questionList = questionService.findQuestions(pageable);
         return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
@@ -84,15 +95,15 @@ public class QuestionController {
     public ResponseEntity getQuestions(
             @PageableDefault(size = 2, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
     ){
-        //TODO : answer값 없는 responseDto로 리팩토링 필요
         List<QuestionResponseDto> questionList = questionService.findQuestions(pageable);
+
         return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
 
     // 수정
     //PatchDto로 body 받아오고, responseDto형식으로 보내기
     @PatchMapping("/questions/{questionId}")
-    public ResponseEntity patchQuestion(@PathVariable("questionId") @Positive long id,
+    public ResponseEntity patchQuestion(@PathVariable("questionId") @Positive Long id,
                                         @RequestBody QuestionPatch requestBody){
         UserAccount userAccount = createUser();
         userRepository.save(userAccount);
@@ -100,14 +111,14 @@ public class QuestionController {
         QuestionDto question = requestBody.toDto(UserAccountDto.from(userAccount));
         QuestionResponseDto updatedQuestion = questionService.updateQuestion(id, question);
 
-        return new ResponseEntity<>
-                (updatedQuestion, HttpStatus.OK);
+        return new ResponseEntity<>(updatedQuestion, HttpStatus.OK);
     }
 
     // 삭제
     @DeleteMapping("/questions/{questionId}")
-    public ResponseEntity deleteQuestion(@PathVariable("questionId") long id){
+    public ResponseEntity deleteQuestion(@PathVariable("questionId") Long id){
         questionService.deleteQuestion(id);
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

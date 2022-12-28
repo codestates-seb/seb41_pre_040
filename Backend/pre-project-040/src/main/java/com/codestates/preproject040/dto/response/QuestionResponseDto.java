@@ -1,9 +1,8 @@
 package com.codestates.preproject040.dto.response;
 
 import com.codestates.preproject040.dto.QuestionDto;
-import com.codestates.preproject040.dto.answer.AnswerDto;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 public record QuestionResponseDto(
         Long questionId,
@@ -11,7 +10,8 @@ public record QuestionResponseDto(
         String title,
         String content1,
         String content2,
-        List<AnswerDto> answerDtoList
+        LocalDateTime createdAt,
+        LocalDateTime modifiedAt
 ) {
     public static QuestionResponseDto of(
             Long questionId,
@@ -19,10 +19,11 @@ public record QuestionResponseDto(
             String title,
             String content1,
             String content2,
-            List<AnswerDto> answerDtoList
+            LocalDateTime createdAt,
+            LocalDateTime modifiedAt
     ){
         return new QuestionResponseDto(
-                questionId, nickname, title, content1, content2, answerDtoList
+                questionId, nickname, title, content1, content2, createdAt, modifiedAt
         );
     }
 
@@ -33,7 +34,8 @@ public record QuestionResponseDto(
                 questionDto.title(),
                 questionDto.content1(),
                 questionDto.content2(),
-                questionDto.answerDtoList()
+                questionDto.createdAt(),
+                questionDto.modifiedAt()
         );
     }
 }

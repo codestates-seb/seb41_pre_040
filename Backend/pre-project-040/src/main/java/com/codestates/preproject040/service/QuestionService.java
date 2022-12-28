@@ -69,41 +69,53 @@ public class QuestionService {
 
     // 생성
     public QuestionResponseDto createQuestion(QuestionDto questionDto) {
-        //QuestionDto 받아서 Question 엔티티로 바꿔줄 예정
-        //엔티티에는 유저정보가 필요한데, 이 유저정보는 퀘스천의 유저정보여야하니까
-        //유저레포지토리에서 getReferenceById로 검색(findById는 Optional 이여서 null 들어갈 수 있으니까 오류)
-        //Id는 퀘스천 유저의 아이디이므로, questionDto에서 userAccountDto를 찾고 그 유저 아이디를 넣어줌
-        Question question = questionDto.toEntity(userRepository.getReferenceById(questionDto.userAccountDto().userId()));
+        Question question =
+                questionDto.toEntity(
+                        userRepository.getReferenceById(questionDto.userAccountDto().userId()));
 
-        //Question 엔티티객체를 Repository에 저장하고, 다시 컨트롤러에는 QuestionResponseDto 형식으로 보낼 예정
-        //저장한 엔티티객체를 QuestionDto.from으로 묶어서 QuestionDto로 만들어주고,
-        //QuestionDto를 QuestionResponseDto.from으로 묶어서 response 형식으로 변환해준다.
         return QuestionResponseDto.from(QuestionDto.from(questionRepository.save(question)));
     }
+/*
+    // 1개 찾기
+    public QuestionWithAnswersResponseDto findQuestion(Long id) {
+        QuestionWithAnswersResponseDto question =
+                QuestionWithAnswersResponseDto.from(
+                    QuestionDto.from(findVerifiedQuestion(id)));
 
-    // id로 찾기
-//    public Question findQuestion(long id) {
-//        return findVerifiedQuestion(id);
-//    }
-    //질문글 1개 찾기(리스폰스Dto로 변환)
-    public QuestionResponseDto findQuestion(long id) {
+        return question;
+    }
+ */
+    // questionId가 주어지면 답변이 없는지 확인
+    public boolean answerIsEmpty(Long id){
+
+        return QuestionDto.from(findVerifiedQuestion(id)).answerDtoList().isEmpty();
+    }
+
+    // 1개 찾기 (answerIsEmpty가 true이면, 일반 ResponseDto로 반환)
+    public QuestionResponseDto findQuestion(Long id) {
         QuestionResponseDto question =
-                QuestionResponseDto.from(
-                    QuestionDto.from(
-                            findVerifiedQuestion(id)
-                    )
-                );
+                QuestionResponseDto.from(QuestionDto.from(findVerifiedQuestion(id)));
+
         return question;
     }
 
+    // 1개 찾기 (answerIsEmpty가 false이면, 일반 WithAnswersResponseDto로 반환)
+    public QuestionWithAnswersResponseDto findQuestionWithAnswers(Long id) {
+        QuestionWithAnswersResponseDto question =
+                QuestionWithAnswersResponseDto.from(
+                        QuestionDto.from(findVerifiedQuestion(id))
+                );
+
+        return question;
+    }
 
     // 전체 목록
     public List<QuestionResponseDto> findQuestions(Pageable pageable) {
         Page<Question> pageQuestions = questionRepository.findAll(pageable);
         List<QuestionResponseDto> questions =
-                pageQuestions.stream() //Stream<Question>
-                        .map(QuestionDto::from) //Stream<QuestionDto>
-                        .map(QuestionResponseDto::from) //Stream<QuestionResponseDto>
+                pageQuestions.stream()
+                        .map(QuestionDto::from)
+                        .map(QuestionResponseDto::from)
                         .collect(Collectors.toList());
 
         return questions;
@@ -126,7 +138,6 @@ public class QuestionService {
     // 삭제
     public void deleteQuestion(Long id) {
         Question findQuestion = findVerifiedQuestion(id);
-
         questionRepository.delete(findQuestion);
     }
 
@@ -136,6 +147,7 @@ public class QuestionService {
         Question findQuestion =
                 optionalQuestion.orElseThrow(() ->
                         new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
+
         return findQuestion;
     }
 

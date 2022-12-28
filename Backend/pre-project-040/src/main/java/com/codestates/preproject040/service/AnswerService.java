@@ -96,7 +96,7 @@ public class AnswerService {
 
     public void deleteAnswer(Long questionId, Long answerId) /* , UserAccount userAccount */ {   // 인증된 유저랑 같이 받기.
         // 게시글 확인.
-        questionService.findQuestion(questionId);
+        questionService.findVerifiedQuestion(questionId);
 
         // 답글을 쓴 유저와 삭제를 시도하는 유저가 같은 유저인지 확인해준다.
         // 일단 나중에 User합칠 때,
