@@ -124,6 +124,10 @@ const AskQuestion = () => {
   };
 
   const handleSubmit = () => {
+    if (titleInput.length === 0 || contentInput.length === 0) {
+      alert("내용을 입력해주세요.");
+      return;
+    }
     dispatch(
       postQuestion({
         title: titleInput,

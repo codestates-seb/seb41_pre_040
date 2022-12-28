@@ -10,9 +10,31 @@ import AskQuestion from "./pages/AskQuestion";
 import Login from "./pages/Login";
 import EditQuestion from "./pages/EditQuestion";
 import QuestionDetail from "./pages/QuestionDetail";
-import UserInfo from "./pages/UserInfo"
+import UserInfo from "./pages/UserInfo";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { LoginStatus } from "./redux/user";
 
 function App() {
+  const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const authHandler = () => {
+    /*
+    초기 화면 렌더링시, 서버에 유저 정보를 요청하여 로그인 상태 유지 여부 결정
+    */
+    if (sessionStorage.getItem("user_id") === null) {
+      console.log("로그인 상태인가요?? ", isLogin);
+    } else {
+      // 세션에 user_id라는 이름의 정보가 있다면 로그인을 유지해야 하므로 상태를 true로 바꾼다
+      dispatch(LoginStatus());
+    }
+  };
+
+  useEffect(() => {
+    // 컴포넌트 생성 시 아래 함수가 실행됩니다.
+    authHandler();
+  }, []);
+
   return (
     <BrowserRouter>
       <div>

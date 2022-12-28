@@ -98,8 +98,9 @@ const LoginForm = () => {
       .then((res) => {
         console.log(res)
         if (res.status === 200) {
-          console.log(res.data);
+          console.log(res);
           dispatch(LoginStatus({ isLogin: true }));
+          sessionStorage.setItem("user_id", email);
           console.log("로그인 성공");
           console.log(res)
           navigte("/");

@@ -133,11 +133,11 @@ const Header = () => {
   // };
   const onClickLogout = () => {
     axios.get("api2/logout").then((res) => {
-      if (res) {
-        dispatch(LogoutStatus());
-        navigte("/");
-        window.location.reload();
-      }
+      // 세션에 있는 정보를 지움
+      sessionStorage.removeItem("user_id");
+      dispatch(LogoutStatus());
+      navigte("/");
+      window.location.reload();
     });
   };
 

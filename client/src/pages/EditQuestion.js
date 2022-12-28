@@ -163,15 +163,16 @@ const EditQuestion = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(questionId);
     dispatch(getQuestionById(questionId));
-    // console.log(question);
     setTitleInput(question.title);
     setContentInput(question.content1);
-    console.log(titleInput, contentInput);
   }, []);
 
   const handleEdit = () => {
+    if (titleInput.length === 0 || contentInput.length === 0) {
+      alert("내용을 입력해주세요.");
+      return;
+    }
     dispatch(
       editQuestion({
         id: questionId,
