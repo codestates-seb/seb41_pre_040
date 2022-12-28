@@ -1,5 +1,8 @@
-import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { setIsSearchMode, setKeyword } from "../redux/questionsSlice";
 
 const SearchContainer = styled.form`
   /* position: relative; */
@@ -42,12 +45,38 @@ const SearchIcon = styled.svg`
 `;
 
 const SearchBar = () => {
-  // 검색 기능 추가 필요
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const [searchInput, setSearchInput] = useState("");
+
+  const inputHandler = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const searchHandler = (e) => {
+    if (e.nativeEvent.isComposing === true) return;
+    if (e.key === "Enter") {
+      // 엔터키가 감지되면 키워드 설정 및 검색 모드로 변경
+      e.preventDefault();
+      dispatch(setKeyword(searchInput));
+      dispatch(setIsSearchMode(true));
+
+      if (pathname !== "/questions") {
+        console.log("경로를 이동합니다");
+        navigate("/questions");
+      }
+    }
+  };
 
   return (
     <SearchContainer>
       <InputContainer>
-        <Input placeholder="Search..."></Input>
+        <Input
+          placeholder="Search..."
+          onChange={inputHandler}
+          onKeyDown={searchHandler}
+        ></Input>
         <SearchIcon>
           <path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z" />
         </SearchIcon>
