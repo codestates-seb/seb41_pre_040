@@ -13,9 +13,10 @@ const TagList = ({ tags }) => {
 
   return (
     <Tags>
-      {tags.map((el, idx) => {
-        return <Tag content={el} key={idx} />;
-      })}
+      {tags &&
+        tags.map((el, idx) => {
+          return <Tag content={el} key={idx} />;
+        })}
     </Tags>
   );
 };
