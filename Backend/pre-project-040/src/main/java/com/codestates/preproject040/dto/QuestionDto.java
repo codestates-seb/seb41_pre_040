@@ -1,11 +1,12 @@
 package com.codestates.preproject040.dto;
 
-import com.codestates.preproject040.domain.Answer;
-import com.codestates.preproject040.domain.Question;
-import com.codestates.preproject040.domain.QuestionHashtag;
-import com.codestates.preproject040.domain.UserAccount;
+import com.codestates.preproject040.controller.QuestionController;
+import com.codestates.preproject040.domain.*;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 public record QuestionDto(

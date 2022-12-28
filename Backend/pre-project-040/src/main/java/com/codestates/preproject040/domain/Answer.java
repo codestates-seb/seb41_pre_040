@@ -39,6 +39,8 @@ public class Answer extends AuditingFields {
         return new Answer(content, userAccount, question);
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

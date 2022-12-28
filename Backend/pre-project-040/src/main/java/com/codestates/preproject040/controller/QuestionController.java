@@ -60,6 +60,7 @@ public class QuestionController {
         userRepository.save(userAccount);
 
         Question question = questionService.findQuestion(id);
+        // 일단 여기 문제는 맞음
         return new ResponseEntity<>(QuestionDto.from(question), HttpStatus.OK);
     }
 
@@ -108,6 +109,6 @@ public class QuestionController {
 
     // 임시 유저 정보 생성 - 추후 삭제 예정
     private UserAccount createUser() {
-        return UserAccount.of("임시 유저", "1234", "abc@gmail.com", "임시 닉네임");
+        return UserAccount.of("tmpUser", "1234", "abc@gmail.com", "임시 닉네임");
     }
 }

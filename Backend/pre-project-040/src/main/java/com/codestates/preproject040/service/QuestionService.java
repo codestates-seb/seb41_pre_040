@@ -80,13 +80,13 @@ public class QuestionService {
     }
 
     // 삭제
-    public void deleteQuestion(long id) {
+    public void deleteQuestion(Long id) {
         Question findQuestion = findVerifiedQuestion(id);
 
         questionRepository.delete(findQuestion);
     }
 
-    public Question findVerifiedQuestion(long id) {
+    public Question findVerifiedQuestion(Long id) {
         Optional<Question> optionalQuestion =
                 questionRepository.findById(id);
         Question findQuestion =

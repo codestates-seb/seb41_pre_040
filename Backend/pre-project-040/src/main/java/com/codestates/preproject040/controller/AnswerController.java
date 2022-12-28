@@ -1,61 +1,79 @@
 package com.codestates.preproject040.controller;
 
 import com.codestates.preproject040.domain.Answer;
-import com.codestates.preproject040.dto.AnswerDto;
-import com.codestates.preproject040.repository.AnswerRepository;
+import com.codestates.preproject040.domain.Question;
+import com.codestates.preproject040.domain.UserAccount;
+import com.codestates.preproject040.dto.answer.AnswerDto;
+import com.codestates.preproject040.dto.answer.AnswerPatch;
+import com.codestates.preproject040.dto.answer.AnswerPost;
+import com.codestates.preproject040.repository.UserRepository;
+import com.codestates.preproject040.response.MultiResponseDto;
 import com.codestates.preproject040.service.AnswerService;
 import com.codestates.preproject040.service.QuestionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 
 @RestController
-@RequestMapping("/questions/")
+@Slf4j
+@RequestMapping("/questions")
 public class AnswerController {
     private final AnswerService answerService;
     private final QuestionService questionService;
-
+    private final UserRepository userRepository;
 
     public AnswerController(AnswerService answerService,
-                            QuestionService questionService) {
+                            QuestionService questionService,
+                            UserRepository userRepository) {
         this.answerService = answerService;
         this.questionService = questionService;
+        this.userRepository = userRepository;
     }
 
-    @PostMapping("/{questionId}/answers")
-    public ResponseEntity postAnswer(@RequestBody AnswerDto requestBody) {
-        questionService.findVerifiedQuestion(requestBody.question().getId());
+    @PostMapping("/{questionId}/answers")   // 답변 등록
+    public ResponseEntity postAnswer(@PathVariable("questionId") @Positive Long questionId
+                                    ,@RequestBody AnswerPost requestBody) { // 나중에 유저정보를 받는다.
 
-        Answer answer = requestBody.toEntity();
+//        // 일단 임시유저로 대체한다.
+//        UserAccount userAccount = createUser();
+//        userRepository.save(userAccount);
 
-        Answer createdAnswer = answerService.createAnswer(answer);
+//        System.out.println(requestBody);
+//        System.out.println(questionId);
+        // PostDto 가공.
+        AnswerPost answerPost = AnswerPost.of(questionId, requestBody.content());
 
-        return new ResponseEntity(AnswerDto.from(createdAnswer), HttpStatus.CREATED);
-    }
-
-
-    @PatchMapping("/{questionId}/answers/{answerId}")
-    public ResponseEntity patchAnswer(@PathVariable("answerId") @Positive long id,
-                                      @RequestBody AnswerDto requestBody) {
-        questionService.findVerifiedQuestion(requestBody.question().getId());
-        Answer answer = AnswerDto.of(id, requestBody.content()).toEntity();
-        Answer updatedAnswer = answerService.updateAnswer(answer);
-
-        return new ResponseEntity(AnswerDto.from(updatedAnswer), HttpStatus.OK);
+        // 서비스 계층으로 Dto를 주고, 서비스 안에서 Dto를 요리조리 볶는다.
+        return new ResponseEntity<>(AnswerDto.from(answerService.createAnswer(answerPost)), HttpStatus.CREATED);
     }
 
 
-    @DeleteMapping("/{quetionId}/answers/{answerId}")
-    public ResponseEntity deleteAnswer(@PathVariable("answerId") @Positive long id,
-                                       @RequestBody AnswerDto requestBody) {
-        questionService.findVerifiedQuestion(requestBody.question().getId());
+    @PatchMapping("/{questionId}/answers/{answerId}")   // 답변 수정
+    public ResponseEntity patchAnswer(@PathVariable("questionId") @Positive Long questionId,
+                                    @PathVariable("answerId") @Positive Long answerId,
+                                      @RequestBody AnswerPatch requestBody) {
+        System.out.println("answerId = " + answerId);
+        System.out.println("questionId = " + questionId);
+        System.out.println("requestBody.content() = " + requestBody.content());
 
-        answerService.deleteAnswer(requestBody.id());
+        AnswerPatch answerPatch = AnswerPatch.of(answerId, questionId, requestBody.content());
+
+        return new ResponseEntity(AnswerDto.from(answerService.updateAnswer(answerPatch)), HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("/{questionId}/answers/{answerId}")   // 답변 삭제
+    public ResponseEntity deleteAnswer(@PathVariable("questionId") @Positive Long questionId,
+                                       @PathVariable("answerId") @Positive Long answerId) /*인증된 유저같이 있어야 한다.*/ {
+
+        answerService.deleteAnswer(questionId, answerId);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
+
 }
