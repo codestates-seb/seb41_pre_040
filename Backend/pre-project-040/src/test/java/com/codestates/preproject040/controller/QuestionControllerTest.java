@@ -2,17 +2,25 @@ package com.codestates.preproject040.controller;
 
 import com.codestates.preproject040.domain.Question;
 import com.codestates.preproject040.dto.QuestionDto;
+import com.codestates.preproject040.dto.response.QuestionResponseDto;
 import com.codestates.preproject040.service.QuestionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.*;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -32,6 +40,7 @@ class QuestionControllerTest {
 
     @Test
     @DisplayName("글 작성")
+    @RepeatedTest(3)
     @BeforeEach
     @Order(1)
     void postQuestion() throws Exception {
@@ -79,9 +88,31 @@ class QuestionControllerTest {
 //    void getQuestionsHome() {
 //    }
 
+//    TODO : 코드 수정
 //    @Test
 //    @DisplayName("퀘스천 화면 전체 목록")
-//    void testGetQuestions() {
+//    @Order(4)
+//    void testGetQuestions() throws Exception {
+//        int page = 0;
+//        int size = 2;
+//        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+//
+//        ResultActions actions =
+//                mvc.perform(
+//                        get("/questions")
+//                                .queryParam("page", String.valueOf(page))
+//                                .accept(MediaType.APPLICATION_JSON)
+//                );
+//
+//        MvcResult result = actions
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$").isArray())
+//                .andReturn();
+//
+//        List list1 = JsonPath.parse(result.getResponse().getContentAsString()).read("$[0]");
+////        List list2 = JsonPath.parse(result.getResponse().getContentAsString()).read("$[1]");
+//
+//        assertThat(list1.size(), is(2));
 //    }
 
     @Test
@@ -92,7 +123,7 @@ class QuestionControllerTest {
 
         String json = objectMapper.writeValueAsString(post);
 
-        long questionId = 1L;
+        long questionId = 2L;
 
         ResultActions actions =
                 mvc.perform(
@@ -112,7 +143,7 @@ class QuestionControllerTest {
 
     @Test
     @DisplayName("글 삭제")
-    @Order(4)
+    @Order(5)
     void deleteQuestion() throws Exception {
         long questionId = 1L;
 

@@ -6,6 +6,7 @@ import com.codestates.preproject040.domain.QuestionHashtag;
 import com.codestates.preproject040.domain.UserAccount;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 public record QuestionDto(
@@ -15,7 +16,7 @@ public record QuestionDto(
         Set<QuestionHashtag> questionHashtag,
         String content1,
         String content2,
-        Set<Answer> answer,
+        List<Answer> answer,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,

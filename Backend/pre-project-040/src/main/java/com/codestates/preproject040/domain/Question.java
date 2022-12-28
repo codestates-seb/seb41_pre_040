@@ -3,9 +3,7 @@ package com.codestates.preproject040.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @ToString(callSuper = true)
@@ -37,7 +35,7 @@ public class Question extends AuditingFields {
     @ToString.Exclude
     @OrderBy("createdAt DESC")
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private final Set<Answer> answers = new LinkedHashSet<>();
+    private final List<Answer> answers = new ArrayList<>();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
