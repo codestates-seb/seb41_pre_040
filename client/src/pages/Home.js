@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Question from "../components/Question";
 import AskButton from "../components/AskButton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getQuestionsAll } from "../redux/questionsSlice";
 
 const MainContent = styled.div`
   width: calc(100% - 300px - 24px);
@@ -78,8 +80,13 @@ const BottomNotice = styled.h2`
 `;
 
 const Home = () => {
-  const questions = useSelector((state) => state.questions.value);
+  // dispatch(getQuestions())로 질문 목록 가져오기
+  const dispatch = useDispatch();
+  const questions = useSelector((state) => state.questions.all);
+
   useEffect(() => {
+    dispatch(getQuestionsAll());
+    // console.log(questions);
     window.scrollTo(0, 0);
   }, []);
 
@@ -98,17 +105,17 @@ const Home = () => {
           <button className="right">Month</button>
         </FilterButtons>
       </ButtonContainer>
-      {/* 일단은 하드코딩해놓기 */}
       <Questions>
-        {questions.map((el) => {
+        {questions.map((el, idx) => {
           return (
             <Question
-              key={el.id}
+              key={idx}
               id={el.id}
               title={el.title}
-              content={el.content}
-              tags={el.tags}
-              created_at={el.created_at}
+              content={el.content1}
+              tags={el.questionHashtag}
+              createdAt={el.createdAt}
+              author={el.createdBy}
             />
           );
         })}

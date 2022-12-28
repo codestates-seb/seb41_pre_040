@@ -82,14 +82,15 @@ const TagInput = ({ tags, setTags }) => {
   return (
     <>
       <TagBox>
-        {tags.map((tagItem, idx) => {
-          return (
-            <TagItem key={idx}>
-              <span>{tagItem}</span>
-              <Button onClick={() => removeTags(idx)}>&times;</Button>
-            </TagItem>
-          );
-        })}
+        {tags &&
+          tags.map((tagItem, idx) => {
+            return (
+              <TagItem key={idx}>
+                <span>{tagItem}</span>
+                <Button onClick={() => removeTags(idx)}>&times;</Button>
+              </TagItem>
+            );
+          })}
         <TagsInput
           type="text"
           onKeyUp={(e) => (e.key === " " ? addTags(e) : null)}

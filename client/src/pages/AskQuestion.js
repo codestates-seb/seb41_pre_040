@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
 import TagInput from "../components/TagInput";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import QuestionTip from "../components/QuestionTip";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { postQuestion } from "../redux/questionsSlice";
 
 const FormContainer = styled.div`
@@ -114,32 +114,29 @@ const AskQuestion = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const questions = useSelector((state) => state.questions.value);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleHistory = () => {
     navigate(-1);
   };
 
   const handleSubmit = () => {
-    // id 고유값으로 수정하기 -> 만약 어떤 질문이 삭제된다면 배열의 길이가 변해 키가 겹칠 가능성이 있다.
-    // 콘솔의 serialize 오류는 현재 온전히 redux-toolkit으로 질문들을 관리하고 있기 때문에 발생하는 오류임
-    // json-server 테스트 결과 거기서는 서버에 바로 데이터를 전달하기 때문에 이런 문제가 생기지 않는다.
     dispatch(
       postQuestion({
-        id: questions.length + 1,
         title: titleInput,
-        content: contentInput,
-        tags: tags,
-        created_at: new Date(),
-        modified_at: new Date(),
+        content1: contentInput,
+        content2: contentInput,
+        // 아래부터는 json-server로 할 때만 보냄
+        createdAt: new Date(),
       })
     );
     alert("질문이 등록되었습니다.");
 
     // 일단은 질문 페이지로 이동하도록
-    // 서버 연동 후에는 새로고침까지 여기서 처리하기
-    // questions.length 말고 id로 접근해야 함.....
-    navigate(`/questions`);
+    navigate("/questions");
   };
 
   return (
