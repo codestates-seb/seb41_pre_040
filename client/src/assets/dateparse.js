@@ -36,6 +36,7 @@ function elapsedTime_ago(date) {
       return `${betweenTime} ${value.singular} ago`;
     }
   }
+  return "Just now";
 }
 
 export default elapsedTime_ago;

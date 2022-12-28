@@ -95,10 +95,23 @@ const UserAndOptions = styled.div`
   }
 `;
 
-const QuestionPostLayout = ({ id, content, tags }) => {
+const QuestionPostLayout = ({ id, content, tags, author }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogged = useSelector((state) => state.user.isLogin);
+
+  const handleDelete = () => {
+    let confirm = window.confirm("질문을 삭제하시겠습니까?");
+    if (confirm === true) {
+      dispatch(
+        deleteQuestion({
+          id: id,
+        })
+      );
+      alert("질문이 삭제되었습니다.");
+      navigate("/questions");
+    }
+  };
 
   return (
     <Layout>
@@ -132,26 +145,12 @@ const QuestionPostLayout = ({ id, content, tags }) => {
           <div className="options">
             <div>Share</div>
             {isLogged ? <Link to="qrevise">Edit</Link> : <></>}
-            <div
-              id="delete"
-              onClick={() => {
-                let confirm = window.confirm("질문을 삭제하시겠습니까?");
-                if (confirm === true) {
-                  dispatch(
-                    deleteQuestion({
-                      id: id,
-                    })
-                  );
-                  alert("질문이 삭제되었습니다.");
-                  navigate("/questions");
-                }
-              }}
-            >
+            <div id="delete" onClick={handleDelete}>
               Delete
             </div>
           </div>
           <div className="author">
-            <div>author: name</div>
+            <div>author: {author}</div>
           </div>
         </UserAndOptions>
       </div>

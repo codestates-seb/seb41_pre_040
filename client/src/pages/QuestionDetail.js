@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import AskButton from "../components/AskButton";
 import Aside from "../components/Aside";
 import AnswersList from "../components/AnswersList";
@@ -7,7 +8,8 @@ import AnswerQuestion from "../components/AnswerQuestion";
 import QuestionPostLayout from "../components/QuestionPostLayout";
 import elapsedTime_ago from "../assets/dateparse";
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { getQuestionById } from "../redux/questionsSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const TitleContainer = styled.div`
   display: flex;
@@ -92,46 +94,58 @@ const RightAside = styled.div`
 
 const QuestionDetail = () => {
   const questionId = useParams().id;
+  const dispatch = useDispatch();
+  // const [answers, setAnswers] = useState([]);
+
+  // 상태는 새로고침하면 초기화되기 때문에 직접 axios로 받아오는 것이 적절한 것 같음
+  const question = useSelector((state) => state.questions.single);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // 서버에서 questionId에 해당하는 질문과 답변 불러오기
+    // 답변은 쿼리스트링 이용해서 불러오기 -> thunk 이용? 아니면 여기서 바로?
+    dispatch(getQuestionById(questionId));
     window.scrollTo(0, 0);
   }, []);
-
-  // 상태에서 아이디에 해당하는 질문 가져오기
-  const question = useSelector((state) => {
-    let questions = state.questions.value;
-    return questions.filter((el) => el.id === Number(questionId))[0];
-  });
 
   return (
     <MainContent>
       <TitleContainer>
         <TitleAndButton>
-          <h1>{question.title}</h1>
+          <h1>{question.title ? question.title : " "}</h1>
           <div className="ask-button">
             <AskButton />
           </div>
         </TitleAndButton>
         <div className="ask-date">
           Asked
-          <span className="time-elapsed">{` ${elapsedTime_ago(
-            question.created_at
-          )}`}</span>
+          {question ? (
+            <span className="time-elapsed">
+              {" "}
+              {elapsedTime_ago(question.createdAt)}
+            </span>
+          ) : (
+            <div> </div>
+          )}
         </div>
       </TitleContainer>
       <Main>
-        {/* 질문 하나, 답변 여러 개 */}
-        <QuestionPostLayout
-          id={question.id}
-          content={question.content}
-          tags={question.tags}
-        />
+        {question ? (
+          <QuestionPostLayout
+            id={question.id}
+            content={question.content1}
+            tags={question.questionHashtag}
+            author={question.createdBy}
+          />
+        ) : (
+          <div> </div>
+        )}
         <div id="answers">
           <div id="answer-header">
-            <h2>answers.length Answers</h2>
+            <h2>{question.answer && question.answer.length} Answers</h2>
           </div>
           <AnswersList />
-          <AnswerQuestion />
+          <AnswerQuestion id={question.id} />
         </div>
         <BottomNotice>
           <h2>
