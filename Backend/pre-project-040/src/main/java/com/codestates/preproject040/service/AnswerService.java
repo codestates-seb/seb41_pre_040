@@ -72,6 +72,7 @@ public class AnswerService {
 
         // 같은 답글인지 확인.
         Answer findAnswer = findVerifiedAnswer(answerPatch.answerId());
+        findAnswer.setContent(answerPatch.content());
 
         // 유저확인(답글을 수정하려는 사람이 해당 답글을 달은 사람이 맞는지 확인)
         // 확인한 답글에서 유저의 아이디가 있는지..

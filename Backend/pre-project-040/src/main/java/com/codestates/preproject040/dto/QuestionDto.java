@@ -49,6 +49,17 @@ public record QuestionDto(
         );
     }
 
+    public static QuestionDto of(
+            String title,
+            String content1,
+            String content2,
+            UserAccountDto userAccountDto) {
+
+        return new QuestionDto(
+                null, userAccountDto, title, null, content1, content2,
+                null, null, null, null, null);
+    }
+
     public static QuestionDto from(Question question) {
         return new QuestionDto(
                 question.getId(),
