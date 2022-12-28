@@ -51,24 +51,24 @@ public class SecurityConfig {
                         ).permitAll()
                         .mvcMatchers(
                                 HttpMethod.POST,
-                                "/",
-                                "/signup/join"
+                                "/signup/join",
+                                "/users/login"
                         ).permitAll()
                         .anyRequest().authenticated()
 
                 )
-                .formLogin().disable()
+                //.formLogin().disable()
                 .httpBasic().disable()
                 /*.formLogin()
-                        //.loginPage("/login")
+                        .loginProcessingUrl("/users/login")
                         .defaultSuccessUrl("/")
                         .permitAll()
-                        .and()
-                .logout()
+                        .and()*/
+                /*.logout()
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .and()*/
-                //.logout(logout -> logout.logoutSuccessUrl("/"))
+                .logout(logout -> logout.logoutSuccessUrl("/"))
                 .oauth2Login(oAuth -> oAuth
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oAuth2UserService)
