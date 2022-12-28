@@ -10,6 +10,7 @@ import AskQuestion from "./pages/AskQuestion";
 import Login from "./pages/Login";
 import EditQuestion from "./pages/EditQuestion";
 import QuestionDetail from "./pages/QuestionDetail";
+import UserInfo from "./pages/UserInfo"
 
 function App() {
   return (

@@ -45,12 +45,15 @@ const StyledLink = styled(Link)`
   font-size: 0.9rem;
   padding-left: 10px;
   transition: 0.4s all;
-
+  
   &:hover {
     background-color: #F1F2F3;
     color: black;
     transition: 0.4s all;
-  } 
+  }   
+  &:focus{
+    background-color: #F1F2F3;
+    color: black;  }
 `;
 
 const LeftPadding = styled.li`

@@ -96,10 +96,12 @@ const LoginForm = () => {
         }
       )
       .then((res) => {
+        console.log(res)
         if (res.status === 200) {
           console.log(res.data);
           dispatch(LoginStatus({ isLogin: true }));
           console.log("로그인 성공");
+          console.log(res)
           navigte("/");
         }
       })
