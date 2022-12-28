@@ -106,39 +106,40 @@ const SignupButton = styled(Link)`
 `;
 
 const UserIcon = styled.button`
-width: 40px;
-height: 47px;
-&:hover{
-  background-color: #babfc4;
-}
-
-
+  width: 40px;
+  height: 47px;
+  &:hover {
+    background-color: #babfc4;
+  }
 `;
 
 const Header = () => {
   const isLogged = useSelector((state) => state.user.isLogin);
-  const userinfos = useSelector((state) => state.users.value)
-  const loggedUser = userinfos.filter(e => e.isLogin === true)
+  const userinfos = useSelector((state) => state.users.value);
+  const loggedUser = userinfos.filter((e) => e.isLogin === true);
 
   const navigte = useNavigate();
   const dispatch = useDispatch();
 
-  // 서버 연결 전 테스트용 코드
-  const onClickLogout = () => {
-    console.log("로그아웃");
-    dispatch(LogoutStatus({ isLogin: false }));
-    navigte("/");
-    window.location.reload();
-  };
   // 서버와 연결시
   // const onClickLogout = () => {
-  //   axios.get("url").then((res) => {
+  //   axios.get("/logout").then((res) => {
   //     if (res.data.success) {
-  //       dispatch(LoginStatus({ isLogin: false }));
+  //       dispatch(LogoutStatus({ isLogin: false }));
   //       navigte("/");
+  //       window.location.reload();
   //     }
   //   });
   // };
+  const onClickLogout = () => {
+    axios.get("api2/logout").then((res) => {
+      if (res) {
+        dispatch(LogoutStatus());
+        navigte("/");
+        window.location.reload();
+      }
+    });
+  };
 
   return (
     <StyledHeader>
@@ -156,8 +157,9 @@ const Header = () => {
             <SearchBar />
             <Buttons>
               <Link to="/userinfo">
-              <UserIcon>
-                <img width="20" alt="" src={loggedUser[0].userImg}/></UserIcon>
+                <UserIcon>
+                  <img width="20" alt="" src={loggedUser[0].userImg} />
+                </UserIcon>
               </Link>
               <LogoutButton onClick={onClickLogout}>LogOut</LogoutButton>
             </Buttons>
