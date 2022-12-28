@@ -84,7 +84,7 @@ const AdditionalInfo = styled.div`
   }
 `;
 
-const Question = ({ id, title, content, tags, created_at }) => {
+const Question = ({ id, title, content, tags, createdAt, author }) => {
   return (
     <QuestionContainer>
       <QuestionStat>
@@ -93,15 +93,15 @@ const Question = ({ id, title, content, tags, created_at }) => {
         <div>3 views</div>
       </QuestionStat>
       <QuestionInfo>
-        <h3 className="question-title">
-          <Link to={`/question/${id}`}>{title}</Link>
-        </h3>
+        <Link to={`/question/${id}`}>
+          <h3 className="question-title">{title}</h3>
+        </Link>
         <div className="question-content">{content}</div>
         <AdditionalInfo>
           <TagList tags={tags} />
           <div className="user-info">
-            <div className="username">작성자</div>
-            <div>asked {elapsedTime_ago(created_at)}</div>
+            <div className="username">{author}</div>
+            <div>asked {elapsedTime_ago(createdAt)}</div>
           </div>
         </AdditionalInfo>
       </QuestionInfo>
