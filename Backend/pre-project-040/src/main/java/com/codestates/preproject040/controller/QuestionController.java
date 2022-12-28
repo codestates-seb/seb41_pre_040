@@ -50,7 +50,7 @@ public class QuestionController {
         Question question = requestBody.toEntity(userAccount);
         Question createdQuestion = questionService.createQuestion(question);
 
-        return new ResponseEntity<>(QuestionResponseDto.from(userAccount, createdQuestion), HttpStatus.CREATED);
+        return new ResponseEntity<>(QuestionResponseDto.from(createdQuestion), HttpStatus.CREATED);
     }
 
     // 1개 보기
