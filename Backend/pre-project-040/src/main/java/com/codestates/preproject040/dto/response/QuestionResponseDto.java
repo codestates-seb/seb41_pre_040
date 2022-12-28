@@ -9,7 +9,8 @@ import java.util.List;
 public record QuestionResponseDto(
         Long id,
         String title,
-        String content,
+        String content1,
+        String content2,
         List<Hashtag> hashtags,
         String userId,
         String nickname
@@ -17,13 +18,14 @@ public record QuestionResponseDto(
     public static QuestionResponseDto of(
             Long id,
             String title,
-            String content,
+            String content1,
+            String content2,
             List<Hashtag> hashtags,
             String userId,
             String nickname
     ){
         return new QuestionResponseDto(
-                id, title, content, hashtags, userId, nickname
+                id, title, content1, content2, hashtags, userId, nickname
         );
     }
 
@@ -32,7 +34,8 @@ public record QuestionResponseDto(
         return new QuestionResponseDto(
                 question.getId(),
                 question.getTitle(),
-                question.getContent(),
+                question.getContent1(),
+                question.getContent2(),
                 null,
                 userAccount.getUserId(),
                 userAccount.getNickname()

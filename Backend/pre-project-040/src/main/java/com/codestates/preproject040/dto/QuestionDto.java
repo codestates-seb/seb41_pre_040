@@ -14,8 +14,9 @@ public record QuestionDto(
         UserAccount userAccount,
         String title,
         Set<QuestionHashtag> questionHashtag,
-        String content,
-        Set<Answer> answer,
+        String content1,
+        String content2,
+        List<Answer> answer,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
@@ -25,10 +26,11 @@ public record QuestionDto(
     // Post 역할 -userAccount, -questionHashtag
     public static QuestionDto of(
             String title,
-            String content) {
+            String content1,
+            String content2) {
 
         return new QuestionDto(
-                null, null, title, null, content,
+                null, null, title, null, content1, content2,
                 null, null, null, null, null);
     }
 
@@ -36,10 +38,11 @@ public record QuestionDto(
     public static QuestionDto of(
             Long id,
             String title,
-            String content) {
+            String content1,
+            String content2) {
 
         return new QuestionDto(
-                id, null, title, null, content,
+                id, null, title, null, content1, content2,
                 null, null, null, null, null
         );
     }
@@ -50,7 +53,8 @@ public record QuestionDto(
                 question.getUserAccount(),
                 question.getTitle(),
                 question.getQuestionHashtags(),
-                question.getContent(),
+                question.getContent1(),
+                question.getContent2(),
                 question.getAnswers(),
                 question.getCreatedAt(),
                 question.getCreatedBy(),
@@ -63,7 +67,8 @@ public record QuestionDto(
     public Question toEntity(UserAccount userAccount) {
         return Question.of(
                 title,
-                content,
+                content1,
+                content2,
                 userAccount
         );
     }
