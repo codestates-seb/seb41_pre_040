@@ -2,21 +2,23 @@ package com.codestates.preproject040.dto;
 
 import com.codestates.preproject040.controller.QuestionController;
 import com.codestates.preproject040.domain.*;
+import com.codestates.preproject040.dto.answer.AnswerDto;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public record QuestionDto(
-        Long id,
-        UserAccount userAccount,
+        Long questionId,
+        UserAccountDto userAccountDto,
         String title,
         Set<QuestionHashtag> questionHashtag,
         String content1,
         String content2,
-        List<Answer> answer,
+        List<AnswerDto> answerDtoList,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
@@ -50,12 +52,14 @@ public record QuestionDto(
     public static QuestionDto from(Question question) {
         return new QuestionDto(
                 question.getId(),
-                question.getUserAccount(),
+                UserAccountDto.from(question.getUserAccount()),
                 question.getTitle(),
                 question.getQuestionHashtags(),
                 question.getContent1(),
                 question.getContent2(),
-                question.getAnswers(),
+                question.getAnswers().stream()
+                        .map(AnswerDto::from)
+                        .collect(Collectors.toList()),
                 question.getCreatedAt(),
                 question.getCreatedBy(),
                 question.getModifiedAt(),
