@@ -11,4 +11,13 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    "^/api2/",
+    createProxyMiddleware({
+      target:
+        "http://ec2-52-78-85-133.ap-northeast-2.compute.amazonaws.com:8080/",
+      pathRewrite: { "^/api2/": "/" },
+      changeOrigin: true,
+    })
+  );
 };

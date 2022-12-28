@@ -79,8 +79,8 @@ const SignupForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailErr, setEmailErr] = useState(false);
-  const [passwordErr, setPasswordErr] = useState(false);
+  // const [emailErr, setEmailErr] = useState(false);
+  // const [passwordErr, setPasswordErr] = useState(false);
 
   //const EMAIL_REGEX = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
   // const signupLists = useSelector((state) => state.signupList.value);
@@ -111,67 +111,92 @@ const SignupForm = () => {
     // }
     setPassword(e.target.value);
   };
+
   const onClickSignup = (e) => {
     e.preventDefault();
     let body = {
       nickname: name,
       userId: email,
       userPassword: password,
+      email: email,
     };
-    const onClickSignup = () => {
-      console.log(emailErr)
-        if (!EMAIL_REGEX.test(email) || password.length < 8) {
-            if (!EMAIL_REGEX.test(email)) setEmailErr(true);
-            else setEmailErr(false);
-            if (password.length < 8) setPasswordErr(true);
-            else setPasswordErr(false);
-            return;
-        }
-        else {
-            dispatch(
-                signupList({ 
-                email: email,
-                display_name: name,
-                password: password,
-                id: (signupLists.length + 1), 
-                }));
-                console.log(emailErr)
-                console.log(signupLists)
-                navigte("/login");
-        }
-        console.log(signupLists)
-    }
 
-    return (
-        <SignInfo>
-        <div className="text">Display name</div>
-        <Inputtext onChange={handleNameChange} ></Inputtext>
-        <div className="text">Email</div>
-        {emailErr 
-        ? <Errtext onChange={handleEmailChange}></Errtext>
-        : <Inputtext onChange={handleEmailChange}></Inputtext>}
-        {emailErr
-        ? <ErrMsg>is not a valid email adress</ErrMsg>
-        : <></>
+    return axios
+      .post(
+        "api2/signup/join",
+        body,
+        {
+          withCredentials: true,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-        {/* <Inputtext onChange={handleEmailChange}></Inputtext> */}
-        <div className="text">Password</div>
-        {passwordErr 
-        ?<Errtext  onChange={handlePasswordChange} type="password" ></Errtext> 
-        : <Inputtext onChange={handlePasswordChange} type="password"></Inputtext>}
-        {passwordErr
-        ? <ErrMsg>Passwords must contain at least eight characters</ErrMsg>
-        : <></>
+      )
+      .then((res) => {
+        if (res) {
+          console.log("회원가입이 완료되었습니다.");
+          navigte("/login");
         }
-        {/* <Inputtext onChange={handlePasswordChange} type="password"></Inputtext> */}
-          <div className="pass">
-          Passwords must contain at least eight characters.
-        </div>
-        <div>
-          <SignupBtn onClick={onClickSignup}>Sign up
-          </SignupBtn>
-        </div>
-      </SignInfo>
-    )
-}
+      });
+
+    // console.log(emailErr)
+    //   if (!EMAIL_REGEX.test(email) || password.length < 8) {
+    //       if (!EMAIL_REGEX.test(email)) setEmailErr(true);
+    //       else setEmailErr(false);
+    //       if (password.length < 8) setPasswordErr(true);
+    //       else setPasswordErr(false);
+    //       return;
+    //   }
+    //   else {
+    //       dispatch(
+    //           signupList({
+    //           email: email,
+    //           display_name: name,
+    //           password: password,
+    //           id: (signupLists.length + 1),
+    //           }));
+    //           console.log(emailErr)
+    //           console.log(signupLists)
+    //           navigte("/login");
+    //   }
+    //   console.log(signupLists)
+  };
+
+  return (
+    <SignInfo>
+      <div className="text">Display name</div>
+      <Inputtext onChange={handleNameChange}></Inputtext>
+      <div className="text">Email</div>
+      {/* {emailErr ? (
+        <Errtext onChange={handleEmailChange}></Errtext>
+      ) : (
+        <Inputtext onChange={handleEmailChange}></Inputtext>
+      )} */}
+      <Inputtext onChange={handleEmailChange}></Inputtext>
+      {/* {emailErr ? <ErrMsg>is not a valid email adress</ErrMsg> : <></>} */}
+      {/* <Inputtext onChange={handleEmailChange}></Inputtext> */}
+      {/* <div className="text">Password</div>
+      {passwordErr ? (
+        <Errtext onChange={handlePasswordChange} type="password"></Errtext>
+      ) : (
+        <Inputtext onChange={handlePasswordChange} type="password"></Inputtext>
+      )} */}
+      <Inputtext onChange={handlePasswordChange} type="password"></Inputtext>
+      {/* {passwordErr ? (
+        <ErrMsg>Passwords must contain at least eight characters</ErrMsg>
+      ) : (
+        <></>
+      )} */}
+      {/* <Inputtext onChange={handlePasswordChange} type="password"></Inputtext> */}
+      <div className="pass">
+        Passwords must contain at least eight characters.
+      </div>
+      <div>
+        <SignupBtn onClick={onClickSignup}>Sign up</SignupBtn>
+      </div>
+    </SignInfo>
+  );
+};
 export default SignupForm;
