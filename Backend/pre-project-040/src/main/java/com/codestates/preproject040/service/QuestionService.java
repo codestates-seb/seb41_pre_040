@@ -12,6 +12,7 @@ import com.codestates.preproject040.repository.AnswerRepository;
 import com.codestates.preproject040.repository.QuestionRepository;
 import com.codestates.preproject040.repository.UserRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -33,10 +34,10 @@ public class QuestionService {
         this.answerRepository = answerRepository;
     }
 
-    //TODO : 결과 없을 때 전체목록 나오고있는데, 에러 메시지 보여주고 전체목록으로 리다이렉션되게...?
+    //TODO : 결과 없을 때 전체목록 나오고있는데, 에러 메시지 보여주기...?
     //TODO : 댓글 내용 검색시, 질문글 제목과 해당 댓글 content내용 노출 >> 현재 댓글 노출안되게 되어있어서 수정 필요
     //TODO : 페이지네이션이 적용되지 않음. >> 페이지네이션 되게 수정 필요
-    public List<QuestionResponseDto> searchQuestions(String searchKeyword, Pageable pageable) {
+    public Page<QuestionResponseDto> searchQuestions(String searchKeyword, Pageable pageable) {
         // 검색 결과가 담길 임시List
         List<Question> tempList = new ArrayList<>();
 
@@ -79,7 +80,9 @@ public class QuestionService {
                         .map(QuestionResponseDto::from)
                         .collect(Collectors.toList());
 
-        return searchList;
+        Page<QuestionResponseDto> searchPage = new PageImpl<>(searchList, pageable, searchList.size());
+
+        return searchPage;
     }
 
     // 생성

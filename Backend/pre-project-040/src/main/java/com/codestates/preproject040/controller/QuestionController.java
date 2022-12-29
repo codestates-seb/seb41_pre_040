@@ -9,6 +9,8 @@ import com.codestates.preproject040.dto.response.QuestionResponseDto;
 import com.codestates.preproject040.dto.response.QuestionWithAnswersResponseDto;
 import com.codestates.preproject040.repository.UserRepository;
 import com.codestates.preproject040.service.QuestionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -35,11 +37,11 @@ public class QuestionController {
     @GetMapping("/questions/search")
     public ResponseEntity getQuestions(
             String searchKeyword,
-            @PageableDefault(size = 2, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
+            @PageableDefault(size = 2) Pageable pageable
+//            @PageableDefault(size = 2, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        List<QuestionResponseDto> questionList = questionService.searchQuestions(searchKeyword, pageable);
-
-        return new ResponseEntity<>(questionList, HttpStatus.OK);
+        Page<QuestionResponseDto> searchPage = questionService.searchQuestions(searchKeyword, pageable);
+        return new ResponseEntity<>(searchPage, HttpStatus.OK);
     }
 
     // 작성
