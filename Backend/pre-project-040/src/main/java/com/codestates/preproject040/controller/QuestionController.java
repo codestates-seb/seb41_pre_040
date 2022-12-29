@@ -1,6 +1,5 @@
 package com.codestates.preproject040.controller;
 
-import com.codestates.preproject040.domain.Question;
 import com.codestates.preproject040.domain.UserAccount;
 import com.codestates.preproject040.dto.QuestionDto;
 import com.codestates.preproject040.dto.QuestionPatch;
@@ -8,10 +7,8 @@ import com.codestates.preproject040.dto.QuestionPost;
 import com.codestates.preproject040.dto.UserAccountDto;
 import com.codestates.preproject040.dto.response.QuestionResponseDto;
 import com.codestates.preproject040.dto.response.QuestionWithAnswersResponseDto;
-import com.codestates.preproject040.repository.QuestionRepository;
 import com.codestates.preproject040.repository.UserRepository;
 import com.codestates.preproject040.service.QuestionService;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -57,7 +54,6 @@ public class QuestionController {
         return new ResponseEntity<>(createdQuestion, HttpStatus.CREATED);
     }
 
-    // 1개 보기
     /*
     @GetMapping("/questions/{questionId}")
     public ResponseEntity getQuestion(@PathVariable("questionId") @Positive Long id){
@@ -66,6 +62,7 @@ public class QuestionController {
         return new ResponseEntity<>(question, HttpStatus.OK);
     }
      */
+    // 1개 보기
     @GetMapping("/questions/{questionId}")
     public ResponseEntity getQuestion(@PathVariable("questionId") @Positive Long id){
         if(questionService.answerIsEmpty(id)) {

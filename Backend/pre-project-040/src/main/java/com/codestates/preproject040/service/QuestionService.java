@@ -4,7 +4,6 @@ import com.codestates.preproject040.domain.Answer;
 import com.codestates.preproject040.domain.AuditingFields;
 import com.codestates.preproject040.domain.Question;
 import com.codestates.preproject040.dto.QuestionDto;
-import com.codestates.preproject040.dto.answer.AnswerDto;
 import com.codestates.preproject040.dto.response.QuestionResponseDto;
 import com.codestates.preproject040.dto.response.QuestionWithAnswersResponseDto;
 import com.codestates.preproject040.exception.BusinessLogicException;
@@ -12,7 +11,6 @@ import com.codestates.preproject040.exception.ExceptionCode;
 import com.codestates.preproject040.repository.AnswerRepository;
 import com.codestates.preproject040.repository.QuestionRepository;
 import com.codestates.preproject040.repository.UserRepository;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,52 +33,47 @@ public class QuestionService {
         this.answerRepository = answerRepository;
     }
 
-    // 질문 검색(title, content 검색 결과를 합쳐서 createdAt 역순으로 정렬)
     //TODO : 결과 없을 때 전체목록 나오고있는데, 에러 메시지 보여주고 전체목록으로 리다이렉션되게...?
     //TODO : 댓글 내용 검색시, 질문글 제목과 해당 댓글 content내용 노출 >> 현재 댓글 노출안되게 되어있어서 수정 필요
+    //TODO : 페이지네이션이 적용되지 않음. >> 페이지네이션 되게 수정 필요
     public List<QuestionResponseDto> searchQuestions(String searchKeyword, Pageable pageable) {
-        Page<Question> byTitleContaining = questionRepository.findByTitleContaining(searchKeyword, pageable);
-        Page<Question> byContent1Containing = questionRepository.findByContent1Containing(searchKeyword, pageable);
-        Page<Question> byContent2Containing = questionRepository.findByContent2Containing(searchKeyword, pageable);
+        // 검색 결과가 담길 임시List
+        List<Question> tempList = new ArrayList<>();
 
-        List<Question> titleList = new ArrayList<>(byTitleContaining.stream().toList());
-        List<Question> content1List = new ArrayList<>(byContent1Containing.stream().toList());
-        List<Question> content2List = new ArrayList<>(byContent2Containing.stream().toList());
+        // 질문 검색 (title, content1, content2 검색으로 해당 Question 담긴 List)
+        List<Question> titleList = questionRepository.findByTitleContaining(searchKeyword);
+        List<Question> content1List = questionRepository.findByContent1Containing(searchKeyword);
+        List<Question> content2List = questionRepository.findByContent2Containing(searchKeyword);
 
-        //TODO : 댓글 검색은되는데 페이지네이션이 적용되지 않음. >> 페이지네이션 되게 수정 필요
+        // 답변 검색 (content 검색으로 해당 Answer 담긴 List)
         List<Answer> contentList = answerRepository.findByContentContaining(searchKeyword);
-        List<Long> questionIdList = new ArrayList<>();
-        List<Question> questionList = new ArrayList<>();
-        for(int i = 0; i < contentList.size(); i++) {
-            Long questionId = contentList.get(i).getQuestion().getId();
-            if (!questionIdList.contains(questionId)) {
-                questionIdList.add(questionId);
-                questionList.add(questionRepository.getReferenceById(questionId)); // 앤서담긴 quesitonEntity
+
+        // 검색된 정보가 들어있는 Question을 중복되지 않도록 임시 List에 담는 과정
+        for(Answer content : contentList) {
+            if (!tempList.contains(content.getQuestion())) {
+                tempList.add(content.getQuestion());
+            }
+        }
+        for(Question title : titleList) {
+            if (!tempList.contains(title)) {
+                tempList.add(title);
+            }
+        }
+        for(Question content1 : content1List) {
+            if (!tempList.contains(content1)) {
+                tempList.add(content1);
+            }
+
+        }
+        for(Question content2 : content2List) {
+            if (!tempList.contains(content2)) {
+                tempList.add(content2);
             }
         }
 
-
-        // 중복 아닌 결과 합치기
-        for(int i = 0; i < content1List.size(); i++) {
-            if (!titleList.contains(content1List.get(i))) {
-                titleList.add(content1List.get(i));
-            }
-        }
-
-        for(int i = 0; i < content2List.size(); i++) {
-            if (!titleList.contains(content2List.get(i))) {
-                titleList.add(content2List.get(i));
-            }
-        }
-
-        for(int i = 0; i < questionList.size(); i++) {
-            if (!titleList.contains(questionList.get(i))) {
-                titleList.add(questionList.get(i));
-            }
-        }
-
+        // List<Quetion>을 List<QuestionResponseDto>로 바꿔주고, 합친 리스트들이 createdAt 역순으로 정렬되게 변경
         List<QuestionResponseDto> searchList =
-                titleList.stream()
+                tempList.stream()
                         .sorted(Comparator.comparing(AuditingFields::getCreatedAt).reversed())
                         .map(QuestionDto::from)
                         .map(QuestionResponseDto::from)
