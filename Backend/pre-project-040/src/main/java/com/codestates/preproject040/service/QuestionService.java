@@ -12,6 +12,7 @@ import com.codestates.preproject040.exception.ExceptionCode;
 import com.codestates.preproject040.repository.AnswerRepository;
 import com.codestates.preproject040.repository.QuestionRepository;
 import com.codestates.preproject040.repository.UserRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,8 @@ public class QuestionService {
     }
 
     // 질문 검색(title, content 검색 결과를 합쳐서 createdAt 역순으로 정렬)
+    //TODO : 결과 없을 때 전체목록 나오고있는데, 에러 메시지 보여주고 전체목록으로 리다이렉션되게...?
+    //TODO : 댓글 내용 검색시, 질문글 제목과 해당 댓글 content내용 노출 >> 현재 댓글 노출안되게 되어있어서 수정 필요
     public List<QuestionResponseDto> searchQuestions(String searchKeyword, Pageable pageable) {
         Page<Question> byTitleContaining = questionRepository.findByTitleContaining(searchKeyword, pageable);
         Page<Question> byContent1Containing = questionRepository.findByContent1Containing(searchKeyword, pageable);
@@ -43,6 +46,19 @@ public class QuestionService {
         List<Question> titleList = new ArrayList<>(byTitleContaining.stream().toList());
         List<Question> content1List = new ArrayList<>(byContent1Containing.stream().toList());
         List<Question> content2List = new ArrayList<>(byContent2Containing.stream().toList());
+
+        //TODO : 댓글 검색은되는데 페이지네이션이 적용되지 않음. >> 페이지네이션 되게 수정 필요
+        List<Answer> contentList = answerRepository.findByContentContaining(searchKeyword);
+        List<Long> questionIdList = new ArrayList<>();
+        List<Question> questionList = new ArrayList<>();
+        for(int i = 0; i < contentList.size(); i++) {
+            Long questionId = contentList.get(i).getQuestion().getId();
+            if (!questionIdList.contains(questionId)) {
+                questionIdList.add(questionId);
+                questionList.add(questionRepository.getReferenceById(questionId)); // 앤서담긴 quesitonEntity
+            }
+        }
+
 
         // 중복 아닌 결과 합치기
         for(int i = 0; i < content1List.size(); i++) {
@@ -54,6 +70,12 @@ public class QuestionService {
         for(int i = 0; i < content2List.size(); i++) {
             if (!titleList.contains(content2List.get(i))) {
                 titleList.add(content2List.get(i));
+            }
+        }
+
+        for(int i = 0; i < questionList.size(); i++) {
+            if (!titleList.contains(questionList.get(i))) {
+                titleList.add(questionList.get(i));
             }
         }
 
@@ -88,7 +110,7 @@ public class QuestionService {
     // questionId가 주어지면 답변이 없는지 확인
     public boolean answerIsEmpty(Long id){
 
-        return QuestionDto.from(findVerifiedQuestion(id)).answerDtoList().isEmpty();
+        return QuestionDto.from(findVerifiedQuestion(id)).answers().isEmpty();
     }
 
     // 1개 찾기 (answerIsEmpty가 true이면, 일반 ResponseDto로 반환)

@@ -58,7 +58,6 @@ public class QuestionController {
     }
 
     // 1개 보기
-    //TODO : 답변 있을 때, 없을 때 구분해서 적용
     /*
     @GetMapping("/questions/{questionId}")
     public ResponseEntity getQuestion(@PathVariable("questionId") @Positive Long id){

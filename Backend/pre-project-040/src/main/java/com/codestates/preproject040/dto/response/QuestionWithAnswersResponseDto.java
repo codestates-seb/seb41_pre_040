@@ -24,10 +24,10 @@ public record QuestionWithAnswersResponseDto(
             String content2,
             LocalDateTime createdAt,
             LocalDateTime modifiedAt,
-            List<AnswerDto> answerDtoList
+            List<AnswerDto> answers
     ){
         return new QuestionWithAnswersResponseDto(
-                questionId, nickname, title, content1, content2, createdAt, modifiedAt, answerDtoList
+                questionId, nickname, title, content1, content2, createdAt, modifiedAt, answers
         );
     }
 
@@ -40,7 +40,7 @@ public record QuestionWithAnswersResponseDto(
                 questionDto.content2(),
                 questionDto.createdAt(),
                 questionDto.modifiedAt(),
-                questionDto.answerDtoList()
+                questionDto.answers()
         );
     }
 

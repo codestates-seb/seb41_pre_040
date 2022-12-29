@@ -1,10 +1,7 @@
 package com.codestates.preproject040.dto;
 
-import com.codestates.preproject040.controller.QuestionController;
 import com.codestates.preproject040.domain.*;
 import com.codestates.preproject040.dto.answer.AnswerDto;
-import lombok.Getter;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,7 +15,7 @@ public record QuestionDto(
         Set<QuestionHashtag> questionHashtag,
         String content1,
         String content2,
-        List<AnswerDto> answerDtoList,
+        List<AnswerDto> answers,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
