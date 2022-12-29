@@ -34,9 +34,7 @@ public class QuestionService {
         this.answerRepository = answerRepository;
     }
 
-    //TODO : 결과 없을 때 전체목록 나오고있는데, 에러 메시지 보여주기...?
-    //TODO : 댓글 내용 검색시, 질문글 제목과 해당 댓글 content내용 노출 >> 현재 댓글 노출안되게 되어있어서 수정 필요
-    //TODO : 페이지네이션이 적용되지 않음. >> 페이지네이션 되게 수정 필요
+    //TODO : 댓글 내용 검색시, 질문글 제목과 해당 댓글 content 노출
     public Page<QuestionResponseDto> searchQuestions(String searchKeyword, Pageable pageable) {
         // 검색 결과가 담길 임시List
         List<Question> tempList = new ArrayList<>();
@@ -72,6 +70,12 @@ public class QuestionService {
             }
         }
 
+        //검색 결과 없으면 예외 던지기
+        if (tempList.isEmpty()) {
+            throw new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND);
+        }
+
+        // TODO : 페이지네이션 먹으면 정렬 없애기 ㅠ
         // List<Quetion>을 List<QuestionResponseDto>로 바꿔주고, 합친 리스트들이 createdAt 역순으로 정렬되게 변경
         List<QuestionResponseDto> searchList =
                 tempList.stream()

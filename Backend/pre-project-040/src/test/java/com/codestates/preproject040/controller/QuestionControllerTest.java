@@ -1,47 +1,49 @@
-//package com.codestates.preproject040.controller;
-//
-//import com.codestates.preproject040.domain.Question;
-//import com.codestates.preproject040.dto.QuestionDto;
-//import com.codestates.preproject040.dto.response.QuestionResponseDto;
-//import com.codestates.preproject040.service.QuestionService;
-//import com.fasterxml.jackson.core.JsonProcessingException;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.jayway.jsonpath.JsonPath;
-//import org.junit.jupiter.api.*;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.data.domain.*;
-//import org.springframework.http.MediaType;
-//import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.test.web.servlet.MvcResult;
-//import org.springframework.test.web.servlet.ResultActions;
-//
-//import java.util.List;
-//
-//import static org.hamcrest.MatcherAssert.assertThat;
-//import static org.hamcrest.Matchers.is;
-//import static org.junit.jupiter.api.Assertions.*;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//
-//@SpringBootTest
-//@AutoConfigureMockMvc
-//class QuestionControllerTest {
-//    @Autowired
-//    private MockMvc mvc;
-//    @Autowired private QuestionService questionService;
-//    @Autowired private ObjectMapper objectMapper;
-//
-////    @Test
-////    @DisplayName("검색 기능")
-////    void getQuestions() {
-////    }
-//
+package com.codestates.preproject040.controller;
+
+import com.codestates.preproject040.domain.Question;
+import com.codestates.preproject040.dto.QuestionDto;
+import com.codestates.preproject040.dto.response.QuestionResponseDto;
+import com.codestates.preproject040.service.QuestionService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.*;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+class QuestionControllerTest {
+    @Autowired
+    private MockMvc mvc;
+    @Autowired private QuestionService questionService;
+    @Autowired private ObjectMapper objectMapper;
+
+//    @Test
+//    @DisplayName("검색 기능")
+//    void getQuestions() {
+//    }
+
+//    //TODO : failed to lazily initialize a collection of role: com.codestates.preproject040.domain.Question.answers, could not initialize proxy - no Session
 //    @Test
 //    @DisplayName("글 작성")
-//    @RepeatedTest(3)
+////    @RepeatedTest(3)
 //    @BeforeEach
 //    @Order(1)
 //    void postQuestion() throws Exception {
@@ -57,14 +59,14 @@
 //                            .content(json)
 //            );
 //
-//        Question question = questionService.findQuestion(1L);
+//        QuestionResponseDto question = questionService.findQuestion(1L);
 //
 //        actions.andExpect(status().isCreated())
-//                .andExpect(jsonPath("$.title").value(question.getTitle()))
-//                .andExpect(jsonPath("$.content1").value(question.getContent1()))
-//                .andExpect(jsonPath("$.content2").value(question.getContent2()));
+//                .andExpect(jsonPath("$.title").value(question.title()))
+//                .andExpect(jsonPath("$.content1").value(question.content1()))
+//                .andExpect(jsonPath("$.content2").value(question.content2()));
 //    }
-//
+
 //    @Test
 //    @DisplayName("1개 보기")
 //    @Order(2)
@@ -155,5 +157,5 @@
 //
 //        actions.andExpect(status().isNoContent());
 //    }
-//
-//}
+
+}

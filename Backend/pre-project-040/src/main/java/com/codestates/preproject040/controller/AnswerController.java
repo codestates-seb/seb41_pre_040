@@ -62,7 +62,7 @@ public class AnswerController {
 
         AnswerPatch answerPatch = AnswerPatch.of(answerId, questionId, requestBody.content());
 
-        return new ResponseEntity(AnswerDto.from(answerService.updateAnswer(answerPatch)), HttpStatus.OK);
+        return new ResponseEntity<>(AnswerDto.from(answerService.updateAnswer(answerPatch)), HttpStatus.OK);
     }
 
 
@@ -72,7 +72,7 @@ public class AnswerController {
 
         answerService.deleteAnswer(questionId, answerId);
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
