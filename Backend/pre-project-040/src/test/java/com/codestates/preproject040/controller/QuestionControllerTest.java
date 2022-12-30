@@ -27,7 +27,7 @@ class QuestionControllerTest {
     @Autowired private QuestionService questionService;
     @Autowired private ObjectMapper objectMapper;
 
-    @DisplayName("글 3개 작성")
+    @DisplayName("글 4개 작성")
     @BeforeAll
     void postQuestion() throws Exception {
         QuestionDto postA = QuestionDto.of("AtestTitle", "AtestContent1", "AtestContent2");
