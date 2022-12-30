@@ -103,11 +103,7 @@ const QuestionPostLayout = ({ id, content, tags, author }) => {
   const handleDelete = () => {
     let confirm = window.confirm("질문을 삭제하시겠습니까?");
     if (confirm === true) {
-      dispatch(
-        deleteQuestion({
-          id: id,
-        })
-      );
+      dispatch(deleteQuestion(id));
       alert("질문이 삭제되었습니다.");
       navigate("/questions");
     }

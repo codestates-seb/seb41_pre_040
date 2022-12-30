@@ -4,6 +4,7 @@ import usersReducer from "./usersSlice";
 import userReducer from "./user";
 import signupReducer from "./signupSlice";
 import userInfoReducer from "./userInfo";
+import answersReducer from "./answersSlice";
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
     user: userReducer,
     signupList: signupReducer,
     userInfo: userInfoReducer,
+    answers: answersReducer,
   },
 });
