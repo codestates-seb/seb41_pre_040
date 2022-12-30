@@ -18,18 +18,6 @@ const Inputtext = styled.input`
   }
 `;
 
-// const Errtext = styled.input`
-//   padding: 8px 10px 8px 10px;
-//   margin-bottom: 15px;
-//   width: 245px;
-//   height: 40px;
-//   border: 1px solid rgb(186, 191, 196);
-//   border-radius: 3px;
-//   font-size: 17px;
-//   border-color: hsl(358, 68%, 59%);
-//   outline: hsl(358, 76%, 90%) solid 4px;
-// `;
-
 const SignInfo = styled.div`
   background-color: white;
   width: 292px;
