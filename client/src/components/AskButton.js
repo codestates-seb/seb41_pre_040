@@ -20,6 +20,8 @@ const AskButton = () => {
 
   return (
     <AskQuestion to={isLogged ? "/ask" : "/login"}>Ask Question</AskQuestion>
+    // 글작성 테스트 시에만 아래 주석 해제
+    // <AskQuestion to="/ask">Ask Question</AskQuestion>
   );
 };
 
