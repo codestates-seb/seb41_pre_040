@@ -7,14 +7,15 @@ import com.codestates.preproject040.dto.question.QuestionResponseDto;
 import com.codestates.preproject040.dto.question.QuestionWithAnswersResponseDto;
 import com.codestates.preproject040.repository.UserRepository;
 import com.codestates.preproject040.service.QuestionService;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,21 +31,12 @@ public class QuestionController {
 
     // 검색 ex. questions/search?searchKeyword=내용&page=0
     // 실제 size=30, 일단 size=2로 작성
-    // TODO : 검색에서 페이지네이션 적용 안되는 문제 해결
-//TODO : ======================================================================================================
-//TODO : ======================================================================================================
-//TODO : ======================================================================================================
     @GetMapping("/questions/search")
-    public ResponseEntity getQuestions(
-            String searchKeyword,
-            @PageableDefault(size = 2, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
-    ) {
-        List<QuestionResponseDto> searchPage = questionService.searchQuestions(searchKeyword, pageable);
+    public ResponseEntity getQuestions(String searchKeyword, @PageableDefault(size = 2) Pageable pageable) {
+        Page<QuestionResponseDto> searchPage = questionService.searchQuestions(searchKeyword, pageable);
+
         return new ResponseEntity<>(searchPage, HttpStatus.OK);
     }
-//TODO : ======================================================================================================
-//TODO : ======================================================================================================
-//TODO : ======================================================================================================
 
     // 작성
     @PostMapping("/questions")
