@@ -35,7 +35,6 @@ public class QuestionService {
         this.answerRepository = answerRepository;
     }
 
-    //TODO : 댓글 내용 검색시, 질문글 제목과 해당 댓글 content 노출
     public Page<QuestionResponseDto> searchQuestions(String searchKeyword, Pageable pageable) {
         // 검색 결과가 담길 임시List
         List<Question> tempList = new ArrayList<>();
@@ -48,37 +47,23 @@ public class QuestionService {
         // 답변 검색 (content 검색으로 해당 Answer 담긴 List)
         List<Answer> contentList = answerRepository.findByContentContaining(searchKeyword);
 
-        // 검색된 정보가 들어있는 Question을 중복되지 않도록 임시 List에 담는 과정
+        // 검색된 정보 임시 List에 담는 과정
         for(Answer content : contentList) {
-            if (!tempList.contains(content.getQuestion())) {
-                tempList.add(content.getQuestion());
-            }
+            tempList.add(content.getQuestion());
         }
-        for(Question title : titleList) {
-            if (!tempList.contains(title)) {
-                tempList.add(title);
-            }
-        }
-        for(Question content1 : content1List) {
-            if (!tempList.contains(content1)) {
-                tempList.add(content1);
-            }
-
-        }
-        for(Question content2 : content2List) {
-            if (!tempList.contains(content2)) {
-                tempList.add(content2);
-            }
-        }
+        tempList.addAll(titleList);
+        tempList.addAll(content1List);
+        tempList.addAll(content2List);
 
         //검색 결과 없으면 예외 던지기
         if (tempList.isEmpty()) {
             throw new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND);
         }
 
-        // List<Quetion>을 List<QuestionResponseDto>로 바꿔주고, 합친 리스트들이 createdAt 역순으로 정렬되게 변경
+        // List<Quetion>을 List<QuestionResponseDto>로 바꿔주고, 중복 제거, 합친 리스트들이 createdAt 역순으로 정렬되게 변경
         List<QuestionResponseDto> searchList =
                 tempList.stream()
+                        .distinct()
                         .sorted(Comparator.comparing(AuditingFields::getCreatedAt).reversed())
                         .map(QuestionDto::from)
                         .map(QuestionResponseDto::from)
@@ -101,16 +86,7 @@ public class QuestionService {
 
         return QuestionResponseDto.from(QuestionDto.from(questionRepository.save(question)));
     }
-/*
-    // 1개 찾기
-    public QuestionWithAnswersResponseDto findQuestion(Long id) {
-        QuestionWithAnswersResponseDto question =
-                QuestionWithAnswersResponseDto.from(
-                    QuestionDto.from(findVerifiedQuestion(id)));
 
-        return question;
-    }
- */
     // questionId가 주어지면 답변이 없는지 확인
     public boolean answerIsEmpty(Long id){
 

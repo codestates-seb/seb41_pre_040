@@ -1,7 +1,5 @@
 package com.codestates.preproject040.controller;
 
-import com.codestates.preproject040.dto.UserAccountDto;
-import com.codestates.preproject040.dto.answer.AnswerDto;
 import com.codestates.preproject040.dto.answer.AnswerPost;
 import com.codestates.preproject040.dto.question.QuestionDto;
 import com.codestates.preproject040.service.QuestionService;
