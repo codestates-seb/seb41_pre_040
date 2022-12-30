@@ -1,11 +1,9 @@
-import React from "react";
 import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
-import TagInput from "../components/TagInput";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { getQuestionById, editQuestion } from "../redux/questionsSlice";
+import { getAnswer, editAnswer } from "../redux/answersSlice";
 
 const Container = styled.div`
   display: flex;
@@ -151,41 +149,38 @@ const Container = styled.div`
   }
 `;
 
-const EditQuestion = () => {
-  const { questionId } = useParams();
-  const question = useSelector((state) => state.questions.single);
+const EditAnswer = () => {
+  const { questionId, answerId } = useParams();
+  const answer = useSelector((state) => state.answers.single);
 
-  const [titleInput, setTitleInput] = useState(null);
-  const [contentInput, setContentInput] = useState(null);
-  // const [tags, setTags] = useState(question.tags);
+  const [contentInput, setContentInput] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getQuestionById(questionId));
+    window.scrollTo(0, 0);
+    dispatch(getAnswer({ questionId, answerId }));
   }, []);
 
   useEffect(() => {
-    setTitleInput(question.title);
-    setContentInput(question.content1);
-  }, [question]);
+    setContentInput(answer.content);
+  }, [answer]);
 
   const handleEdit = () => {
-    if (titleInput.length === 0 || contentInput.length === 0) {
+    if (contentInput.length === 0) {
       alert("내용을 입력해주세요.");
       return;
     }
     dispatch(
-      editQuestion({
-        id: questionId,
-        title: titleInput,
-        content1: contentInput,
-        content2: contentInput,
+      editAnswer({
+        questionId: questionId,
+        answerId: answerId,
+        content: contentInput,
       })
     );
-    alert("질문이 수정되었습니다.");
-    navigate("/questions");
+    alert("답변이 수정되었습니다.");
+    navigate(-1);
   };
 
   return (
@@ -207,38 +202,13 @@ const EditQuestion = () => {
             </div>
             <div className="FormContainer">
               <div className="FormBox">
-                <label>Title</label>
-                {titleInput === null ? (
-                  <></>
-                ) : (
-                  <input
-                    type="text"
-                    value={titleInput}
-                    onChange={(e) => setTitleInput(e.target.value)}
-                  ></input>
-                )}
-              </div>
-              <div className="FormBox">
                 <label>Body</label>
                 <div>
-                  {contentInput === null ? (
-                    <></>
-                  ) : (
-                    <>
-                      <MDEditor
-                        value={contentInput}
-                        onChange={setContentInput}
-                      />
-                      <MDEditor.Markdown
-                        source={contentInput}
-                        style={{ whiteSpace: "pre-wrap" }}
-                      />
-                    </>
-                  )}
-                </div>
-                <div>
-                  <label>Tags</label>
-                  {/* <TagInput tags={tags} setTags={setTags} /> */}
+                  <MDEditor value={contentInput} onChange={setContentInput} />
+                  <MDEditor.Markdown
+                    source={contentInput}
+                    style={{ whiteSpace: "pre-wrap" }}
+                  />
                 </div>
                 <div>
                   <label>Edit Summary</label>
@@ -271,4 +241,4 @@ const EditQuestion = () => {
   );
 };
 
-export default EditQuestion;
+export default EditAnswer;

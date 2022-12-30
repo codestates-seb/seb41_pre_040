@@ -110,12 +110,12 @@ const Home = () => {
           return (
             <Question
               key={idx}
-              id={el.id}
+              id={el.questionId}
               title={el.title}
               content={el.content1}
               tags={el.questionHashtag}
               createdAt={el.createdAt}
-              author={el.createdBy}
+              author={el.nickname}
             />
           );
         })}

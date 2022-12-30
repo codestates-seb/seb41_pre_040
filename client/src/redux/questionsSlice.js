@@ -6,9 +6,7 @@ export const getQuestionsAll = createAsyncThunk(
   "GET/ALLQUESTIONS",
   async () => {
     const response = await axios
-      // .get("/api/") <- 실제 서버로 보낼 때
-      // .get("/api/questions") <- json-server 테스트할 때
-      .get("/api/questions")
+      .get("/api/")
       .catch((err) => console.error(err));
     return response.data;
   }
@@ -19,9 +17,7 @@ export const getQuestionsByPage = createAsyncThunk(
   "GET/QUESTIONS",
   async ({ page }) => {
     const response = await axios
-      // .get(`/api/questions?pages=${page - 1}&size=10`) <- 실제 서버로 보낼 때
-      // .get(`/api/questions?_page=${page}`) <- json-server 테스트할 때
-      .get(`/api/questions?_page=${page}`)
+      .get(`/api/questions?pages=${page - 1}&size=10`)
       .catch((err) => console.error(err));
     return response.data;
   }
@@ -40,9 +36,7 @@ export const getSearchResult = createAsyncThunk(
   "GET/SEARCH",
   async (keyword) => {
     const response = await axios
-      // .get(`/api/search?searchKeyword=${keyword}&page=0`) <- 실제 서버
-      // .get(`/api/questions?q=${keyword}`) <- json-server
-      .get(`/api/questions?q=${keyword}`)
+      .get(`/api/questions/search?searchKeyword=${keyword}`)
       .catch((err) => console.error(err));
     return response.data;
   }
@@ -53,9 +47,11 @@ export const getSearchResultByPage = createAsyncThunk(
   "GET/SEARCH/PAGE",
   async ({ keyword, page }) => {
     const response = await axios
-      // .get(`/api/search?searchKeyword=${keyword}&page=${page - 1}`) <- 실제 서버
-      // .get(`/api/questions?q=${keyword}&_page=${page}&_limit=5`) <- json-server
-      .get(`/api/questions?q=${keyword}&_page=${page}`)
+      .get(
+        `/api/questions/search?searchKeyword=${keyword}&page=${
+          page - 1
+        }&size=10`
+      )
       .catch((err) => console.error(err));
     return response.data;
   }
@@ -87,11 +83,11 @@ export const postQuestion = createAsyncThunk(
 export const deleteQuestion = createAsyncThunk(
   "DELETE/QUESTION",
   // 해당하는 id만 받아와서 서버로 delete 요청 보내기
-  async ({ id }) => {
+  async (questionId) => {
     const response = await axios
-      .delete(`/api/questions/${id}`)
+      .delete(`/api/questions/${questionId}`)
       .catch((err) => console.error(err));
-    return id;
+    return questionId;
   }
 );
 
@@ -101,9 +97,9 @@ const initialStateValue = {
   single: {},
   isSearchMode: false,
   keyword: "",
+  answers: [],
 };
 
-// 에러 핸들링 필요
 export const questionsSlice = createSlice({
   name: "questions",
   initialState: initialStateValue,
@@ -125,21 +121,17 @@ export const questionsSlice = createSlice({
       state.perPage = action.payload;
     });
     builder.addCase(getSearchResult.fulfilled, (state, action) => {
-      state.all = action.payload;
+      state.all = action.payload.content;
     });
     builder.addCase(getSearchResultByPage.fulfilled, (state, action) => {
-      state.perPage = action.payload;
+      state.perPage = action.payload.content;
     });
-    // builder.addCase(postQuestion.fulfilled, (state, action) => {
-    //   // console.log(action);
-    //   state.isSearchMode = false;
-    //   state.all = [...state.all, action.payload];
-    // });
     builder.addCase(getQuestionById.pending, (state, action) => {
       state.single = {};
     });
     builder.addCase(getQuestionById.fulfilled, (state, action) => {
       state.single = action.payload;
+      state.answers = action.payload.answerDtoList;
     });
   },
 });
