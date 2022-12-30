@@ -152,7 +152,7 @@ const Container = styled.div`
 `;
 
 const EditQuestion = () => {
-  const questionId = useParams().id;
+  const { questionId } = useParams();
   const question = useSelector((state) => state.questions.single);
 
   const [titleInput, setTitleInput] = useState(null);
@@ -164,9 +164,12 @@ const EditQuestion = () => {
 
   useEffect(() => {
     dispatch(getQuestionById(questionId));
+  }, []);
+
+  useEffect(() => {
     setTitleInput(question.title);
     setContentInput(question.content1);
-  }, []);
+  }, [question]);
 
   const handleEdit = () => {
     if (titleInput.length === 0 || contentInput.length === 0) {
@@ -214,11 +217,6 @@ const EditQuestion = () => {
                     onChange={(e) => setTitleInput(e.target.value)}
                   ></input>
                 )}
-                {/* <input
-                  type="text"
-                  value={titleInput === null ? "로딩 중..." : titleInput}
-                  onChange={(e) => setTitleInput(e.target.value)}
-                ></input> */}
               </div>
               <div className="FormBox">
                 <label>Body</label>
@@ -237,14 +235,6 @@ const EditQuestion = () => {
                       />
                     </>
                   )}
-                  {/* <MDEditor
-                    value={contentInput === null ? "로딩 중..." : contentInput}
-                    onChange={setContentInput}
-                  />
-                  <MDEditor.Markdown
-                    source={contentInput}
-                    style={{ whiteSpace: "pre-wrap" }}
-                  /> */}
                 </div>
                 <div>
                   <label>Tags</label>
