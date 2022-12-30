@@ -3,16 +3,17 @@ package com.codestates.preproject040.service;
 import com.codestates.preproject040.domain.Answer;
 import com.codestates.preproject040.domain.AuditingFields;
 import com.codestates.preproject040.domain.Question;
-import com.codestates.preproject040.dto.QuestionDto;
-import com.codestates.preproject040.dto.response.QuestionResponseDto;
-import com.codestates.preproject040.dto.response.QuestionWithAnswersResponseDto;
+import com.codestates.preproject040.dto.question.QuestionDto;
+import com.codestates.preproject040.dto.question.QuestionResponseDto;
+import com.codestates.preproject040.dto.question.QuestionWithAnswersResponseDto;
 import com.codestates.preproject040.exception.BusinessLogicException;
 import com.codestates.preproject040.exception.ExceptionCode;
 import com.codestates.preproject040.repository.AnswerRepository;
 import com.codestates.preproject040.repository.QuestionRepository;
 import com.codestates.preproject040.repository.UserRepository;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
+//import org.springframework.data.domain.PageImpl;
+//import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,19 +35,42 @@ public class QuestionService {
         this.userRepository = userRepository;
         this.answerRepository = answerRepository;
     }
-
+//TODO : ======================================================================================================
+//TODO : ======================================================================================================
+//TODO : ======================================================================================================
     //TODO : 댓글 내용 검색시, 질문글 제목과 해당 댓글 content 노출
-    public Page<QuestionResponseDto> searchQuestions(String searchKeyword, Pageable pageable) {
+    public List<QuestionResponseDto> searchQuestions(String searchKeyword, Pageable pageable) {
         // 검색 결과가 담길 임시List
         List<Question> tempList = new ArrayList<>();
 
-        // 질문 검색 (title, content1, content2 검색으로 해당 Question 담긴 List)
-        List<Question> titleList = questionRepository.findByTitleContaining(searchKeyword);
-        List<Question> content1List = questionRepository.findByContent1Containing(searchKeyword);
-        List<Question> content2List = questionRepository.findByContent2Containing(searchKeyword);
+//        // 1
+//        // 질문 검색 (title, content1, content2 검색으로 해당 Question 담긴 List)
+//        List<Question> titleList = questionRepository.findByTitleContaining(searchKeyword);
+//        List<Question> content1List = questionRepository.findByContent1Containing(searchKeyword);
+//        List<Question> content2List = questionRepository.findByContent2Containing(searchKeyword);
+//
+//        // 답변 검색 (content 검색으로 해당 Answer 담긴 List)
+//        List<Answer> contentList = answerRepository.findByContentContaining(searchKeyword);
 
+//        //2
+//        // 질문 검색 (title, content1, content2 검색으로 해당 Question 담긴 List)
+//        List<Question> titleList = questionRepository.findByTitleContaining(searchKeyword, pageable);
+//        List<Question> content1List = questionRepository.findByContent1Containing(searchKeyword, pageable);
+//        List<Question> content2List = questionRepository.findByContent2Containing(searchKeyword, pageable);
+//
+//        // 답변 검색 (content 검색으로 해당 Answer 담긴 List)
+//        List<Answer> contentList = answerRepository.findByContentContaining(searchKeyword, pageable);
+
+        // 질문 검색 (title, content1, content2 검색으로 해당 Question 담긴 List)
+        Page<Question> byTitleContaining = questionRepository.findByTitleContaining(searchKeyword, pageable);
+        Page<Question> byContent1Containing = questionRepository.findByContent1Containing(searchKeyword, pageable);
+        Page<Question> byContent2Containing = questionRepository.findByContent2Containing(searchKeyword, pageable);
+        List<Question> titleList = new ArrayList<>(byTitleContaining.stream().toList());
+        List<Question> content1List = new ArrayList<>(byContent1Containing.stream().toList());
+        List<Question> content2List = new ArrayList<>(byContent2Containing.stream().toList());
         // 답변 검색 (content 검색으로 해당 Answer 담긴 List)
-        List<Answer> contentList = answerRepository.findByContentContaining(searchKeyword);
+        Page<Answer> byAnswerContaining = answerRepository.findByContentContaining(searchKeyword, pageable);
+        List<Answer> contentList = new ArrayList<>(byAnswerContaining.stream().toList());
 
         // 검색된 정보가 들어있는 Question을 중복되지 않도록 임시 List에 담는 과정
         for(Answer content : contentList) {
@@ -85,10 +109,13 @@ public class QuestionService {
                         .map(QuestionResponseDto::from)
                         .collect(Collectors.toList());
 
-        Page<QuestionResponseDto> searchPage = new PageImpl<>(searchList, pageable, searchList.size());
+//        Page<QuestionResponseDto> searchPage = new PageImpl<>(searchList, pageable, searchList.size());
 
-        return searchPage;
+        return searchList;
     }
+//TODO : ======================================================================================================
+//TODO : ======================================================================================================
+//TODO : ======================================================================================================
 
     // 생성
     public QuestionResponseDto createQuestion(QuestionDto questionDto) {

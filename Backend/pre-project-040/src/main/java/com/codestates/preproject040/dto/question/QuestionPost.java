@@ -1,4 +1,6 @@
-package com.codestates.preproject040.dto;
+package com.codestates.preproject040.dto.question;
+
+import com.codestates.preproject040.dto.UserAccountDto;
 
 public record QuestionPost(
         String title,

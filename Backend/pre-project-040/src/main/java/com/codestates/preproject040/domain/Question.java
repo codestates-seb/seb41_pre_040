@@ -39,7 +39,7 @@ public class Question extends AuditingFields {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private final Set<QuestionHashtag> questionHashtags = new LinkedHashSet<>();
+    private final List<QuestionHashtag> questionHashtags = new ArrayList<>();
 
     private Question(String title, String content1, String content2, UserAccount userAccount) {
         this.title = title;

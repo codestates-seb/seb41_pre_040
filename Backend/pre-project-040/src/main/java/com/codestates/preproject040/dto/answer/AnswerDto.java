@@ -3,9 +3,7 @@ package com.codestates.preproject040.dto.answer;
 import com.codestates.preproject040.domain.Answer;
 import com.codestates.preproject040.domain.Question;
 import com.codestates.preproject040.domain.UserAccount;
-import com.codestates.preproject040.dto.QuestionDto;
 import com.codestates.preproject040.dto.UserAccountDto;
-import org.apache.catalina.User;
 
 import java.time.LocalDateTime;
 

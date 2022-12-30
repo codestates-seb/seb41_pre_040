@@ -1,12 +1,8 @@
 package com.codestates.preproject040.controller;
 
-import com.codestates.preproject040.domain.Question;
-import com.codestates.preproject040.dto.QuestionDto;
-import com.codestates.preproject040.dto.response.QuestionResponseDto;
+import com.codestates.preproject040.dto.question.QuestionDto;
 import com.codestates.preproject040.service.QuestionService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,15 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -56,12 +45,12 @@ class QuestionControllerTest {
 
         // postA
         ResultActions actionsA =
-            mvc.perform(
-                    post("/questions")
-                            .accept(MediaType.APPLICATION_JSON_VALUE)
-                            .contentType(MediaType.APPLICATION_JSON_VALUE)
-                            .content(jsonA)
-            );
+                mvc.perform(
+                        post("/questions")
+                                .accept(MediaType.APPLICATION_JSON_VALUE)
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .content(jsonA)
+                );
 
         actionsA.andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("AtestTitle"))
@@ -123,15 +112,15 @@ class QuestionControllerTest {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
 
         mvc.perform(
-                get("/")
-                        .accept(MediaType.APPLICATION_JSON)
-        )
+                        get("/")
+                                .accept(MediaType.APPLICATION_JSON)
+                )
 
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$").isArray())
-        // 페이지에 questionId 3, 2 나오는지 확인
-        .andExpect(jsonPath("$[0].questionId").value(3))
-        .andExpect(jsonPath("$[1].questionId").value(2));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                // 페이지에 questionId 3, 2 나오는지 확인
+                .andExpect(jsonPath("$[0].questionId").value(3))
+                .andExpect(jsonPath("$[1].questionId").value(2));
     }
 
     @Test
@@ -143,16 +132,16 @@ class QuestionControllerTest {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
 
         mvc.perform(
-                get("/")
-                        .queryParam("page", String.valueOf(page))
-                        .accept(MediaType.APPLICATION_JSON)
-        )
+                        get("/")
+                                .queryParam("page", String.valueOf(page))
+                                .accept(MediaType.APPLICATION_JSON)
+                )
 
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$").isArray())
-        // 3 페이지에 quesitonId 2, 1인지 확인 (1페이지에 6, 5 / 2페이지에 4, 3 / 1페이지에 2, 1)
-        .andExpect(jsonPath("$[0].questionId").value(2))
-        .andExpect(jsonPath("$[1].questionId").value(1));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                // 3 페이지에 quesitonId 2, 1인지 확인 (1페이지에 6, 5 / 2페이지에 4, 3 / 1페이지에 2, 1)
+                .andExpect(jsonPath("$[0].questionId").value(2))
+                .andExpect(jsonPath("$[1].questionId").value(1));
     }
 
     @Test
@@ -166,16 +155,16 @@ class QuestionControllerTest {
         long questionId = 2L;
 
         mvc.perform(
-                patch("/questions/" + questionId)
-                        .accept(MediaType.APPLICATION_JSON_VALUE)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(json)
-        )
+                        patch("/questions/" + questionId)
+                                .accept(MediaType.APPLICATION_JSON_VALUE)
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .content(json)
+                )
 
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.title").value("BtestNewTitle"))
-        .andExpect(jsonPath("$.content1").value("BtestNewContent1"))
-        .andExpect(jsonPath("$.content2").value("BtestNewContent2"));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("BtestNewTitle"))
+                .andExpect(jsonPath("$.content1").value("BtestNewContent1"))
+                .andExpect(jsonPath("$.content2").value("BtestNewContent2"));
     }
 
     @Test
@@ -185,10 +174,10 @@ class QuestionControllerTest {
         long questionId = 3L;
 
         mvc.perform(
-                delete("/questions/" + questionId)
-        )
+                        delete("/questions/" + questionId)
+                )
 
-        .andExpect(status().isNoContent());
+                .andExpect(status().isNoContent());
     }
 
 }

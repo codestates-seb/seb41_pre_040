@@ -1,20 +1,21 @@
-package com.codestates.preproject040.dto;
+package com.codestates.preproject040.dto.question;
 
 import com.codestates.preproject040.domain.*;
+import com.codestates.preproject040.dto.QuestionHashtagDto;
+import com.codestates.preproject040.dto.UserAccountDto;
 import com.codestates.preproject040.dto.answer.AnswerDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public record QuestionDto(
         Long questionId,
         UserAccountDto userAccountDto,
         String title,
-        Set<QuestionHashtag> questionHashtag,
         String content1,
         String content2,
+        List<QuestionHashtagDto> questionHashtag,
         List<AnswerDto> answers,
         LocalDateTime createdAt,
         String createdBy,
@@ -29,7 +30,7 @@ public record QuestionDto(
             String content2) {
 
         return new QuestionDto(
-                null, null, title, null, content1, content2,
+                null, null, title, content1, content2, null,
                 null, null, null, null, null);
     }
 
@@ -41,7 +42,7 @@ public record QuestionDto(
             String content2) {
 
         return new QuestionDto(
-                id, null, title, null, content1, content2,
+                id, null, title, content1, content2, null,
                 null, null, null, null, null
         );
     }
@@ -53,7 +54,7 @@ public record QuestionDto(
             UserAccountDto userAccountDto) {
 
         return new QuestionDto(
-                null, userAccountDto, title, null, content1, content2,
+                null, userAccountDto, title, content1, content2, null,
                 null, null, null, null, null);
     }
 
@@ -62,9 +63,9 @@ public record QuestionDto(
                 question.getId(),
                 UserAccountDto.from(question.getUserAccount()),
                 question.getTitle(),
-                question.getQuestionHashtags(),
                 question.getContent1(),
                 question.getContent2(),
+                null,
                 question.getAnswers().stream()
                         .map(AnswerDto::from)
                         .collect(Collectors.toList()),
