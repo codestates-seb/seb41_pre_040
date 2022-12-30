@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { postAnswer } from "../redux/answersSlice";
 
 const AnswerForm = styled.div`
   h2 {
@@ -38,19 +41,37 @@ const ManageButton = styled.div`
 `;
 
 const AnswerQuestion = () => {
-  const [value, setValue] = useState("");
+  const dispatch = useDispatch();
+  const { questionId } = useParams();
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSubmit = () => {
+    // 질문 등록 함수 구현하기
+    dispatch(
+      postAnswer({
+        questionId: questionId,
+        content: inputValue,
+      })
+    );
+    alert("답변이 등록되었습니다.");
+    window.location.reload();
+    window.scrollTo(0, 0);
+  };
 
   return (
     <AnswerForm>
       <h2>Your Answer</h2>
       <div className="editor">
-        <MDEditor value={value} onChange={setValue} />
-        <MDEditor.Markdown source={value} style={{ whiteSpace: "pre-wrap" }} />
+        <MDEditor value={inputValue} onChange={setInputValue} />
+        <MDEditor.Markdown
+          source={inputValue}
+          style={{ whiteSpace: "pre-wrap" }}
+        />
       </div>
       <ManageButton>
-        {/* 글 등록 구현 필요 */}
-        {/* 글 등록 시 해당 글의 detail 페이지로 이동 */}
-        <button className="submit-question">Post Your Answer</button>
+        <button className="submit-question" onClick={handleSubmit}>
+          Post Your Answer
+        </button>
       </ManageButton>
     </AnswerForm>
   );

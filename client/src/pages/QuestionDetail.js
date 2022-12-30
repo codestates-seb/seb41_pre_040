@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import AskButton from "../components/AskButton";
 import Aside from "../components/Aside";
-import AnswersList from "../components/AnswersList";
+import Answer from "../components/Answer";
 import AnswerQuestion from "../components/AnswerQuestion";
 import QuestionPostLayout from "../components/QuestionPostLayout";
 import elapsedTime_ago from "../assets/dateparse";
@@ -93,17 +92,14 @@ const RightAside = styled.div`
 `;
 
 const QuestionDetail = () => {
-  const questionId = useParams().id;
+  const { questionId } = useParams();
   const dispatch = useDispatch();
+
+  const question = useSelector((state) => state.questions.single);
+  const answers = useSelector((state) => state.questions.answers);
   // const [answers, setAnswers] = useState([]);
 
-  // 상태는 새로고침하면 초기화되기 때문에 직접 axios로 받아오는 것이 적절한 것 같음
-  const question = useSelector((state) => state.questions.single);
-  // const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
-    // 서버에서 questionId에 해당하는 질문과 답변 불러오기
-    // 답변은 쿼리스트링 이용해서 불러오기 -> thunk 이용? 아니면 여기서 바로?
     dispatch(getQuestionById(questionId));
     window.scrollTo(0, 0);
   }, []);
@@ -112,39 +108,46 @@ const QuestionDetail = () => {
     <MainContent>
       <TitleContainer>
         <TitleAndButton>
-          <h1>{question.title ? question.title : " "}</h1>
+          <h1>{question.title}</h1>
           <div className="ask-button">
             <AskButton />
           </div>
         </TitleAndButton>
         <div className="ask-date">
           Asked
-          {question ? (
+          {question && (
             <span className="time-elapsed">
               {" "}
               {elapsedTime_ago(question.createdAt)}
             </span>
-          ) : (
-            <div> </div>
           )}
         </div>
       </TitleContainer>
       <Main>
-        {question ? (
+        {question && (
           <QuestionPostLayout
-            id={question.id}
+            id={question.questionId}
             content={question.content1}
             tags={question.questionHashtag}
-            author={question.createdBy}
+            author={question.nickname}
           />
-        ) : (
-          <div> </div>
         )}
         <div id="answers">
           <div id="answer-header">
-            <h2>{question.answer && question.answer.length} Answers</h2>
+            <h2>{answers ? answers.length : 0} Answers</h2>
           </div>
-          <AnswersList />
+          {answers &&
+            answers.map((el) => {
+              return (
+                <Answer
+                  key={el.id}
+                  id={el.id}
+                  questionId={questionId}
+                  content={el.content}
+                  author={el.createdBy}
+                />
+              );
+            })}
           <AnswerQuestion id={question.id} />
         </div>
         <BottomNotice>
