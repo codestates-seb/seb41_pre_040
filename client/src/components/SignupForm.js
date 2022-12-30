@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-//import { Link } from "react-router-dom";
-//import { useSelector } from "react-redux";
-//import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-//import { signupList } from "../redux/signupSlice";
 
 const Inputtext = styled.input`
   padding: 8px 10px 8px 10px;
@@ -15,10 +11,7 @@ const Inputtext = styled.input`
   border: 1px solid rgb(186, 191, 196);
   border-radius: 3px;
   font-size: 17px;
-  /* .err{
-      border-color: hsl(358, 68%, 59%);
-      outline: hsl(358, 76%, 90%) solid 4px;
-    } */
+
   &:focus {
     border-color: #0a95ff;
     outline: #c1f4ff solid 4px;
@@ -68,22 +61,19 @@ const SignupBtn = styled.button`
   }
 `;
 
-// const ErrMsg = styled.div`
-//   color: red;
-//   margin-top: -8px;
-//   margin-bottom: 12px;
-//   font-size: 13px;
-// `;
+const ErrMsg = styled.div`
+  color: red;
+  margin-top: -8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+`;
 
 const SignupForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [emailErr, setEmailErr] = useState(false);
-  // const [passwordErr, setPasswordErr] = useState(false);
-
-  //const EMAIL_REGEX = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
-  // const signupLists = useSelector((state) => state.signupList.value);
+  const [emailErr, setEmailErr] = useState(false);
+  const [passwordErr, setPasswordErr] = useState(false);
 
   const navigte = useNavigate();
 
@@ -91,23 +81,21 @@ const SignupForm = () => {
     setName(e.target.value);
   };
   const handleEmailChange = (e) => {
-    // if (EMAIL_REGEX.test(e.target.value)) {
-    // }
-    // setEmailErr(false);
-
-    // signupList.map((e) =>{
-    //     {e.email === e.target.value ? setEmailErr(true) : setEmailErr(false) }
-    // }
-    // //     e.email
-    // //  === e.target.value ? setEmailErr(true) : setEmailErr(false)
-    // )
+    const EMAIL_REGEX = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
+    if (EMAIL_REGEX.test(e.target.value)) {
+      setEmailErr(false);
+    } else {
+      setEmailErr(true);
+    }
     setEmail(e.target.value);
   };
   const handlePasswordChange = (e) => {
-    // const passwordInput = e.target.value;
-    // if (passwordInput.length >= 8) {
-    //   setPasswordErr(false);
-    // }
+    const passwordInput = e.target.value;
+    if (passwordInput.length >= 8) {
+      setPasswordErr(false);
+    } else {
+      setPasswordErr(true);
+    }
     setPassword(e.target.value);
   };
 
@@ -138,29 +126,12 @@ const SignupForm = () => {
           console.log("회원가입이 완료되었습니다.");
           navigte("/login");
         }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("이미 존재하는 id입니다.");
+        window.location.replace("/signup");
       });
-
-    // console.log(emailErr)
-    //   if (!EMAIL_REGEX.test(email) || password.length < 8) {
-    //       if (!EMAIL_REGEX.test(email)) setEmailErr(true);
-    //       else setEmailErr(false);
-    //       if (password.length < 8) setPasswordErr(true);
-    //       else setPasswordErr(false);
-    //       return;
-    //   }
-    //   else {
-    //       dispatch(
-    //           signupList({
-    //           email: email,
-    //           display_name: name,
-    //           password: password,
-    //           id: (signupLists.length + 1),
-    //           }));
-    //           console.log(emailErr)
-    //           console.log(signupLists)
-    //           navigte("/login");
-    //   }
-    //   console.log(signupLists)
   };
 
   return (
@@ -168,27 +139,17 @@ const SignupForm = () => {
       <div className="text">Display name</div>
       <Inputtext onChange={handleNameChange}></Inputtext>
       <div className="text">Email</div>
-      {/* {emailErr ? (
-        <Errtext onChange={handleEmailChange}></Errtext>
-      ) : (
-        <Inputtext onChange={handleEmailChange}></Inputtext>
-      )} */}
       <Inputtext onChange={handleEmailChange}></Inputtext>
-      {/* {emailErr ? <ErrMsg>is not a valid email adress</ErrMsg> : <></>} */}
-      {/* <Inputtext onChange={handleEmailChange}></Inputtext> */}
-      {/* <div className="text">Password</div>
-      {passwordErr ? (
-        <Errtext onChange={handlePasswordChange} type="password"></Errtext>
-      ) : (
-        <Inputtext onChange={handlePasswordChange} type="password"></Inputtext>
-      )} */}
+      {emailErr ? <ErrMsg>is not a valid email adress</ErrMsg> : <></>}
+
+      <div className="text">Password</div>
       <Inputtext onChange={handlePasswordChange} type="password"></Inputtext>
-      {/* {passwordErr ? (
+      {passwordErr ? (
         <ErrMsg>Passwords must contain at least eight characters</ErrMsg>
       ) : (
         <></>
-      )} */}
-      {/* <Inputtext onChange={handlePasswordChange} type="password"></Inputtext> */}
+      )}
+
       <div className="pass">
         Passwords must contain at least eight characters.
       </div>
