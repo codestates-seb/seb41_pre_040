@@ -86,7 +86,6 @@ const SignupForm = () => {
   // const signupLists = useSelector((state) => state.signupList.value);
 
   const navigte = useNavigate();
-  //const dispatch = useDispatch();
 
   const handleNameChange = (e) => {
     setName(e.target.value);
