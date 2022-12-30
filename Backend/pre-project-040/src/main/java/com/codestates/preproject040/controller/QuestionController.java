@@ -33,7 +33,7 @@ public class QuestionController {
 
     // 검색 ex. questions/search?searchKeyword=내용&page=0
     // 실제 size=30, 일단 size=2로 작성
-    //TODO : 검색에서 페이지네이션 적용 안되는 문제 해결
+    // TODO : 검색에서 페이지네이션 적용 안되는 문제 해결
     @GetMapping("/questions/search")
     public ResponseEntity getQuestions(
             String searchKeyword,
@@ -83,6 +83,7 @@ public class QuestionController {
             @PageableDefault(size = 2, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
     ){
         List<QuestionResponseDto> questionList = questionService.findQuestions(pageable);
+
         return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
 

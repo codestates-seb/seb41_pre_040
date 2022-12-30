@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -114,6 +115,7 @@ public class QuestionService {
     }
 
     // 1개 찾기 (answerIsEmpty가 true이면, 일반 ResponseDto로 반환)
+    @Transactional
     public QuestionResponseDto findQuestion(Long id) {
         QuestionResponseDto question =
                 QuestionResponseDto.from(QuestionDto.from(findVerifiedQuestion(id)));
