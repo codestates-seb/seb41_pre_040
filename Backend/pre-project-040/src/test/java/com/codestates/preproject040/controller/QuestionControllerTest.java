@@ -27,7 +27,7 @@ class QuestionControllerTest {
     @Autowired private QuestionService questionService;
     @Autowired private ObjectMapper objectMapper;
 
-    @DisplayName("글 3개 작성")
+    @DisplayName("글 4개 작성")
     @BeforeAll
     void postQuestion() throws Exception {
         QuestionDto postA = QuestionDto.of("AtestTitle", "AtestContent1", "AtestContent2");
@@ -144,7 +144,7 @@ class QuestionControllerTest {
 
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
-                // 1 페이지에 quesitonId 2, 1인지 확인 (1 페이지에 4, 3 / 0 페이지에 2, 1)
+                // 1 페이지에 quesitonId 2, 1인지 확인 (0 페이지에 4, 3 / 1 페이지에 2, 1)
                 .andExpect(jsonPath("$[0].questionId").value(2))
                 .andExpect(jsonPath("$[1].questionId").value(1));
     }
