@@ -20,10 +20,11 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // 임시
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-	runtimeOnly 'com.mysql:mysql-connector-j:8.0.31'
-	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'  // 임시
+	runtimeOnly 'com.mysql:mysql-connector-j:8.0.31'                        // 임시
 
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -31,7 +32,9 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
