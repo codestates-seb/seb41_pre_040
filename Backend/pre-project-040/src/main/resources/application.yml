@@ -1,3 +1,12 @@
+debug: false
+management.endpoints.web.exposure.include: "*"
+
+logging:
+  level:
+    com.codestates.preproject040: debug
+    org.springframework.web.servlet: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+
 spring:
   #datasource:
     #url: jdbc:mysql://localhost:3306/qna
@@ -29,21 +38,15 @@ spring:
       client:
         registration:
           google:
+            authorization-grant-type: authorization_code
             clientId: "${OAUTH2_CLIENT_ID}"
             clientSecret: "${OAUTH2_CLIENT_PW}"
-            redirect-uri: "{baseUrl}/login/oauth2/code/google"
+            redirectUri: "{baseUrl}/login/oauth2/code/google"
             scope:
               - email
               - profile
 
-logging:
-  level:
-    org:
-      springframework:
-        orm:
-          jpa: DEBUG
-
-server:
-  servlet:
-    encoding:
-      force-response: true
+#server:
+  #servlet:
+    #encoding:
+      #force-response: true
