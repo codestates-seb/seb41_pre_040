@@ -3,19 +3,24 @@ package com.codestates.preproject040.controller;
 import com.codestates.preproject040.dto.request.LoginRequest;
 import com.codestates.preproject040.dto.request.UserRequest;
 import com.codestates.preproject040.dto.response.UserResponse;
+import com.codestates.preproject040.dto.security.UserAccountPrincipal;
 import com.codestates.preproject040.service.UserAccountService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -23,7 +28,13 @@ public class UserController {
     private final UserAccountService userAccountService;
 
     @PostMapping("/login")
-    private UserResponse login(@RequestBody LoginRequest loginRequest) {
+    private UserResponse login(@RequestBody LoginRequest loginRequest,
+                               @AuthenticationPrincipal UserAccountPrincipal principal) {
+        if (loginRequest == null)
+            userAccountService.settingOauth2Google(principal);
+
+        assert loginRequest != null;
+        //userAccountService.login(loginRequest);
         return userAccountService.login(loginRequest);
     }
 
