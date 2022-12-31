@@ -2,6 +2,7 @@ package com.codestates.preproject040.config;
 
 import com.codestates.preproject040.dto.security.GoogleOAuth2Response;
 import com.codestates.preproject040.dto.security.UserAccountPrincipal;
+import com.codestates.preproject040.handler.OAuth2UserSuccessHandler;
 import com.codestates.preproject040.service.UserAccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -36,10 +37,11 @@ public class SecurityConfig {
             OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService
     ) throws Exception {
         return http
+                .csrf().disable()
                 .headers().frameOptions().sameOrigin()
                         .and()
-                .csrf().disable()
-                .cors(withDefaults())
+                //.cors(withDefaults())
+                .cors().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .mvcMatchers(
@@ -57,11 +59,12 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
 
                 )
-                //.formLogin().disable()
-                .httpBasic().disable()
+                .formLogin().disable()
+                //.formLogin(withDefaults())
+                //.httpBasic().disable()
                 /*.formLogin()
-                        .loginProcessingUrl("/users/login")
-                        .defaultSuccessUrl("/")
+                        //.loginProcessingUrl("/users/login")
+                        //.defaultSuccessUrl("/")
                         .permitAll()
                         .and()*/
                 /*.logout()
@@ -73,11 +76,12 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oAuth2UserService)
                         )
+                        .successHandler(new OAuth2UserSuccessHandler())
                 )
                 .build();
     }
 
-    @Bean
+    /*@Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
@@ -87,7 +91,7 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
 
         return source;
-    }
+    }*/
 
     @Bean
     public UserDetailsService userDetailsService(UserAccountService userAccountService) {
@@ -106,6 +110,11 @@ public class SecurityConfig {
 
         return userRequest -> {
             OAuth2User oAuth2User = delegate.loadUser(userRequest);
+
+            log.info("---------------------------------------");
+            for (String key : oAuth2User.getAttributes().keySet())
+                log.info("google info : {}", oAuth2User.getAttributes().get(key));
+            log.info("---------------------------------------");
 
             GoogleOAuth2Response googleResponse = GoogleOAuth2Response.from(oAuth2User.getAttributes());
             String registrationId = userRequest.getClientRegistration().getRegistrationId();

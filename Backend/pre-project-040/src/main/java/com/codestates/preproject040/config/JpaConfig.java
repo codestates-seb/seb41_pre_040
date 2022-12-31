@@ -14,7 +14,7 @@ import java.util.Optional;
 @Configuration
 @EnableJpaAuditing
 public class JpaConfig {
-    @Bean
+    /*@Bean
     public AuditorAware<String> auditorAware() {
         return () -> Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
@@ -25,6 +25,16 @@ public class JpaConfig {
                     UserAccountPrincipal userAccountPrincipal =  (UserAccountPrincipal) principal;
                     return userAccountPrincipal.getName();
                 });
+    }*/
+
+    @Bean
+    public AuditorAware<String> auditorAware() {
+        return () -> Optional.ofNullable(SecurityContextHolder.getContext())
+                .map(SecurityContext::getAuthentication)
+                .filter(Authentication::isAuthenticated)
+                .map(Authentication::getPrincipal)
+                .map(UserAccountPrincipal.class::cast)
+                .map(UserAccountPrincipal::getUsername);
     }
 
 }
