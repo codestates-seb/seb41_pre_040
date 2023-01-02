@@ -1,16 +1,16 @@
 package com.codestates.preproject040.service;
 
-import com.codestates.preproject040.domain.Answer;
-import com.codestates.preproject040.domain.AuditingFields;
-import com.codestates.preproject040.domain.Question;
+import com.codestates.preproject040.domain.*;
+import com.codestates.preproject040.dto.Hashtag.HashtagDto;
+import com.codestates.preproject040.dto.Hashtag.HashtagResponseDto;
 import com.codestates.preproject040.dto.question.QuestionDto;
 import com.codestates.preproject040.dto.question.QuestionResponseDto;
 import com.codestates.preproject040.dto.question.QuestionWithAnswersResponseDto;
 import com.codestates.preproject040.exception.BusinessLogicException;
 import com.codestates.preproject040.exception.ExceptionCode;
-import com.codestates.preproject040.repository.AnswerRepository;
-import com.codestates.preproject040.repository.QuestionRepository;
-import com.codestates.preproject040.repository.UserRepository;
+import com.codestates.preproject040.repository.*;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -21,19 +21,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class QuestionService {
     private final QuestionRepository questionRepository;
+    private final HashtagRepository hashtagRepository;
     private final UserRepository userRepository;
     private final AnswerRepository answerRepository;
-
-    public QuestionService(QuestionRepository questionRepository,
-                           UserRepository userRepository,
-                           AnswerRepository answerRepository) {
-        this.questionRepository = questionRepository;
-        this.userRepository = userRepository;
-        this.answerRepository = answerRepository;
-    }
+    private final QuestionHashtagRepository questionHashtagRepository;
 
     public Page<QuestionResponseDto> searchQuestions(String searchKeyword, Pageable pageable) {
         // 검색 결과가 담길 임시List
@@ -79,12 +75,28 @@ public class QuestionService {
     }
 
     // 생성
-    public QuestionResponseDto createQuestion(QuestionDto questionDto) {
-        Question question =
-                questionDto.toEntity(
-                        userRepository.getReferenceById(questionDto.userAccountDto().userId()));
+    public QuestionResponseDto createQuestion(QuestionDto questionDto, List<HashtagDto> hashtags) {
+        UserAccount user = userRepository.getReferenceById(questionDto.userAccountDto().userId());
+        Question question = questionRepository.save(questionDto.toEntity(user));
 
-        return QuestionResponseDto.from(QuestionDto.from(questionRepository.save(question)));
+        log.info("question info : {}", question.getId());
+
+        if (hashtags == null) {
+            return QuestionResponseDto.from(QuestionDto.from(question));
+        }
+        for (HashtagDto dto : hashtags) {
+            Hashtag hashtag = hashtagRepository.findByContent(dto.content())
+                    .orElseGet(() -> hashtagRepository.save(dto.toEntity()));
+            QuestionHashtag questionHashtag = QuestionHashtag.of(question, hashtag);
+            questionHashtagRepository.save(questionHashtag);
+        }
+
+        List<HashtagResponseDto> hashtagList = questionHashtagRepository.findAllByQuestion_Id(question.getId()).stream()
+                .map(questionHashtag -> hashtagRepository.getReferenceById(questionHashtag.getHashtag().getId()))
+                .map(HashtagDto::from)
+                .map(HashtagResponseDto::from)
+                .toList();
+        return QuestionResponseDto.from(QuestionDto.from(question), hashtagList);
     }
 
     // questionId가 주어지면 답변이 없는지 확인

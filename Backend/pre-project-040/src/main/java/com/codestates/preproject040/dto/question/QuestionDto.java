@@ -69,7 +69,7 @@ public record QuestionDto(
                 null,
                 question.getAnswers().stream()
                         .map(AnswerDto::from)
-                        .collect(Collectors.toList()),
+                        .toList(),
                 question.getCreatedAt(),
                 question.getCreatedBy(),
                 question.getModifiedAt(),

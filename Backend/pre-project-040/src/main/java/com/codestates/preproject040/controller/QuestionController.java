@@ -43,7 +43,7 @@ public class QuestionController {
         userRepository.save(userAccount);
 
         QuestionDto question = requestBody.toDto(UserAccountDto.from(userAccount));
-        QuestionResponseDto createdQuestion = questionService.createQuestion(question);
+        QuestionResponseDto createdQuestion = questionService.createQuestion(question, requestBody.hashtags());
 
         return new ResponseEntity<>(createdQuestion, HttpStatus.CREATED);
     }
