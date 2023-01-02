@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .headers().frameOptions().sameOrigin()
                         .and()
-                //.cors(withDefaults())
+                .cors(withDefaults())
                 .cors().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
@@ -60,18 +60,6 @@ public class SecurityConfig {
 
                 )
                 .formLogin().disable()
-                //.formLogin(withDefaults())
-                //.httpBasic().disable()
-                /*.formLogin()
-                        //.loginProcessingUrl("/users/login")
-                        //.defaultSuccessUrl("/")
-                        .permitAll()
-                        .and()*/
-                /*.logout()
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .and()*/
-                //.logout(logout -> logout.logoutSuccessUrl("/"))
                 .oauth2Login(oAuth -> oAuth
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oAuth2UserService)
@@ -81,7 +69,7 @@ public class SecurityConfig {
                 .build();
     }
 
-    /*@Bean
+    @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
@@ -91,7 +79,7 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
 
         return source;
-    }*/
+    }
 
     @Bean
     public UserDetailsService userDetailsService(UserAccountService userAccountService) {
@@ -130,7 +118,9 @@ public class SecurityConfig {
                                             username,
                                             dummyPassword,
                                             googleResponse.email(),
-                                            googleResponse.nickname()
+                                            googleResponse.nickname(),
+                                            googleResponse.photoUrl(),
+                                            null
                                     )
                             )
                     );

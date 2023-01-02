@@ -23,7 +23,7 @@ public class OAuth2UserSuccessHandler implements AuthenticationSuccessHandler {
 
         HttpSession session = request.getSession(false);
         session.setMaxInactiveInterval(10000);
-        response.sendRedirect("/questions");
+        response.sendRedirect("/");
     }
 
 }

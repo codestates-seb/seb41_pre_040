@@ -1,6 +1,4 @@
-package com.codestates.preproject040.dto.request;
-
-import com.codestates.preproject040.dto.UserAccountDto;
+package com.codestates.preproject040.dto.user;
 
 public record UserRequest(
         String userId,

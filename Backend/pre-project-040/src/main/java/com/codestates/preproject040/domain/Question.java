@@ -3,9 +3,9 @@ package com.codestates.preproject040.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @ToString(callSuper = true)
@@ -26,7 +26,10 @@ public class Question extends AuditingFields {
     private String title;
 
     @Setter @Column(nullable = false)
-    private String content;
+    private String content1;
+
+    @Setter @Column(nullable = false)
+    private String content2;
 
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId")
     private UserAccount userAccount;
@@ -34,20 +37,21 @@ public class Question extends AuditingFields {
     @ToString.Exclude
     @OrderBy("createdAt DESC")
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private final Set<Answer> answers = new LinkedHashSet<>();
+    private final List<Answer> answers = new ArrayList<>();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private final Set<QuestionHashtag> questionHashtags = new LinkedHashSet<>();
+    private final List<QuestionHashtag> questionHashtags = new ArrayList<>();
 
-    private Question(String title, String content, UserAccount userAccount) {
+    private Question(String title, String content1, String content2, UserAccount userAccount) {
         this.title = title;
-        this.content = content;
+        this.content1 = content1;
+        this.content2 = content2;
         this.userAccount = userAccount;
     }
 
-    public static Question of(String title, String content, UserAccount userAccount) {
-        return new Question(title, content, userAccount);
+    public static Question of(String title, String content1, String content2, UserAccount userAccount) {
+        return new Question(title, content1, content2, userAccount);
     }
 
     @Override

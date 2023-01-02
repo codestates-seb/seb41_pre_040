@@ -20,7 +20,7 @@ public class Answer extends AuditingFields {
     private Long id;
 
     @Setter
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false, length = 2000)
     private String content;
 
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId")
@@ -38,6 +38,8 @@ public class Answer extends AuditingFields {
     public static Answer of(String content, UserAccount userAccount, Question question) {
         return new Answer(content, userAccount, question);
     }
+
+
 
     @Override
     public boolean equals(Object o) {

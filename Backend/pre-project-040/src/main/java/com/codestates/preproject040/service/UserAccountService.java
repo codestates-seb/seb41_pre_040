@@ -1,12 +1,11 @@
 package com.codestates.preproject040.service;
 
 import com.codestates.preproject040.domain.UserAccount;
-import com.codestates.preproject040.dto.UserAccountDto;
-import com.codestates.preproject040.dto.request.LoginRequest;
-import com.codestates.preproject040.dto.request.UserRequest;
-import com.codestates.preproject040.dto.response.UserResponse;
-import com.codestates.preproject040.dto.security.GoogleOAuth2Response;
 import com.codestates.preproject040.dto.security.UserAccountPrincipal;
+import com.codestates.preproject040.dto.user.LoginRequest;
+import com.codestates.preproject040.dto.user.UserAccountDto;
+import com.codestates.preproject040.dto.user.UserRequest;
+import com.codestates.preproject040.dto.user.UserResponse;
 import com.codestates.preproject040.exception.BusinessLogicException;
 import com.codestates.preproject040.exception.ExceptionCode;
 import com.codestates.preproject040.repository.UserAccountRepository;
@@ -16,23 +15,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -61,7 +53,7 @@ public class UserAccountService {
         return userAccountRepository.findAll().stream()
                 .map(UserAccountDto::from)
                 .map(UserResponse::from)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public void updateUser(String userId, UserRequest request) {
@@ -82,7 +74,7 @@ public class UserAccountService {
             throw new BusinessLogicException(ExceptionCode.USER_ALREADY_EXIST);
 
         UserAccount user = UserAccount.of(
-                dto.userId(), dto.userPassword(), dto.email(), dto.nickname(), dto.userId());
+                dto.userId(), dto.userPassword(), dto.email(), dto.nickname(), dto.location(), dto.pictureUrl(), dto.userId());
 
         user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
 
@@ -94,12 +86,11 @@ public class UserAccountService {
         return UserResponse.from(UserAccountDto.from(user));
     }
 
-    public UserAccountDto saveUser(String username, String password, String email, String nickname) {
-        UserAccount user = UserAccount.of(username, password, email, nickname, username);
+    public UserAccountDto saveUser(String username, String password, String email, String nickname, String photoUrl, String location) {
+        if (location == null) location = "-";
+        UserAccount user = UserAccount.of(username, password, email, nickname, location, photoUrl, username);
 
-        UserAccountDto dto = UserAccountDto.from(userAccountRepository.save(user));
-        //settingOauth2Google(UserAccountPrincipal.from(dto));
-        return dto;
+        return UserAccountDto.from(userAccountRepository.save(user));
     }
 
     public void deleteUser(String userId) {
@@ -149,6 +140,12 @@ public class UserAccountService {
             log.info("SecurityContextHolder.getContext() : {}", SecurityContextHolder.getContext());
         }
         else log.warn("SecurityContextHolder.getContext() is null");
+    }
+
+    public UserResponse changeReputation(String userId) {
+        UserAccount user = userAccountRepository.getReferenceById(userId);
+        user.addReputation();
+        return UserResponse.from(UserAccountDto.from(userAccountRepository.save(user)));
     }
 
 }

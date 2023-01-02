@@ -18,6 +18,10 @@ GET http://localhost:8080/signup
 
 ###
 
+GET http://localhost:8080/questions/1
+
+###
+
 POST http://localhost:8080/questions
 Content-Type: application/json
 
@@ -28,8 +32,37 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/questions
+PATCH http://localhost:8080/questions/1
+Content-Type: application/json
+
+{
+  "title": "test-title11111111111111",
+  "content": "test-content1111111111111"
+}
 
 ###
 
-GET http://localhost:8080/logout
+DELETE http://localhost:8080/questions/1
+
+###
+
+POST http://localhost:8080/questions/1/answers
+Content-Type: application/json
+
+{
+  "content": "test-content"
+}
+
+###
+
+PATCH http://localhost:8080/questions/1/answers/1
+Content-Type: application/json
+
+{
+  "content": "test-content111111111111111"
+}
+
+###
+
+DELETE http://localhost:8080/questions/1/answers/1
+

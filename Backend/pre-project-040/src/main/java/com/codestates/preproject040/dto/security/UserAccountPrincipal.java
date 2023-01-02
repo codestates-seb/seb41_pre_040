@@ -1,7 +1,6 @@
 package com.codestates.preproject040.dto.security;
 
-
-import com.codestates.preproject040.dto.UserAccountDto;
+import com.codestates.preproject040.dto.user.UserAccountDto;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -8,11 +8,6 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: trace
 
 spring:
-  #datasource:
-    #url: jdbc:mysql://localhost:3306/qna
-    #username: bonojuno
-    #password: thisisTESTpw!#%&
-    #driver-class-name: com.mysql.cj.jdbc.Driver
   h2:
     console:
       enabled: true
@@ -23,16 +18,16 @@ spring:
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create  # (1) 스키마 자동 생성
-    show-sql: true      # (2) SQL 쿼리 출력
+      ddl-auto: create
+    show-sql: true
     properties:
       hibernate:
-        format_sql: true  # (3) SQL pretty print
+        format_sql: true
     open-in-view: false
   sql.init.mode: always
-  #sql:
-    #init:
-      #data-locations: classpath*:db/h2/data.sql
+    #sql:
+  #init:
+  #data-locations: classpath*:db/h2/data.sql
   security:
     oauth2:
       client:
@@ -45,8 +40,3 @@ spring:
             scope:
               - email
               - profile
-
-#server:
-  #servlet:
-    #encoding:
-      #force-response: true

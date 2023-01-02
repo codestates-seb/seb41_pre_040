@@ -1,6 +1,4 @@
-package com.codestates.preproject040.dto.response;
-
-import com.codestates.preproject040.dto.AnswerDto;
+package com.codestates.preproject040.dto.answer;
 
 import java.time.LocalDateTime;
 

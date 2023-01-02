@@ -65,7 +65,9 @@ class UserAccountServiceTest {
                 userAccount.getUserId(),
                 userAccount.getUserPassword(),
                 userAccount.getEmail(),
-                userAccount.getNickname()
+                userAccount.getNickname(),
+                userAccount.getPictureUrl(),
+                userAccount.getLocation()
         );
 
         // Then
@@ -94,6 +96,8 @@ class UserAccountServiceTest {
                 "password",
                 "e@mail.com",
                 "nickname",
+                null,
+                null,
                 createdBy
         );
     }

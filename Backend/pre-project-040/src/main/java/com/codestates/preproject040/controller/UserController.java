@@ -1,9 +1,9 @@
 package com.codestates.preproject040.controller;
 
-import com.codestates.preproject040.dto.request.LoginRequest;
-import com.codestates.preproject040.dto.request.UserRequest;
-import com.codestates.preproject040.dto.response.UserResponse;
 import com.codestates.preproject040.dto.security.UserAccountPrincipal;
+import com.codestates.preproject040.dto.user.LoginRequest;
+import com.codestates.preproject040.dto.user.UserRequest;
+import com.codestates.preproject040.dto.user.UserResponse;
 import com.codestates.preproject040.service.UserAccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -30,8 +29,6 @@ public class UserController {
     @PostMapping("/login")
     private UserResponse login(@RequestBody LoginRequest loginRequest,
                                @AuthenticationPrincipal UserAccountPrincipal principal) {
-        if (loginRequest == null)
-            userAccountService.settingOauth2Google(principal);
 
         assert loginRequest != null;
         //userAccountService.login(loginRequest);
@@ -67,6 +64,11 @@ public class UserController {
     public String deleteUser(@PathVariable("userId") String userId) {
         userAccountService.deleteUser(userId);
         return "회원 정보 삭제 완료";
+    }
+
+    @PatchMapping("/{userId}/reputation")
+    public UserResponse changeUserReputation(@PathVariable("userId") String userId) {
+        return userAccountService.changeReputation(userId);
     }
 
 }
