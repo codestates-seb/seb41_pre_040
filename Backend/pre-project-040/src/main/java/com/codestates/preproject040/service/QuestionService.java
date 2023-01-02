@@ -17,7 +17,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 
@@ -58,6 +65,7 @@ public class QuestionService {
         }
 
         // List<Quetion>을 List<QuestionResponseDto>로 바꿔주고, 중복 제거, 합친 리스트들이 createdAt 역순으로 정렬되게 변경
+
         List<QuestionDto> searchList =
                 tempList.stream()
                         .distinct()
@@ -217,6 +225,7 @@ public class QuestionService {
         }
 
         // List<Quetion>을 List<QuestionResponseDto>로 바꿔주고, 중복 제거, 합친 리스트들이 createdAt 역순으로 정렬되게 변경
+
         List<QuestionResponseDto> searchList =
                 tempList.stream()
                         .distinct()
@@ -322,6 +331,8 @@ public class QuestionService {
                         new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
 
         return findQuestion;
-    }*/
+
+    }
+
 
 }

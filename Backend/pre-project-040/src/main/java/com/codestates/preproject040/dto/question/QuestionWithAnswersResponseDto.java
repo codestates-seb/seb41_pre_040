@@ -1,6 +1,8 @@
 package com.codestates.preproject040.dto.question;
 
+
 import com.codestates.preproject040.dto.Hashtag.HashtagResponseDto;
+
 import com.codestates.preproject040.dto.Hashtag.QuestionHashtagDto;
 import com.codestates.preproject040.dto.answer.AnswerDto;
 
@@ -34,7 +36,9 @@ public record QuestionWithAnswersResponseDto(
         );
     }
 
+
     public static QuestionWithAnswersResponseDto from(QuestionDto questionDto, List<HashtagResponseDto> hashtagResponseDtos){
+
         return new QuestionWithAnswersResponseDto(
                 questionDto.questionId(),
                 questionDto.userAccountDto().nickname(),

@@ -102,6 +102,8 @@ public class QuestionController {
         QuestionDto question = requestBody.toDto(principal.toDto());
         QuestionResponseDto updatedQuestion = questionService.updateQuestion(id, question, requestBody.hashtags());
 
+
+
         return new ResponseEntity<>(updatedQuestion, HttpStatus.OK);
     }
 
