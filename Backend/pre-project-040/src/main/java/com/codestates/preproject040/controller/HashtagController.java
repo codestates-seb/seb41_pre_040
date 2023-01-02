@@ -31,7 +31,8 @@ public class HashtagController {
         return new ResponseEntity<>(HashtagDto.from(hashtagService.createHashtag(postHashtagDto)), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/questions/{hashtagId}")
+    @DeleteMapping("/questions/hashtag/{hashtagId}")
+
     public ResponseEntity patchAnswer(@PathVariable("hashtagId") @Positive Long hashtagId){
         hashtagService.deleteHashtag(hashtagId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

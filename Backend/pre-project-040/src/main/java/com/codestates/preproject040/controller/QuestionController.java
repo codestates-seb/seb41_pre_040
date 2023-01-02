@@ -100,7 +100,9 @@ public class QuestionController {
                                         @AuthenticationPrincipal UserAccountPrincipal principal){
 
         QuestionDto question = requestBody.toDto(principal.toDto());
-        QuestionResponseDto updatedQuestion = questionService.updateQuestion(id, question);
+        QuestionResponseDto updatedQuestion = questionService.updateQuestion(id, question, requestBody.hashtags());
+
+
 
         return new ResponseEntity<>(updatedQuestion, HttpStatus.OK);
     }
