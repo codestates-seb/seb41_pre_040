@@ -30,9 +30,9 @@ public class QuestionController {
     }
 
     // 검색 ex. questions/search?searchKeyword=내용&page=0
-    // 실제 size=30, 일단 size=2로 작성
+    // 실제 question size=30
     @GetMapping("/questions/search")
-    public ResponseEntity getQuestions(String searchKeyword, @PageableDefault(size = 2) Pageable pageable) {
+    public ResponseEntity getQuestions(String searchKeyword, @PageableDefault(size = 30) Pageable pageable) {
         Page<QuestionResponseDto> searchPage = questionService.searchQuestions(searchKeyword, pageable);
 
         return new ResponseEntity<>(searchPage, HttpStatus.OK);
@@ -74,7 +74,7 @@ public class QuestionController {
     // 실제 size=96, 일단 size=2로 작성
     @GetMapping("/")
     public ResponseEntity getQuestionsHome(
-            @PageableDefault(size = 2, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
+            @PageableDefault(size = 96, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
     ){
         List<QuestionResponseDto> questionList = questionService.findQuestions(pageable);
 
@@ -85,7 +85,7 @@ public class QuestionController {
     // 실제 size=30, 일단 size=2로 작성
     @GetMapping("/questions")
     public ResponseEntity getQuestions(
-            @PageableDefault(size = 2, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
+            @PageableDefault(size = 30, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
     ){
         List<QuestionResponseDto> questionList = questionService.findQuestions(pageable);
 
