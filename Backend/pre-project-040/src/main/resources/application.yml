@@ -1,0 +1,42 @@
+debug: false
+management.endpoints.web.exposure.include: "*"
+
+logging:
+  level:
+    com.codestates.preproject040: debug
+    org.springframework.web.servlet: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:test
+    driver-class-name: org.h2.Driver
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+  sql.init.mode: always
+    #sql:
+  #init:
+  #data-locations: classpath*:db/h2/data.sql
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            authorization-grant-type: authorization_code
+            clientId: "${OAUTH2_CLIENT_ID}"
+            clientSecret: "${OAUTH2_CLIENT_PW}"
+            redirectUri: "{baseUrl}/login/oauth2/code/google"
+            scope:
+              - email
+              - profile

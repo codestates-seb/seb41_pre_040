@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2c199ea-9bf0-460c-8fda-c4aa803bf477" name="Changes" comment="final change for backend">
-      <change beforePath="$PROJECT_DIR$/.idea/modules/pre-project-040.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/pre-project-040.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/pre-project-040.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/pre-project-040.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="f2c199ea-9bf0-460c-8fda-c4aa803bf477" name="Changes" comment="readme merging">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/PreProject040Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/PreProject040Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/controller/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/service/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/service/QuestionService.java" afterDir="false" />
     </list>
     <list id="449dea70-f4cd-4087-b960-b892c46c2a4b" name="Changes by bonoj" comment="Changes by bonoj" />
     <list id="4dba2829-a90c-46d0-bb22-2cfbee008a7b" name="Changes by yeonhee" comment="Changes by teammates" />
@@ -55,13 +59,10 @@
       </list>
     </option>
   </component>
-  <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/FrontEnd" />
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="QnA" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -84,6 +85,8 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
@@ -98,7 +101,11 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;bbc4eaab54f7c26c08c04d244f0c37d4&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -109,7 +116,26 @@
       <recent name="com.codestates.preproject040.dto.Hashtag" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.PreProject040Application">
+    <configuration name="C:/Users/2264/IdeaProjects/seb41_pre_0402/Backend/pre-project-040" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Backend/pre-project-040" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="pre-project-040" />
       <method v="2">
@@ -123,6 +149,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PreProject040Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="com.codestates.pre-project-040.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.codestates.preproject040.PreProject040Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PreProject040Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="pre-project-040.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.codestates.preproject040.PreProject040Application" />
@@ -130,6 +163,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.C:/Users/2264/IdeaProjects/seb41_pre_0402/Backend/pre-project-040" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -140,6 +178,7 @@
       <option name="presentableId" value="Default" />
       <updated>1672619346480</updated>
       <workItem from="1672619349094" duration="19570000" />
+      <workItem from="1672664966755" duration="1444000" />
     </task>
     <task id="LOCAL-00001" summary="Hashtag 최종본">
       <created>1672638249460</created>
@@ -162,28 +201,7 @@
       <option name="project" value="LOCAL" />
       <updated>1672642949569</updated>
     </task>
-    <task id="LOCAL-00004" summary="final change for backend">
-      <created>1672667874008</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1672667874008</updated>
-    </task>
-    <task id="LOCAL-00005" summary="final change for backend">
-      <created>1672667888362</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1672667888362</updated>
-    </task>
-    <task id="LOCAL-00006" summary="final change for backend">
-      <created>1672667908229</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1672667908229</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,11 +219,11 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Changes by bonoj" />
     <MESSAGE value="Changes by teammates" />
     <MESSAGE value="Hashtag 최종본" />
-    <MESSAGE value="final change for backend" />
-    <option name="LAST_COMMIT_MESSAGE" value="final change for backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hashtag 최종본" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
