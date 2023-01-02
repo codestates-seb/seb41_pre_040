@@ -19,8 +19,7 @@ public class Hashtag extends AuditingFields {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter
-    @Column(nullable = false, unique = true, length = 50)
+    @Setter @Column(nullable = false, unique = true, length = 50)
     private String content;
 
     private Hashtag(String content) {

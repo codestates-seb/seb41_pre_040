@@ -1,0 +1,68 @@
+POST http://localhost:8080/signup/join
+Content-Type: application/json
+
+{
+    "userId": "juno",
+    "userPassword": "1234",
+    "email": "e@email.com",
+    "nickname": "juno"
+}
+
+###
+
+GET http://localhost:8080
+
+###
+
+GET http://localhost:8080/signup
+
+###
+
+GET http://localhost:8080/questions/1
+
+###
+
+POST http://localhost:8080/questions
+Content-Type: application/json
+
+{
+  "title": "test-title",
+  "content": "test-content"
+}
+
+###
+
+PATCH http://localhost:8080/questions/1
+Content-Type: application/json
+
+{
+  "title": "test-title11111111111111",
+  "content": "test-content1111111111111"
+}
+
+###
+
+DELETE http://localhost:8080/questions/1
+
+###
+
+POST http://localhost:8080/questions/1/answers
+Content-Type: application/json
+
+{
+  "content": "test-content"
+}
+
+###
+
+PATCH http://localhost:8080/questions/1/answers/1
+Content-Type: application/json
+
+{
+  "content": "test-content111111111111111"
+}
+
+###
+
+DELETE http://localhost:8080/questions/1/answers/1
+

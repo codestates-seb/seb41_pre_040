@@ -14,8 +14,7 @@ public class QuestionHashtag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter
-    @ManyToOne(optional = false) @JoinColumn(name = "questionId")
+    @Setter @ManyToOne(optional = false) @JoinColumn(name = "questionId")
     private Question question;
 
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "hashtagId")
