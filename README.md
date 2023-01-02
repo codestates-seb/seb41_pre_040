@@ -7,7 +7,7 @@ ID:
 
 Buid Tools
 
-    FrontEnd: React, Redux-toolkit, styled-component
+    FrontEnd: React, Redux-toolkit, styled-components
 
     BackEnd:Spring, JDS17,
 
