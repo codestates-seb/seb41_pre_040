@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2c199ea-9bf0-460c-8fda-c4aa803bf477" name="Changes" comment="final change for backend" />
+    <list default="true" id="f2c199ea-9bf0-460c-8fda-c4aa803bf477" name="Changes" comment="final change for backend">
+      <change beforePath="$PROJECT_DIR$/.idea/modules/pre-project-040.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/pre-project-040.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/pre-project-040.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/pre-project-040.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <list id="449dea70-f4cd-4087-b960-b892c46c2a4b" name="Changes by bonoj" comment="Changes by bonoj" />
     <list id="4dba2829-a90c-46d0-bb22-2cfbee008a7b" name="Changes by yeonhee" comment="Changes by teammates" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +54,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/FrontEnd" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -162,7 +169,21 @@
       <option name="project" value="LOCAL" />
       <updated>1672667874008</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="final change for backend">
+      <created>1672667888362</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1672667888362</updated>
+    </task>
+    <task id="LOCAL-00006" summary="final change for backend">
+      <created>1672667908229</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1672667908229</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
