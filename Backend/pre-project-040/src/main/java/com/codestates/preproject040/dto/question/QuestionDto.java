@@ -1,7 +1,8 @@
 package com.codestates.preproject040.dto.question;
 
 import com.codestates.preproject040.domain.*;
-import com.codestates.preproject040.dto.QuestionHashtagDto;
+import com.codestates.preproject040.dto.Hashtag.HashtagDto;
+import com.codestates.preproject040.dto.Hashtag.QuestionHashtagDto;
 import com.codestates.preproject040.dto.UserAccountDto;
 import com.codestates.preproject040.dto.answer.AnswerDto;
 

@@ -7,7 +7,6 @@ import com.codestates.preproject040.dto.answer.AnswerDto;
 import com.codestates.preproject040.dto.answer.AnswerPatch;
 import com.codestates.preproject040.dto.answer.AnswerPost;
 import com.codestates.preproject040.repository.UserRepository;
-import com.codestates.preproject040.response.MultiResponseDto;
 import com.codestates.preproject040.service.AnswerService;
 import com.codestates.preproject040.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;

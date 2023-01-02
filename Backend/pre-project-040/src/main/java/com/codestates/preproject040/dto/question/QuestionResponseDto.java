@@ -36,4 +36,17 @@ public record QuestionResponseDto(
                 questionDto.modifiedAt()
         );
     }
+
+    public static QuestionResponseDto from(QuestionDto questionDto, List<HashtagResponseDto> hashtagDto){
+        return new QuestionResponseDto(
+                questionDto.questionId(),
+                questionDto.userAccountDto().nickname(),
+                questionDto.title(),
+                questionDto.content1(),
+                questionDto.content2(),
+                hashtagDto,
+                questionDto.createdAt(),
+                questionDto.modifiedAt()
+        );
+    }
 }
