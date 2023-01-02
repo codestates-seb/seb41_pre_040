@@ -1,0 +1,71 @@
+Index: Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/model/Question.java
+===================================================================
+diff --git a/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/model/Question.java b/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/model/Question.java
+--- a/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/model/Question.java	
++++ b/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/model/Question.java	
+@@ -1,5 +1,6 @@
+ package com.test.preproject040.domain.Hashtag.model;
+ 
++import com.test.preproject040.domain.AuditingFields;
+ import lombok.AccessLevel;
+ import lombok.Builder;
+ import lombok.Getter;
+@@ -11,7 +12,7 @@
+ @Entity
+ @Getter
+ @NoArgsConstructor(access = AccessLevel.PROTECTED)
+-public class Question {
++public class Question extends AuditingFields {
+ 
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+Index: Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/model/Hashtag.java
+===================================================================
+diff --git a/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/model/Hashtag.java b/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/model/Hashtag.java
+--- a/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/model/Hashtag.java	
++++ b/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/model/Hashtag.java	
+@@ -1,5 +1,6 @@
+ package com.test.preproject040.domain.Hashtag.model;
+ 
++import com.test.preproject040.domain.AuditingFields;
+ import lombok.AllArgsConstructor;
+ import lombok.Builder;
+ import lombok.Getter;
+@@ -15,7 +16,7 @@
+ @NoArgsConstructor
+ @AllArgsConstructor
+ @Builder
+-public class Hashtag {
++public class Hashtag extends AuditingFields {
+ 
+     @Id
+     @GeneratedValue
+Index: Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/Service/HashTagService.java
+===================================================================
+diff --git a/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/Service/HashTagService.java b/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/Service/HashTagService.java
+--- a/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/Service/HashTagService.java	
++++ b/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/Service/HashTagService.java	
+@@ -1,10 +1,9 @@
+ package com.test.preproject040.domain.Hashtag.Service;
+ 
+-import lombok.AllArgsConstructor;
++
+ import org.springframework.stereotype.Service;
+ 
+ @Service
+-@AllArgsConstructor
+ public class HashTagService {
+ 
+ }
+Index: Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/Repository/QuestionRepository.java
+===================================================================
+diff --git a/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/Repository/QuestionRepository.java b/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/Repository/QuestionRepository.java
+--- a/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/Repository/QuestionRepository.java	
++++ b/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/Hashtag/Repository/QuestionRepository.java	
+@@ -18,4 +18,4 @@
+ 
+     @Query("SELECT hashTagFrom Hashtag hashtag hashtag.name- ?1")
+     Optional<Hashtag> findHashtagByName(String name);
+-}
++}
+\ No newline at end of file

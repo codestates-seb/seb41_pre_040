@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pre-project-040" target="17" />
+      <module name="pre-project-040.main" target="17" />
+      <module name="pre-project-040.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

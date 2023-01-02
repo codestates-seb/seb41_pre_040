@@ -1,0 +1,26 @@
+Index: Backend/pre-project-040/src/main/java/com/test/preproject040/domain/QuestionJoinHashtag/entitity/QuestionJoinHashTag.java
+===================================================================
+diff --git a/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/QuestionJoinHashtag/entitity/QuestionJoinHashTag.java b/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/QuestionJoinHashtag/entitity/QuestionJoinHashTag.java
+deleted file mode 100644
+--- a/Backend/pre-project-040/src/main/java/com/test/preproject040/domain/QuestionJoinHashtag/entitity/QuestionJoinHashTag.java	
++++ /dev/null	
+@@ -1,19 +0,0 @@
+-package com.test.preproject040.domain.QuestionJoinHashtag.entitity;
+-
+-
+-import lombok.Getter;
+-import lombok.NoArgsConstructor;
+-
+-import javax.persistence.Entity;
+-import javax.persistence.Index;
+-import javax.persistence.Table;
+-
+-/*
+-* HashTag와  Questionr 테이블과의 매핑을 위한 table
+-* */
+-@Getter
+-@Entity
+-@NoArgsConstructor()
+-@Table(indexes = @Index(columnList = "questioId"))
+-public class QuestionJoinHashTag {
+-}
