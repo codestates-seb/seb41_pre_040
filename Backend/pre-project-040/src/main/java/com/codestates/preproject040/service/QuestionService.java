@@ -3,6 +3,7 @@ package com.codestates.preproject040.service;
 import com.codestates.preproject040.domain.*;
 import com.codestates.preproject040.dto.Hashtag.HashtagDto;
 import com.codestates.preproject040.dto.Hashtag.HashtagResponseDto;
+import com.codestates.preproject040.dto.Hashtag.QuestionHashtagDto;
 import com.codestates.preproject040.dto.question.QuestionDto;
 import com.codestates.preproject040.dto.question.QuestionResponseDto;
 import com.codestates.preproject040.dto.question.QuestionWithAnswersResponseDto;
@@ -104,6 +105,8 @@ public class QuestionService {
     // 1개 찾기 (answerIsEmpty가 true이면, 일반 ResponseDto로 반환)
     @Transactional
     public QuestionResponseDto findQuestion(Long id) {
+
+
         QuestionResponseDto question =
                 QuestionResponseDto.from(QuestionDto.from(findVerifiedQuestion(id)), returnHashtags(id));
 
@@ -127,11 +130,12 @@ public class QuestionService {
         Page<Question> pageQuestions = questionRepository.findAll(pageable);
         List<QuestionDto> questions =
                 pageQuestions.stream()
-                        .map(QuestionDto::from)
-                        .map(QuestionResponseDto::from)
-                        .collect(Collectors.toList());
+                .map(QuestionDto::from)
+                .toList();
 
-        return questions;
+        return questions.stream()
+                .map(questionDto -> QuestionResponseDto.from(questionDto, returnHashtags(questionDto.questionId())))
+                .toList();
     }
 
     // 수정 (매개변수 id로 질문 찾고 수정하는 흐름)
