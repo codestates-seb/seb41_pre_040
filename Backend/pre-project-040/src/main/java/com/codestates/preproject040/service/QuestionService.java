@@ -57,7 +57,7 @@ public class QuestionService {
         }
 
         // List<Quetion>을 List<QuestionResponseDto>로 바꿔주고, 중복 제거, 합친 리스트들이 createdAt 역순으로 정렬되게 변경
-        List<QuestionResponseDto> searchList =
+        List<QuestionDto> searchList =
                 tempList.stream()
                         .distinct()
                         .sorted(Comparator.comparing(AuditingFields::getCreatedAt).reversed())
@@ -91,11 +91,7 @@ public class QuestionService {
             questionHashtagRepository.save(questionHashtag);
         }
 
-        List<HashtagResponseDto> hashtagList = questionHashtagRepository.findAllByQuestion_Id(question.getId()).stream()
-                .map(questionHashtag -> hashtagRepository.getReferenceById(questionHashtag.getHashtag().getId()))
-                .map(HashtagDto::from)
-                .map(HashtagResponseDto::from)
-                .toList();
+        List<HashtagResponseDto> hashtagList = returnHashtags(question.getId());
         return QuestionResponseDto.from(QuestionDto.from(question), hashtagList);
     }
 
@@ -109,16 +105,18 @@ public class QuestionService {
     @Transactional
     public QuestionResponseDto findQuestion(Long id) {
         QuestionResponseDto question =
-                QuestionResponseDto.from(QuestionDto.from(findVerifiedQuestion(id)));
+                QuestionResponseDto.from(QuestionDto.from(findVerifiedQuestion(id)), returnHashtags(id));
 
         return question;
     }
 
     // 1개 찾기 (answerIsEmpty가 false이면, 일반 WithAnswersResponseDto로 반환)
     public QuestionWithAnswersResponseDto findQuestionWithAnswers(Long id) {
+
         QuestionWithAnswersResponseDto question =
                 QuestionWithAnswersResponseDto.from(
-                        QuestionDto.from(findVerifiedQuestion(id))
+                        QuestionDto.from(findVerifiedQuestion(id)),
+                        returnHashtags(id)
                 );
 
         return question;
@@ -127,7 +125,7 @@ public class QuestionService {
     // 전체 목록
     public List<QuestionResponseDto> findQuestions(Pageable pageable) {
         Page<Question> pageQuestions = questionRepository.findAll(pageable);
-        List<QuestionResponseDto> questions =
+        List<QuestionDto> questions =
                 pageQuestions.stream()
                         .map(QuestionDto::from)
                         .map(QuestionResponseDto::from)

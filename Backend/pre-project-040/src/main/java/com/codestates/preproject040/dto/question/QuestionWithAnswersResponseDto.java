@@ -2,6 +2,7 @@ package com.codestates.preproject040.dto.question;
 
 import com.codestates.preproject040.domain.Hashtag;
 import com.codestates.preproject040.dto.Hashtag.HashtagDto;
+import com.codestates.preproject040.dto.Hashtag.HashtagResponseDto;
 import com.codestates.preproject040.dto.Hashtag.QuestionHashtagDto;
 import com.codestates.preproject040.dto.answer.AnswerDto;
 
@@ -14,7 +15,7 @@ public record QuestionWithAnswersResponseDto(
         String title,
         String content1,
         String content2,
-        List<QuestionHashtagDto> questionHashtags,
+        List<HashtagResponseDto> hashtags,
         LocalDateTime createdAt,
         LocalDateTime modifiedAt,
         List<AnswerDto> answerDtoList
@@ -25,13 +26,13 @@ public record QuestionWithAnswersResponseDto(
             String title,
             String content1,
             String content2,
-            List<QuestionHashtagDto> questionHashtags,
+            List<HashtagResponseDto> hashtags,
             LocalDateTime createdAt,
             LocalDateTime modifiedAt,
             List<AnswerDto> answers
     ){
         return new QuestionWithAnswersResponseDto(
-                questionId, nickname, title, content1, content2, questionHashtags, createdAt, modifiedAt, answers
+                questionId, nickname, title, content1, content2, hashtags, createdAt, modifiedAt, answers
         );
     }
 
@@ -42,7 +43,21 @@ public record QuestionWithAnswersResponseDto(
                 questionDto.title(),
                 questionDto.content1(),
                 questionDto.content2(),
-                questionDto.hashtags(),
+                null,
+                questionDto.createdAt(),
+                questionDto.modifiedAt(),
+                questionDto.answers()
+        );
+    }
+
+    public static QuestionWithAnswersResponseDto from(QuestionDto questionDto, List<HashtagResponseDto> hashtagDto){
+        return new QuestionWithAnswersResponseDto(
+                questionDto.questionId(),
+                questionDto.userAccountDto().nickname(),
+                questionDto.title(),
+                questionDto.content1(),
+                questionDto.content2(),
+                hashtagDto,
                 questionDto.createdAt(),
                 questionDto.modifiedAt(),
                 questionDto.answers()
