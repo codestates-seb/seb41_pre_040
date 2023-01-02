@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-// import axios from "axios";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { usersList } from "../redux/usersSlice"
+
 
 
 const UserInfoContainer = styled.section`
@@ -14,6 +18,9 @@ const UserInfoContainer = styled.section`
   .div{
     margin-top: 20px;
     font-size: 20px;
+  }
+  .unlogged{
+    font-size: 50px;
   }
   `
 const Userimg = styled.div`
@@ -45,24 +52,70 @@ const Userdetail = styled.div`
 
 const UserInfo = () => {
     const userinfos = useSelector((state) => state.users.value);
-    console.log(userinfos)
-    const loggedUser = userinfos.filter(e => (e.isLogin === true ))
+    const isLogged = useSelector((state) => state.user.isLogin);
+
+    // //세션 이용
+    // const dispatch = useDispatch();
+    // const sessionId = sessionStorage.getItem("userId");
+    // const sessionName = sessionStorage.getItem("display_name");
+    // const sessionLocation =  sessionStorage.getItem("location");
+    // const sessionReputation = sessionStorage.getItem("reputatiom");
+    // const sessionImg = sessionStorage.getItem("userImg");
+
+    // useEffect(() => {
+    //     dispatch(usersList({
+    //         display_name: sessionName,
+    //         location: sessionLocation,
+    //         reputation: sessionReputation,
+    //         userImg: sessionImg,
+    //         userId: sessionId,
+    // }));
+    // }, []);
+
+
+    // //api 사용
+    // const [data, setData] = useState(null);
+    // const dispatch = useDispatch();
+    // useEffect(() => {
+    //     axios
+    //   .get("https://jsonplaceholder.typicode.com/users")
+    //   .then((res) => {
+    //     console.log("res data",res.data)
+    //     setData(res.data.filter(e => e.id === 4));   
+    //     console.log("data",data)
+
+
+    // //   setData(res.data.filter(e => e.user_id === sessionStorage.getItem("user_id")));
+    //     dispatch(usersList({
+    //             location: data[0].username,
+    //             reputation: data[0].name,
+    //           }))
+    //   });
+    // },  []
+    // )
+
+
+
     
     return (
         <UserInfoContainer>
+            {isLogged ? 
+                (
+            <>
             <Userimg>
-                <img width="70" alt="img"src={loggedUser[0].userImg} />
-                <Username>{loggedUser[0].display_name}</Username>
+                <img width="70" alt="img"src={userinfos[0].userImg} />
+                <Username>{userinfos[0].display_name}</Username>
             </Userimg>
                 <div className="div">Summary</div>
             <Userdetail>
-                <div className="div"> - Email: {loggedUser[0].userId}</div>
-                <div className="div"> - Location: {loggedUser[0].location}</div>
-                <div className="div"> - Reputation: {loggedUser[0].reputation}</div>
-                <div className="div">기타 더미정보2</div>
-                <div className="div">기타 더미정보3</div>
-                <div className="div">기타 더미정보4</div>
+                <div className="div"> - Email: {userinfos[0].userId}</div>
+                <div className="div"> - Location: {userinfos[0].location}</div>
+                <div className="div"> - Reputation: {userinfos[0].reputation}</div>
             </Userdetail>
+                </>
+            ):
+            (<div className="unlogged">Login Please</div>)
+            }
         </UserInfoContainer>
     )
 };

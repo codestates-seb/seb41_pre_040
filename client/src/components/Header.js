@@ -8,6 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LogoutStatus } from "../redux/user";
 
+import { useEffect, useState } from "react";
+import { usersList } from "../redux/usersSlice"
+
+
 const StyledHeader = styled.header`
   display: flex;
   align-items: center;
@@ -111,15 +115,65 @@ const UserIcon = styled.button`
   &:hover {
     background-color: #babfc4;
   }
-`;
+  `;
 
 const Header = () => {
   const isLogged = useSelector((state) => state.user.isLogin);
-  const userinfos = useSelector((state) => state.users.value);
-  const loggedUser = userinfos.filter((e) => e.isLogin === true);
-
+  // const userinfos = useSelector((state) => state.users.value);
+  // const loggedUser = userinfos.filter((e) => e.isLogin === true);
   const navigte = useNavigate();
   const dispatch = useDispatch();
+  
+  // //세션을 이용한 조건문
+  // const loggedUserImg = ( sessionStorage.getItem("userImg") !== undefined 
+  // ?  "https://pic.onlinewebfonts.com/svg/img_312847.png"
+  // : sessionStorage.getItem("userImg") );
+  // // const loggedUserImg = "https://pic.onlinewebfonts.com/svg/img_312847.png"
+  // // if(sessionStorage.getItem("userImg") !== null){
+  // //   loggedUserImg = sessionStorage.getItem("userImg");
+  // // } 
+  
+  // api 사용
+  const userinfos = useSelector((state) => state.users.value);
+  const [data, setData] = useState(null);
+  
+      // useEffect (() => {
+      //   axios
+      //     .get("https://jsonplaceholder.typicode.com/users")
+      //     .then((res) => {
+      //       // console.log("res확인...", res)
+      //       setData(res.data.filter(e => e.user_id === sessionStorage.getItem("user_id")));
+      //       // setData(res.data.filter(e => e.id === 4));
+
+      //       dispatch(usersList({
+      //         // userImg: data.userImg,
+      //         userImg: "https://pic.onlinewebfonts.com/svg/img_312847.png",
+      //       }))
+      //     });
+      // }, []);
+
+  // const onClickImg = async() => {
+  //     try{
+  //         const res = await axios.get("https://jsonplaceholder.typicode.com/users")
+  //         console.log("첫 데이터: ",res.data)  
+  //         setData(res.data.filter(e => e.id === 4));
+  //       console.log("data: ",data)
+  //       console.log("data0: ",data[0].username)
+  //       dispatch(usersList({
+  //         location: data[0].username,
+  //         reputation: data[0].name,
+  //         userImg: "https://pic.onlinewebfonts.com/svg/img_312847.png",
+  //       }))
+
+  //     }catch (e) {
+  //       console.log(e);
+  //     }
+  //     console.log("userinfos: ",userinfos)
+  //   }
+
+
+
+
 
   // 서버와 연결시
   // const onClickLogout = () => {
@@ -157,8 +211,13 @@ const Header = () => {
             <SearchBar />
             <Buttons>
               <Link to="/userinfo">
-                <UserIcon>
-                  <img width="20" alt="" src={loggedUser[0].userImg} />
+                <UserIcon >
+                  {/* <img width="20" alt="" src={loggedUser[0].userImg} /> */}
+                  
+                  {/* 세션을 이용 */}
+                  <img width="20" alt="" src={userinfos[0].userImg} />
+
+
                 </UserIcon>
               </Link>
               <LogoutButton onClick={onClickLogout}>LogOut</LogoutButton>
