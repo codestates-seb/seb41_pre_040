@@ -3,9 +3,6 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { usersList } from "../redux/usersSlice"
-
 
 
 const UserInfoContainer = styled.section`
@@ -49,68 +46,46 @@ const Userdetail = styled.div`
     }
 `
 
-
 const UserInfo = () => {
-    const userinfos = useSelector((state) => state.users.value);
     const isLogged = useSelector((state) => state.user.isLogin);
 
-    // //세션 이용
-    // const dispatch = useDispatch();
-    // const sessionId = sessionStorage.getItem("userId");
-    // const sessionName = sessionStorage.getItem("display_name");
-    // const sessionLocation =  sessionStorage.getItem("location");
-    // const sessionReputation = sessionStorage.getItem("reputatiom");
-    // const sessionImg = sessionStorage.getItem("userImg");
-
-    // useEffect(() => {
-    //     dispatch(usersList({
-    //         display_name: sessionName,
-    //         location: sessionLocation,
-    //         reputation: sessionReputation,
-    //         userImg: sessionImg,
-    //         userId: sessionId,
-    // }));
-    // }, []);
-
-
-    // //api 사용
-    // const [data, setData] = useState(null);
-    // const dispatch = useDispatch();
-    // useEffect(() => {
-    //     axios
-    //   .get("https://jsonplaceholder.typicode.com/users")
-    //   .then((res) => {
-    //     console.log("res data",res.data)
-    //     setData(res.data.filter(e => e.id === 4));   
-    //     console.log("data",data)
-
-
-    // //   setData(res.data.filter(e => e.user_id === sessionStorage.getItem("user_id")));
-    //     dispatch(usersList({
-    //             location: data[0].username,
-    //             reputation: data[0].name,
-    //           }))
-    //   });
-    // },  []
-    // )
-
-
-
+    const [data, setData] = useState(null);
+    const [isPending, setIsPending] = useState(true);
+    useEffect(() => {
+    axios
+      .get("api2/users",
+      {
+        withCredentials: true,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        setData(res.data.filter(e => e.email === sessionStorage.getItem("user_id")));
+      })
+      .then(()=> {
+        setIsPending(false);
+      })
+      .catch((err)=>console.error(err));;
+    },  []
+    )
     
     return (
         <UserInfoContainer>
-            {isLogged ? 
+            { (isLogged && !isPending ) ? 
                 (
             <>
             <Userimg>
-                <img width="70" alt="img"src={userinfos[0].userImg} />
-                <Username>{userinfos[0].display_name}</Username>
+                <img width="70" alt="img"src={data[0].photoUrl} />
+                <Username>{data[0].nickname}</Username>
             </Userimg>
                 <div className="div">Summary</div>
             <Userdetail>
-                <div className="div"> - Email: {userinfos[0].userId}</div>
-                <div className="div"> - Location: {userinfos[0].location}</div>
-                <div className="div"> - Reputation: {userinfos[0].reputation}</div>
+                <div className="div"> - Email: {data[0].userId}</div>
+                <div className="div"> - Location: {data[0].location}</div>
+                <div className="div"> - Reputation: {data[0].reputation}</div>
             </Userdetail>
                 </>
             ):

@@ -5,11 +5,11 @@ const initialState = {
   {
     // userId: sessionStorage.getItem("userId"),
     // display_name: sessionStorage.getItem("display_name"),
-    userId: "",
-    display_name: "",
-    location: "",
-    reputation: "",
-    userImg: "",
+    userId: "flowr@yahoo.jp",
+    display_name: "Nakamura_San",
+    location: "Osaka, Japan",
+    reputation: "2135",
+    userImg: "https://pic.onlinewebfonts.com/svg/img_312847.png",
     // https://pic.onlinewebfonts.com/svg/img_312847.png
   },
   ],
