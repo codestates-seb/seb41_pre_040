@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface QuestionHashtagRepository extends JpaRepository<QuestionHashtag, Long> {
     List<QuestionHashtag> findAllByQuestion_Id(Long questionId);
+    QuestionHashtag findByQuestion_Id(Long questionId);
+    void deleteAllByQuestion_Id(Long questionId);
 }
