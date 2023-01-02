@@ -62,9 +62,12 @@ public class QuestionService {
                 tempList.stream()
                         .distinct()
                         .sorted(Comparator.comparing(AuditingFields::getCreatedAt).reversed())
-                        .map(QuestionDto::from)
-                        .map(QuestionResponseDto::from)
-                        .collect(Collectors.toList());
+                        .map(QuestionDto::from).toList();
+
+        List<QuestionResponseDto> questionResponse =
+                searchList.stream()
+                        .map(questionDto -> QuestionResponseDto.from(questionDto, returnHashtags(questionDto.questionId())))
+                        .toList();
 
         // subList 이용해서 페이지네이션
         int start = (int) pageable.getOffset();
