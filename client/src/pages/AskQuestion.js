@@ -128,13 +128,18 @@ const AskQuestion = () => {
       alert("내용을 입력해주세요.");
       return;
     }
+    let arr = tags.map((el) => {
+      el = { '"content"': el };
+      return el;
+    });
     dispatch(
       postQuestion({
         title: titleInput,
         content1: contentInput,
         content2: contentInput,
-        // 아래부터는 json-server로 할 때만 보냄
-        createdAt: new Date(),
+        // tag 추가
+        // ["a", "b", "c"]
+        hashtags: arr,
       })
     );
     alert("질문이 등록되었습니다.");

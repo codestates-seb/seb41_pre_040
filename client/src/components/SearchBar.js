@@ -63,10 +63,10 @@ const SearchBar = () => {
       dispatch(setIsSearchMode(true));
 
       if (pathname !== "/questions") {
-        console.log("경로를 이동합니다");
         navigate("/questions");
       }
     }
+    return;
   };
 
   return (

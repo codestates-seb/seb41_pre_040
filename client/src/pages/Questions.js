@@ -133,13 +133,14 @@ const Questions = () => {
   useEffect(() => {
     // console.log("검색 모드: ", isSearchMode);
     // console.log("키워드: ", keyword);
+    dispatch(getQuestionsAll());
     if (isSearchMode) {
       dispatch(getSearchResult(keyword));
     } else {
       dispatch(getQuestionsAll());
+      console.log("all: ", allQuestions);
     }
-    // console.log("all: ", allQuestions);
-  }, [isSearchMode, keyword]);
+  }, []);
 
   // 페이지별 검색 결과 불러오기
   useEffect(() => {
@@ -148,13 +149,15 @@ const Questions = () => {
     } else {
       dispatch(getQuestionsByPage({ page: page }));
     }
+    dispatch(getQuestionsByPage({ page: page }));
     window.scrollTo(0, 0);
-  }, [page, allQuestions]);
+  }, [page]);
 
   return (
     <MainContent>
       <TitleAndButton>
         <h1>{isSearchMode ? "Search Results" : "All Questions"}</h1>
+        {/* <h1>All Questions</h1> */}
         <AskButton />
       </TitleAndButton>
       <ButtonContainer>
@@ -181,7 +184,7 @@ const Questions = () => {
                 id={el.questionId}
                 title={el.title}
                 content={el.content1}
-                tags={el.questionHashtag}
+                tags={el.hashtags}
                 createdAt={el.createdAt}
                 author={el.nickname}
               />

@@ -17,7 +17,7 @@ export const getQuestionsByPage = createAsyncThunk(
   "GET/QUESTIONS",
   async ({ page }) => {
     const response = await axios
-      .get(`/api/questions?pages=${page - 1}&size=10`)
+      .get(`/api/questions?pages=${page - 1}`)
       .catch((err) => console.error(err));
     return response.data;
   }

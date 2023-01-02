@@ -128,7 +128,7 @@ const QuestionDetail = () => {
           <QuestionPostLayout
             id={question.questionId}
             content={question.content1}
-            tags={question.questionHashtag}
+            tags={question.hashtags}
             author={question.nickname}
           />
         )}
