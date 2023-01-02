@@ -111,28 +111,16 @@ const UserIcon = styled.button`
   &:hover {
     background-color: #babfc4;
   }
-`;
+  `;
 
 const Header = () => {
   const isLogged = useSelector((state) => state.user.isLogin);
-  const userinfos = useSelector((state) => state.users.value);
-  const loggedUser = userinfos.filter((e) => e.isLogin === true);
-
   const navigte = useNavigate();
   const dispatch = useDispatch();
-
-  // 서버와 연결시
-  // const onClickLogout = () => {
-  //   axios.get("/logout").then((res) => {
-  //     if (res.data.success) {
-  //       dispatch(LogoutStatus({ isLogin: false }));
-  //       navigte("/");
-  //       window.location.reload();
-  //     }
-  //   });
-  // };
+  const userinfos = useSelector((state) => state.users.value);
+  
   const onClickLogout = () => {
-    axios.get("api2/logout").then((res) => {
+    axios.get("api2/users/logout").then((res) => {
       // 세션에 있는 정보를 지움
       sessionStorage.removeItem("user_id");
       dispatch(LogoutStatus());
@@ -157,8 +145,8 @@ const Header = () => {
             <SearchBar />
             <Buttons>
               <Link to="/userinfo">
-                <UserIcon>
-                  <img width="20" alt="" src={loggedUser[0].userImg} />
+                <UserIcon >
+                  <img width="20" alt="" src={userinfos[0].userImg} />
                 </UserIcon>
               </Link>
               <LogoutButton onClick={onClickLogout}>LogOut</LogoutButton>

@@ -10,5 +10,5 @@ export default configureStore({
     users: usersReducer,
     user: userReducer,
     answers: answersReducer,
-  },
+    },
 });

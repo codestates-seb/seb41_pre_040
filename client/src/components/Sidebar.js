@@ -103,12 +103,12 @@ const Sidebar = () => {
           </li>
         </ul>
       <div className="topmargin">
-      <StLine class="fc-black-750 mb6">Stack Overflow for</StLine>
+      <StLine className="fc-black-750 mb6">Stack Overflow for</StLine>
       <StLine>Teams</StLine>
       <AdSection>
         – Start collaborating and sharing organizational knowledge.
         </AdSection>
-      <img class="wmx100 mx-auto my8 h-auto d-block" width="160" height="114" src="https://cdn.sstatic.net/Img/teams/teams-illo-free-sidebar-promo.svg?v=47faa659a05e" alt=""></img>
+      <img className="wmx100 mx-auto my8 h-auto d-block" width="160" height="114" src="https://cdn.sstatic.net/Img/teams/teams-illo-free-sidebar-promo.svg?v=47faa659a05e" alt=""></img>
       </div>
       </Menus>
     </LeftSidebar>
