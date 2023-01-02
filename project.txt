@@ -1,0 +1,247 @@
+Folder PATH listing
+Volume serial number is F42F-3497
+C:.
+„   project.txt
+„   README.md
+„   
+„¥„Ÿ.idea
+„   „   .gitignore
+„   „   compiler.xml
+„   „   discord.xml
+„   „   gradle.xml
+„   „   jarRepositories.xml
+„   „   jpa-buddy.xml
+„   „   misc.xml
+„   „   modules.xml
+„   „   seb41_pre_040.iml
+„   „   seb41_pre_040_ana.iml
+„   „   uiDesigner.xml
+„   „   vcs.xml
+„   „   workspace.xml
+„   „   
+„   „¥„ŸinspectionProfiles
+„   „       Project_Default.xml
+„   „       
+„   „¥„Ÿmodules
+„   „       pre-project-040.main.iml
+„   „       
+„   „¤„Ÿshelf
+„       „   Uncommitted_changes_before_rebase__Changes_.xml
+„       „   
+„       „¤„ŸUncommitted_changes_before_rebase_[Changes]
+„               shelved.patch
+„               
+„¥„ŸBackend
+„   „   README.md
+„   „   
+„   „¤„Ÿpre-project-040
+„       „   .gitignore
+„       „   build.gradle
+„       „   gradlew
+„       „   gradlew.bat
+„       „   settings.gradle
+„       „   
+„       „¥„Ÿ.gradle
+„       „   „   file-system.probe
+„       „   „   
+„       „   „¥„Ÿ7.4
+„       „   „   „   gc.properties
+„       „   „   „   
+„       „   „   „¥„Ÿchecksums
+„       „   „   „       checksums.lock
+„       „   „   „       md5-checksums.bin
+„       „   „   „       sha1-checksums.bin
+„       „   „   „       
+„       „   „   „¥„Ÿdependencies-accessors
+„       „   „   „       dependencies-accessors.lock
+„       „   „   „       gc.properties
+„       „   „   „       
+„       „   „   „¥„ŸexecutionHistory
+„       „   „   „       executionHistory.bin
+„       „   „   „       executionHistory.lock
+„       „   „   „       
+„       „   „   „¥„ŸfileChanges
+„       „   „   „       last-build.bin
+„       „   „   „       
+„       „   „   „¥„ŸfileHashes
+„       „   „   „       fileHashes.bin
+„       „   „   „       fileHashes.lock
+„       „   „   „       resourceHashesCache.bin
+„       „   „   „       
+„       „   „   „¤„ŸvcsMetadata
+„       „   „¥„ŸbuildOutputCleanup
+„       „   „       buildOutputCleanup.lock
+„       „   „       cache.properties
+„       „   „       outputFiles.bin
+„       „   „       
+„       „   „¤„Ÿvcs-1
+„       „           gc.properties
+„       „           
+„       „¥„Ÿbuild
+„       „   „¥„Ÿclasses
+„       „   „   „¤„Ÿjava
+„       „   „       „¤„Ÿmain
+„       „   „           „¤„Ÿcom
+„       „   „               „¤„Ÿcodestates
+„       „   „                   „¤„Ÿpreproject040
+„       „   „                       „   PreProject040Application.class
+„       „   „                       „   
+„       „   „                       „¥„Ÿconfig
+„       „   „                       „       JpaConfig.class
+„       „   „                       „       
+„       „   „                       „¥„Ÿcontroller
+„       „   „                       „       AnswerController.class
+„       „   „                       „       HashtagController.class
+„       „   „                       „       QuestionController.class
+„       „   „                       „       
+„       „   „                       „¥„Ÿdomain
+„       „   „                       „       Answer.class
+„       „   „                       „       AuditingFields.class
+„       „   „                       „       Hashtag.class
+„       „   „                       „       Question.class
+„       „   „                       „       QuestionHashtag.class
+„       „   „                       „       UserAccount.class
+„       „   „                       „       
+„       „   „                       „¥„Ÿdto
+„       „   „                       „   „   UserAccountDto.class
+„       „   „                       „   „   
+„       „   „                       „   „¥„Ÿanswer
+„       „   „                       „   „       AnswerDto.class
+„       „   „                       „   „       AnswerPatch.class
+„       „   „                       „   „       AnswerPost.class
+„       „   „                       „   „       
+„       „   „                       „   „¥„ŸHashtag
+„       „   „                       „   „       HashtagDto.class
+„       „   „                       „   „       HashtagResponseDto.class
+„       „   „                       „   „       PostHashtagDto.class
+„       „   „                       „   „       QuestionHashtagDto.class
+„       „   „                       „   „       
+„       „   „                       „   „¤„Ÿquestion
+„       „   „                       „           QuestionDto.class
+„       „   „                       „           QuestionPatch.class
+„       „   „                       „           QuestionPost.class
+„       „   „                       „           QuestionResponseDto.class
+„       „   „                       „           QuestionWithAnswersResponseDto.class
+„       „   „                       „           
+„       „   „                       „¥„Ÿexception
+„       „   „                       „       BusinessLogicException.class
+„       „   „                       „       ExceptionCode.class
+„       „   „                       „       
+„       „   „                       „¥„Ÿrepository
+„       „   „                       „       AnswerRepository.class
+„       „   „                       „       HashtagRepository.class
+„       „   „                       „       QuestionHashtagRepository.class
+„       „   „                       „       QuestionRepository.class
+„       „   „                       „       UserRepository.class
+„       „   „                       „       
+„       „   „                       „¤„Ÿservice
+„       „   „                               AnswerService.class
+„       „   „                               HashtagService.class
+„       „   „                               QuestionService.class
+„       „   „                               
+„       „   „¥„Ÿgenerated
+„       „   „   „¤„Ÿsources
+„       „   „       „¥„ŸannotationProcessor
+„       „   „       „   „¤„Ÿjava
+„       „   „       „       „¤„Ÿmain
+„       „   „       „¤„Ÿheaders
+„       „   „           „¤„Ÿjava
+„       „   „               „¤„Ÿmain
+„       „   „¥„Ÿresources
+„       „   „   „¤„Ÿmain
+„       „   „           application.yml
+„       „   „           
+„       „   „¤„Ÿtmp
+„       „       „¤„ŸcompileJava
+„       „               previous-compilation-data.bin
+„       „               
+„       „¥„Ÿgradle
+„       „   „¤„Ÿwrapper
+„       „           gradle-wrapper.jar
+„       „           gradle-wrapper.properties
+„       „           
+„       „¤„Ÿsrc
+„           „¥„Ÿmain
+„           „   „¥„Ÿjava
+„           „   „   „¤„Ÿcom
+„           „   „       „¤„Ÿcodestates
+„           „   „           „¤„Ÿpreproject040
+„           „   „               „   PreProject040Application.java
+„           „   „               „   
+„           „   „               „¥„Ÿconfig
+„           „   „               „       JpaConfig.java
+„           „   „               „       
+„           „   „               „¥„Ÿcontroller
+„           „   „               „       AnswerController.java
+„           „   „               „       HashtagController.java
+„           „   „               „       QuestionController.java
+„           „   „               „       
+„           „   „               „¥„Ÿdomain
+„           „   „               „       Answer.java
+„           „   „               „       AuditingFields.java
+„           „   „               „       Hashtag.java
+„           „   „               „       Question.java
+„           „   „               „       QuestionHashtag.java
+„           „   „               „       UserAccount.java
+„           „   „               „       
+„           „   „               „¥„Ÿdto
+„           „   „               „   „   UserAccountDto.java
+„           „   „               „   „   
+„           „   „               „   „¥„Ÿanswer
+„           „   „               „   „       AnswerDto.java
+„           „   „               „   „       AnswerPatch.java
+„           „   „               „   „       AnswerPost.java
+„           „   „               „   „       
+„           „   „               „   „¥„ŸHashtag
+„           „   „               „   „       HashtagDto.java
+„           „   „               „   „       HashtagResponseDto.java
+„           „   „               „   „       PostHashtagDto.java
+„           „   „               „   „       QuestionHashtagDto.java
+„           „   „               „   „       
+„           „   „               „   „¤„Ÿquestion
+„           „   „               „           QuestionDto.java
+„           „   „               „           QuestionPatch.java
+„           „   „               „           QuestionPost.java
+„           „   „               „           QuestionResponseDto.java
+„           „   „               „           QuestionWithAnswersResponseDto.java
+„           „   „               „           
+„           „   „               „¥„Ÿexception
+„           „   „               „       BusinessLogicException.java
+„           „   „               „       ExceptionCode.java
+„           „   „               „       
+„           „   „               „¥„Ÿrepository
+„           „   „               „       AnswerRepository.java
+„           „   „               „       HashtagRepository.java
+„           „   „               „       QuestionHashtagRepository.java
+„           „   „               „       QuestionRepository.java
+„           „   „               „       UserRepository.java
+„           „   „               „       
+„           „   „               „¤„Ÿservice
+„           „   „                       AnswerService.java
+„           „   „                       HashtagService.java
+„           „   „                       QuestionService.java
+„           „   „                       
+„           „   „¤„Ÿresources
+„           „           application.yml
+„           „           
+„           „¤„Ÿtest
+„               „¤„Ÿjava
+„                   „¤„Ÿcom
+„                       „¤„Ÿcodestates
+„                           „¤„Ÿpreproject040
+„                               „   PreProject040ApplicationTests.java
+„                               „   
+„                               „¤„Ÿcontroller
+„                                       QuestionControllerTest.java
+„                                       
+„¥„ŸClient
+„       Client.md
+„       
+„¥„ŸGuideLines
+„       Readme.md
+„       StackOver (1).png
+„       _seb41_pre_040_??? ???? ???.pdf
+„       
+„¤„ŸServer
+        server.md
+        
