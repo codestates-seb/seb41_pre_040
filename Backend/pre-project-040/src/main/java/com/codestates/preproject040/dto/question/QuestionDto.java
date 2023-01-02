@@ -16,7 +16,7 @@ public record QuestionDto(
         String title,
         String content1,
         String content2,
-        List<QuestionHashtagDto> questionHashtag,
+        List<QuestionHashtagDto> hashtags,
         List<AnswerDto> answers,
         LocalDateTime createdAt,
         String createdBy,
@@ -66,7 +66,9 @@ public record QuestionDto(
                 question.getTitle(),
                 question.getContent1(),
                 question.getContent2(),
-                null,
+                question.getQuestionHashtags().stream()
+                        .map(QuestionHashtagDto::from)
+                        .toList(),
                 question.getAnswers().stream()
                         .map(AnswerDto::from)
                         .toList(),

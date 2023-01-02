@@ -1,6 +1,14 @@
 package com.codestates.preproject040.dto.question;
 
+import com.codestates.preproject040.domain.Question;
+import com.codestates.preproject040.domain.QuestionHashtag;
+import com.codestates.preproject040.dto.Hashtag.HashtagDto;
+import com.codestates.preproject040.dto.Hashtag.HashtagResponseDto;
+import com.codestates.preproject040.dto.Hashtag.QuestionHashtagDto;
+import com.codestates.preproject040.repository.QuestionHashtagRepository;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record QuestionResponseDto(
         Long questionId,
@@ -8,6 +16,7 @@ public record QuestionResponseDto(
         String title,
         String content1,
         String content2,
+        List<HashtagResponseDto> hashtags,
         LocalDateTime createdAt,
         LocalDateTime modifiedAt
 ) {
@@ -17,11 +26,12 @@ public record QuestionResponseDto(
             String title,
             String content1,
             String content2,
+            List<HashtagResponseDto> hashtags,
             LocalDateTime createdAt,
             LocalDateTime modifiedAt
     ){
         return new QuestionResponseDto(
-                questionId, nickname, title, content1, content2, createdAt, modifiedAt
+                questionId, nickname, title, content1, content2, hashtags, createdAt, modifiedAt
         );
     }
 
@@ -32,6 +42,7 @@ public record QuestionResponseDto(
                 questionDto.title(),
                 questionDto.content1(),
                 questionDto.content2(),
+                null,
                 questionDto.createdAt(),
                 questionDto.modifiedAt()
         );

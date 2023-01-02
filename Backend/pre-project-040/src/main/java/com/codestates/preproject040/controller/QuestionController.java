@@ -1,6 +1,7 @@
 package com.codestates.preproject040.controller;
 
 import com.codestates.preproject040.domain.UserAccount;
+import com.codestates.preproject040.dto.Hashtag.HashtagDto;
 import com.codestates.preproject040.dto.question.*;
 import com.codestates.preproject040.dto.UserAccountDto;
 import com.codestates.preproject040.dto.question.QuestionResponseDto;

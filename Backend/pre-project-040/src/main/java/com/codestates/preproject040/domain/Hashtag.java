@@ -23,8 +23,9 @@ public class Hashtag extends AuditingFields {
     @Column(nullable = false, unique = true, length = 50)
     private String content;
 
-    private Hashtag(String content) {
+    private Hashtag(String content/*, Question question*/) {
         this.content = content;
+//        this.question = question;
     }
 
     public static Hashtag of(String content) {

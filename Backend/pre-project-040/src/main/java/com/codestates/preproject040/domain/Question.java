@@ -1,5 +1,6 @@
 package com.codestates.preproject040.domain;
 
+import com.codestates.preproject040.dto.Hashtag.HashtagDto;
 import lombok.*;
 
 import javax.persistence.*;

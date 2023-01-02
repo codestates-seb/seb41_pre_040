@@ -46,4 +46,3 @@ public record UserAccountDto (
 
 }
 
-//#백엔드-채팅에 메시지 보내기
