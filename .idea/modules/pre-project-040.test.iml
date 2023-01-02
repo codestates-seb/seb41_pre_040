@@ -25,6 +25,9 @@
     <content url="file://$MODULE_DIR$/../../Backend/pre-project-040/src/test">
       <sourceFolder url="file://$MODULE_DIR$/../../Backend/pre-project-040/src/test/java" isTestSource="true" />
     </content>
+    <content url="file://$MODULE_DIR$/../../Backend/pre-project-040/src/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../Backend/pre-project-040/src/test/java" isTestSource="true" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="pre-project-040.main" />
