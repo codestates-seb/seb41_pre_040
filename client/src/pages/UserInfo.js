@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-// import axios from "axios";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
 
 
@@ -14,6 +15,9 @@ const UserInfoContainer = styled.section`
   .div{
     margin-top: 20px;
     font-size: 20px;
+  }
+  .unlogged{
+    font-size: 50px;
   }
   `
 const Userimg = styled.div`
@@ -42,27 +46,51 @@ const Userdetail = styled.div`
     }
 `
 
-
 const UserInfo = () => {
-    const userinfos = useSelector((state) => state.users.value);
-    console.log(userinfos)
-    const loggedUser = userinfos.filter(e => (e.isLogin === true ))
+    const isLogged = useSelector((state) => state.user.isLogin);
+
+    const [data, setData] = useState(null);
+    const [isPending, setIsPending] = useState(true);
+    useEffect(() => {
+    axios
+      .get("api2/users",
+      {
+        withCredentials: true,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        setData(res.data.filter(e => e.email === sessionStorage.getItem("user_id")));
+      })
+      .then(()=> {
+        setIsPending(false);
+      })
+      .catch((err)=>console.error(err));;
+    },  []
+    )
     
     return (
         <UserInfoContainer>
+            { (isLogged && !isPending ) ? 
+                (
+            <>
             <Userimg>
-                <img width="70" alt="img"src={loggedUser[0].userImg} />
-                <Username>{loggedUser[0].display_name}</Username>
+                <img width="70" alt="img"src={data[0].photoUrl} />
+                <Username>{data[0].nickname}</Username>
             </Userimg>
                 <div className="div">Summary</div>
             <Userdetail>
-                <div className="div"> - Email: {loggedUser[0].userId}</div>
-                <div className="div"> - Location: {loggedUser[0].location}</div>
-                <div className="div"> - Reputation: {loggedUser[0].reputation}</div>
-                <div className="div">기타 더미정보2</div>
-                <div className="div">기타 더미정보3</div>
-                <div className="div">기타 더미정보4</div>
+                <div className="div"> - Email: {data[0].userId}</div>
+                <div className="div"> - Location: {data[0].location}</div>
+                <div className="div"> - Reputation: {data[0].reputation}</div>
             </Userdetail>
+                </>
+            ):
+            (<div className="unlogged">Login Please</div>)
+            }
         </UserInfoContainer>
     )
 };
