@@ -67,9 +67,9 @@ public class QuestionService {
 
         // subList 이용해서 페이지네이션
         int start = (int) pageable.getOffset();
-        int end = Math.min(start + pageable.getPageSize(), searchList.size());
-        List<QuestionResponseDto> subList = start >= end ? new ArrayList<>() : searchList.subList(start, end);
-        Page<QuestionResponseDto> searchPage = new PageImpl<>(subList, pageable, searchList.size());
+        int end = Math.min(start + pageable.getPageSize(), questionResponse.size());
+        List<QuestionResponseDto> subList = start >= end ? new ArrayList<>() : questionResponse.subList(start, end);
+        Page<QuestionResponseDto> searchPage = new PageImpl<>(subList, pageable, questionResponse.size());
 
         return searchPage;
     }
@@ -164,6 +164,14 @@ public class QuestionService {
                         new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
 
         return findQuestion;
+    }
+
+    private List<HashtagResponseDto> returnHashtags(Long questionId) {
+        return questionHashtagRepository.findAllByQuestion_Id(questionId).stream()
+                .map(questionHashtag -> hashtagRepository.getReferenceById(questionHashtag.getHashtag().getId()))
+                .map(HashtagDto::from)
+                .map(HashtagResponseDto::from)
+                .toList();
     }
 
 }
