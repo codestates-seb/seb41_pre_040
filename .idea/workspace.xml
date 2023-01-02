@@ -5,13 +5,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2c199ea-9bf0-460c-8fda-c4aa803bf477" name="Changes" comment="readme merging">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/PreProject040Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/PreProject040Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/controller/QuestionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/service/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/src/main/java/com/codestates/preproject040/service/QuestionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/pre-project-040/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/pre-project-040/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/pre-project-040/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/pre-project-040/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_mockito_mockito_inline_4_9_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_2_2023_10_58_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_2_2023_10_58_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/PreProject040Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/PreProject040Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/config/JpaConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/config/JpaConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/controller/AnswerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/controller/AnswerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/controller/HashtagController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/controller/HashtagController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/controller/QuestionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/controller/QuestionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/domain/AuditingFields.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/domain/AuditingFields.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/domain/Hashtag.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/domain/Hashtag.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/domain/Question.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/domain/Question.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/domain/QuestionHashtag.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/domain/QuestionHashtag.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/domain/UserAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/domain/UserAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/Hashtag/HashtagDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/Hashtag/HashtagDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/UserAccountDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/answer/AnswerDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/answer/AnswerDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/answer/AnswerPatch.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/answer/AnswerPatch.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/answer/AnswerPost.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/answer/AnswerPost.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/question/QuestionDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/question/QuestionDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/question/QuestionPatch.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/question/QuestionPatch.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/question/QuestionPost.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/question/QuestionPost.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/question/QuestionResponseDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/question/QuestionResponseDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/question/QuestionWithAnswersResponseDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/dto/question/QuestionWithAnswersResponseDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/exception/ExceptionCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/exception/ExceptionCode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/repository/AnswerRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/repository/AnswerRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/repository/QuestionHashtagRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/repository/QuestionHashtagRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/repository/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/service/AnswerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/service/AnswerService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/service/HashtagService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/service/HashtagService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/service/QuestionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/classes/java/main/com/codestates/preproject040/service/QuestionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/resources/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/resources/main/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pre-project-040/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pre-project-040/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
     </list>
     <list id="449dea70-f4cd-4087-b960-b892c46c2a4b" name="Changes by bonoj" comment="Changes by bonoj" />
     <list id="4dba2829-a90c-46d0-bb22-2cfbee008a7b" name="Changes by yeonhee" comment="Changes by teammates" />
@@ -37,11 +71,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="pre-project-040" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="pre-project-040" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -83,32 +112,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;bbc4eaab54f7c26c08c04d244f0c37d4&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.editor",
+    "spring.configuration.checksum": "bbc4eaab54f7c26c08c04d244f0c37d4",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.codestates.preproject040.repository" />
@@ -116,7 +145,7 @@
       <recent name="com.codestates.preproject040.dto.Hashtag" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.PreProject040Application">
+  <component name="RunManager" selected="Spring Boot.PreProject040Application (1)">
     <configuration name="C:/Users/2264/IdeaProjects/seb41_pre_0402/Backend/pre-project-040" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
